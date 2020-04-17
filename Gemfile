@@ -14,6 +14,10 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 # Views
 gem 'slim'
+gem 'simple_form', '~> 5.0'
+
+# Auth
+gem 'devise'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
