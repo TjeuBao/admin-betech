@@ -16,6 +16,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry-rails'
   gem 'rspec-rails', '~> 4.0.0'
+  gem 'rspec_junit_formatter'
   gem 'factory_bot_rails'
   gem 'fuubar'
   gem 'faker'
