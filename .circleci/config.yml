@@ -56,38 +56,43 @@ jobs:
               host: localhost
             ' > config/database.yml
 
+      # Wait for DB
       - run:
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
+      # Setup Database
       - run:
           name: Setup Database
           command: bundle exec rake db:create db:schema:load --trace
 
-      # - run:
-      #     name: Setup Code Climate Test Reporter
-      #     command: |
-      #       mkdir -p tmp/
-      #       curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
-      #       chmod +x ./tmp/cc-test-reporter
+      # Setup Code Climate Test Reporter
+      - run:
+          name: Setup Code Climate Test Reporter
+          command: |
+            mkdir -p tmp/
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./tmp/cc-test-reporter
+            chmod +x ./tmp/cc-test-reporter
 
-      # - run:
-      #     name: Run RSpec in parallel
-      #     command: |
-      #       bundle exec rspec --profile 10 \
-      #                         --format RspecJunitFormatter \
-      #                         --out /tmp/test-results/rspec.xml \
-      #                         --format progress \
-      #                         $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
-      #     when: always
-      # - store_test_results:
-      #     path: /tmp/test-results
-      # - store_artifacts:
-      #     path: /tmp/test-results
-      #     destination: test-results
+      # Run RSpec in parallel
+      - run:
+          name: Run RSpec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out /tmp/test-results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+          when: always
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
 
-      # - run:
-      #     name: Upload coverage results to Code Climate
-      #     command: |
-      #       ./tmp/cc-test-reporter format-coverage -t simplecov $CIRCLE_ARTIFACTS/coverage/.resultset.json
-      #       ./tmp/cc-test-reporter upload-coverage
+      # Upload coverage results to Code Climate
+      - run:
+          name: Upload coverage results to Code Climate
+          command: |
+            ./tmp/cc-test-reporter format-coverage -t simplecov $CIRCLE_ARTIFACTS/coverage/.resultset.json
+            ./tmp/cc-test-reporter upload-coverage
