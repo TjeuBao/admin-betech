@@ -1,0 +1,22 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    title Authentication
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  body.authentication-bg
+    .account-pages.mt-5.mb-5
+      .container
+        .row.justify-content-center
+          .col-lg-5
+            .card
+              .card-header.pt-4.pb-4.text-center.bg-primary
+                = link_to root_path do
+                  span
+                    = image_pack_tag 'logo.png', height: 18
+              .card-body.p-4
+                = render 'shared/flash', with_margin: false
+                = yield
