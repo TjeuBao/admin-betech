@@ -37,6 +37,7 @@ yarn-debug.log*
 # Ignore coverage
 coverage/**/*
 .rubocop.yml
-.vscode/
 
-.vscode/settings.json
+#Ignore vscode
+.vscode/
+.vscode/*
