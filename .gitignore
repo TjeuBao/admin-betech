@@ -38,4 +38,5 @@ yarn-debug.log*
 coverage/**/*
 .rubocop.yml
 .vscode/
+
 .vscode/settings.json
