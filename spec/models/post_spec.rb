@@ -11,5 +11,10 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'validetess' do
+    it { is_expected.to validate_presence_of :title }
+  end
+  context 'validates' do
+    it { is_expected.to validate_presence_of :content }
+  end
 end
