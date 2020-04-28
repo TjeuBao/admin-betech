@@ -13,4 +13,8 @@ FactoryBot.define do
     title { 'MyString' }
     content { 'MyText' }
   end
+  trait :invalid do
+    title { '' }
+    content { '' }
+  end
 end
