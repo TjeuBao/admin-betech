@@ -21,6 +21,12 @@ plugins:
     checks:
       Rubocop/Style/Documentation:
         enabled: false
+      Rubocop/Layout/LineLength:
+        enabled: false
+      Rubocop/Style/FrozenStringLiteralComment:
+        enabled: false
+      Rubocop/Metrics/BlockLength:
+        enabled: false
 ratings:
   paths:
     - 'app/**'

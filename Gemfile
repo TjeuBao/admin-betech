@@ -23,9 +23,9 @@ gem 'devise'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
   gem 'faker'
   gem 'fuubar'
-  gem 'factory_bot_rails'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 4.0.0'
   gem 'rspec_junit_formatter'
@@ -43,9 +43,9 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
-  gem 'rails-controller-testing'
   gem 'simplecov', '~> 0.17.1', require: false
   gem 'webdrivers'
 end

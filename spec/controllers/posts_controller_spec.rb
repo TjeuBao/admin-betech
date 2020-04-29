@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  context 'before signs user' do
-    let(:user) { create(:user) }
+  let!(:user) { create(:user) }
 
+  context 'before signs user' do
     before { sign_in user }
 
     describe 'GET index' do
