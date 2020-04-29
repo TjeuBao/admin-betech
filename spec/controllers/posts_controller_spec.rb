@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  context'before signs user' do
+  context 'before signs user' do
     let(:user) { create(:user) }
 
     before { sign_in user }

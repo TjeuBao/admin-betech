@@ -18,6 +18,9 @@ plugins:
   rubocop:
     enabled: true
     channel: rubocop-0-79
+    checks:
+      Rubocop/Style/Documentation:
+        enabled: false
 ratings:
   paths:
     - 'app/**'
@@ -28,3 +31,4 @@ exclude_paths:
   - 'public/'
   - 'spec/'
   - 'vendor/'
+  - 'bin/'
