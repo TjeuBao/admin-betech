@@ -1,1 +1,19 @@
-h1 Home
+.row
+  .col-12
+    .page-title-box
+      .page-title-right
+        ol.breadcrumb.m-0
+          li.breadcrumb-item
+            = link_to 'Home', root_path
+          li.breadcrumb-item.active Dashboard
+      h4.page-title
+        | Dashboard
+.row
+  .col-4
+    = link_to '#'
+      .card.text-white.bg-info
+        .card-body
+          .toll-free-box.text-center
+            h4
+              i.dripicons-document
+              | Users - 1

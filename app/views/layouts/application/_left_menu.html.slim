@@ -1,0 +1,23 @@
+.left-side-menu
+  .slimscroll-menu style='height: 100vh !important;'
+    = link_to root_path, class: 'logo text-center' do
+      span.logo-lg
+        = image_pack_tag 'logo.png', height: '16px'
+      span.logo-sm
+        = image_pack_tag 'logo_sm.png', height: '16px'
+    ul.metismenu.side-nav
+      li.side-nav-title.side-nav-item
+        | Navigation
+      li.side-nav-item
+        = link_to '#', class: 'side-nav-link' do
+          i.dripicons-meter
+          span Dashboard
+      li.side-nav-item
+        = link_to '#', class: 'side-nav-link' do
+          i.dripicons-user
+          span Users
+      li.side-nav-item
+        = link_to posts_path, class: 'side-nav-link' do
+          i.dripicons-document-new
+          span Blog
+    .clearfix

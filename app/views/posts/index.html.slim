@@ -1,0 +1,28 @@
+h3.title Blog
+
+section.hero.is-primary.is-medium
+  .hero-head
+    nav.navbar
+      .container
+        .navbar-brand
+
+        #navbarMenuHeroA.navbar-menu
+          .navbar-end
+            = link_to "Create New Post", new_post_path, class:"navbar-item"
+  .hero-body
+    .container.has-text-centered
+      h1.title
+        = yield :page_title
+
+section.section
+  .container
+    - @posts.each do |post|
+      .card
+        .card-content
+          .container
+            .media
+              .media-content
+                h5.title.is-4
+                  =link_to post.title, post
+            .content.mb-1
+              =post.content

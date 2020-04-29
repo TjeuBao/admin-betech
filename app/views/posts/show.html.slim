@@ -1,0 +1,19 @@
+- content_for :page_title, @post.title
+section.section
+  .container
+    nav.level
+      /! Left side
+      .level-left.mt-2
+        p.level-item
+          strong Actions
+      /! Right side
+      .level-right
+        p.level-item
+          = link_to "Edit", edit_post_path(@post), class:"button btn btn-primary btn-sm"
+        p.level-item
+          = link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, class:"button btn btn-danger btn-sm"
+    hr/
+    h3.title
+      =@post.title
+    .content
+      =@post.content
