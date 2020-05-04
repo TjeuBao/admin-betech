@@ -21,8 +21,10 @@ section.section
         .card-content
           .container
             .media
-              .media-content
-                h5.title.is-4
-                  =link_to post.title, post
+            .media-content
+              h5.title.is-4
+                = link_to post.title, post
             .content.mb-1
-              =post.content
+            = post.content
+        .container.mt-2.mb-3
+          = image_tag post.image.url(:medium)

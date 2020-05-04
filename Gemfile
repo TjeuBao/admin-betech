@@ -55,4 +55,6 @@ gem 'rubocop', '~> 0.79.0', require: false
 gem 'rubocop-rails', require: false
 
 # Others
+gem 'kaminari'
+gem 'paperclip', '~> 6.0.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

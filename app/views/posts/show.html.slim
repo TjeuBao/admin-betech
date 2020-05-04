@@ -14,6 +14,7 @@ section.section
           = link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" }, class:"button btn btn-danger btn-sm"
     hr/
     h3.title
-      =@post.title
+      = @post.title
     .content
-      =@post.content
+      = @post.content
+    = image_tag @post.image.url(:medium)

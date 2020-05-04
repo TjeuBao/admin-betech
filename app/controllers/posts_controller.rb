@@ -5,7 +5,9 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.all.order('created_at DESC')
+    @posts = Post.all
+    # @posts = Post.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
+
     respond_to do |format|
       format.html
       format.json { render json: @posts }
@@ -26,7 +28,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = Post.create(post_params)
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -60,11 +62,16 @@ class PostsController < ApplicationController
 
   private
 
+  # def paginate
+  #   page = Post.count(*)
+  #   per_page =
+  # end
+
   def set_post
     @post = Post.find(params[:id])
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :image)
   end
 end
