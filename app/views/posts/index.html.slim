@@ -28,3 +28,9 @@ section.section
             = post.content
         .container.mt-2.mb-3
           = image_tag post.image.url(:medium)
+section.section
+  .container.center
+    .center.d-inline-block
+      = link_to  "Prev Page", posts_path( page: @page - 1 )
+    .center.d-inline-block.ml-4
+       = link_to  "Next Page", posts_path( page: @page + 1 )

@@ -4,10 +4,12 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: %i[show edit update destroy]
 
-  def index
-    @posts = Post.all
-    # @posts = Post.paginate(:page => params[:page], :per_page => 10).order('created_at desc')
+  PER_PAGE = 3
 
+  def index
+
+    @page = params.fetch(:page, 0).to_i
+    @posts = Post.offset(@page * PER_PAGE).limit(PER_PAGE)
     respond_to do |format|
       format.html
       format.json { render json: @posts }
@@ -61,11 +63,6 @@ class PostsController < ApplicationController
   end
 
   private
-
-  # def paginate
-  #   page = Post.count(*)
-  #   per_page =
-  # end
 
   def set_post
     @post = Post.find(params[:id])
