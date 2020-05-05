@@ -25,19 +25,10 @@ section.section
               h5.title.is-4
                 = link_to post.title, post
             .content.mb-1
-            = post.content
+              = post.content
         .container.mt-2.mb-3
           = image_tag post.image.url(:medium)
 section.section
   .container.mb-3
     .d-flex.justify-content-center
-      .center.d-inline-block.mr-4
-        = link_to  "First", posts_path( page: 1 ), class: 'page-link'
-      - if @page > 1
-        .center.d-inline-block.mr-4
-          = link_to  "<< Prev Page", posts_path( page: @page - 1 ), class: 'page-link'
-      - if @page < @total_page
-        .center.d-inline-block.mr-4
-          = link_to  "Next Page >>", posts_path( page: @page + 1 ), class: 'page-link'
-      .center.d-inline-block
-        = link_to  "Last", posts_path( page: @total_page ), class: 'page-link'
+      == pagy_bootstrap_nav(@pagy)

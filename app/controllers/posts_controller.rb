@@ -4,14 +4,8 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: %i[show edit update destroy]
 
-  TOTAL_RECORD = Post.count
-  PER_PAGE = 5.0
-
   def index
-    @page = params.fetch(:page, 1).to_i
-    @total_page = (TOTAL_RECORD / PER_PAGE).ceil
-
-    @posts = Post.offset((@page - 1) * PER_PAGE).limit(PER_PAGE)
+    @pagy, @posts = pagy(Post.all, items: 5)
 
     respond_to do |format|
       format.html
