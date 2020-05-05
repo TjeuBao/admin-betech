@@ -4,12 +4,15 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: %i[show edit update destroy]
 
-  PER_PAGE = 3
+  TOTAL_RECORD = Post.count
+  PER_PAGE = 5.0
 
   def index
+    @page = params.fetch(:page, 1).to_i
+    @total_page = (TOTAL_RECORD / PER_PAGE).ceil
 
-    @page = params.fetch(:page, 0).to_i
-    @posts = Post.offset(@page * PER_PAGE).limit(PER_PAGE)
+    @posts = Post.offset((@page - 1) * PER_PAGE).limit(PER_PAGE)
+
     respond_to do |format|
       format.html
       format.json { render json: @posts }
