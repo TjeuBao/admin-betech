@@ -33,8 +33,14 @@ section.section
                 = link_to career.title, career
             .content.mb-1
               = career.content
-        .container.mt-2.mb-3
-          = image_tag career.image.url(:medium)
+            hr/
+            .content.mb-1
+              = career.jobtype
+            hr/
+            .content.mb-1
+              = career.status
+        / .container.mt-2.mb-3
+        /   = image_tag career.image.url(:medium)
 section.section
   .container.mb-3
     .d-flex.justify-content-center
