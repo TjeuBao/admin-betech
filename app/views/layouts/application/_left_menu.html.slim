@@ -8,16 +8,16 @@
     ul.metismenu.side-nav
       li.side-nav-title.side-nav-item
         | Navigation
-      / li.side-nav-item
-      /   = link_to '#', class: 'side-nav-link' do
-      /     i.dripicons-meter
-      /     span Dashboard
       li.side-nav-item
-        = link_to '#', class: 'side-nav-link' do
+        = link_to root_path, class: 'side-nav-link' do
           i.dripicons-user
           span Users
       li.side-nav-item
         = link_to posts_path, class: 'side-nav-link' do
           i.dripicons-document-new
-          span Blog
+          span Blogs
+      li.side-nav-item
+        = link_to posts_path, class: 'side-nav-link' do
+          i.dripicons-briefcase
+          span Careers
     .clearfix
