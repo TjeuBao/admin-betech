@@ -1,0 +1,41 @@
+.row
+  .col-12
+    .page-title-box
+      .page-title-right
+        ol.breadcrumb.m-0
+          li.breadcrumb-item
+            = link_to 'Home', root_path
+          li.breadcrumb-item.active Career
+      h4.page-title
+        | Career
+section.hero.is-primary.is-medium
+  .hero-head
+    nav.navbar
+      .container
+        .navbar-brand
+        #navbarMenuHeroA.navbar-menu
+          .navbar-end
+            = link_to "Create New Career", new_career_path, class:"navbar-item"
+  .hero-body
+    .container.has-text-centered
+      h1.title
+        = yield :page_title
+
+section.section
+  .container
+    - @careers.each do |career|
+      .card
+        .card-content
+          .container
+            .media
+            .media-content
+              h5.title.is-4
+                = link_to career.title, career
+            .content.mb-1
+              = career.content
+        .container.mt-2.mb-3
+          = image_tag career.image.url(:medium)
+section.section
+  .container.mb-3
+    .d-flex.justify-content-center
+      == pagy_bootstrap_nav(@pagy)

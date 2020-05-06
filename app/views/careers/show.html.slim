@@ -1,0 +1,22 @@
+- content_for :page_title, @career.title
+section.section
+  .container
+    nav.level
+      /! Left side
+      .level-left.mt-2
+        p.level-item
+          strong Actions
+      /! Right side
+      .level-right.d-flex
+        p.level-item.mr-3
+          = link_to "Edit", edit_career_path(@career), class:"button btn btn-primary btn-sm"
+        p.level-item.mr-3
+          = link_to "Delete", career_path(@career), method: :delete, data: { confirm: "Are you sure?" }, class:"button btn btn-danger btn-sm"
+        p.level-item
+          = link_to  "Back", careers_path(page: @page), class:"button btn btn-dark btn-sm"
+    hr/
+    h3.title
+      = @career.title
+    .content
+      = @career.content
+    = image_tag @career.image.url(:medium)
