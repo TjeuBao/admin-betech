@@ -12,5 +12,5 @@
     .field.mt-2.mb-2
       .control
         = f.input :status, input_html: { class: 'textarea' }, wrapper: false, label_html: { class: 'label' }
-    / = f.input :image, as: :file
+    = f.input :image, as: :file
     = f.button :submit, class: "btn btn-info mt-2"

@@ -64,6 +64,6 @@ class CareersController < ApplicationController
   end
 
   def career_params
-    params.require(:career).permit(:title, :content, :jobtype, :status)
+    params.require(:career).permit(:title, :content, :jobtype, :status, :image)
   end
 end

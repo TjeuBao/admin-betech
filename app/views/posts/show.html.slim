@@ -15,8 +15,8 @@ section.section
         p.level-item
           = link_to  "Back", posts_path(page: @page), class:"button btn btn-dark btn-sm"
     hr/
-    h3.title
+    h4.title
       = @post.title
-    .content
+    .content.mb-2
       = @post.content
     = image_tag @post.image.url(:medium)

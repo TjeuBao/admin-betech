@@ -1,6 +1,6 @@
 - content_for :page_title, @career.title
 section.section
-  .container
+  .container.mb-4
     nav.level
       /! Left side
       .level-left.mt-2
@@ -15,7 +15,7 @@ section.section
         p.level-item
           = link_to  "Back", careers_path(page: @page), class:"button btn btn-dark btn-sm"
     hr/
-    h3.title
+    h4.title
       = @career.title
     .content
       = @career.content
@@ -24,7 +24,7 @@ section.section
       h5 Time :
       = @career.jobtype
       hr/
-    .content
-      h5 status :
+    .content.mb-2
+      h5 Status :
       = @career.status
-    / = image_tag @career.image.url(:medium)
+    = image_tag @career.image.url(:medium)
