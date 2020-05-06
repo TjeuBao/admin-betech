@@ -5,7 +5,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.all.order('created_at DESC')
+    @pagy, @posts = pagy(Post.all.order(id: :asc), items: 5)
+
     respond_to do |format|
       format.html
       format.json { render json: @posts }
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = Post.create(post_params)
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -65,6 +66,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :image)
   end
 end

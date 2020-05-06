@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module ApplicationHelper
+  include Pagy::Frontend
   def alert_class_of_flash(flash_type)
     {
       success: 'alert-success',
