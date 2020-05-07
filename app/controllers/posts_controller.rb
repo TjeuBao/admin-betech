@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @pagy, @posts = pagy(Post.all.order(id: :asc), items: 5)
+    @pagy, @posts = pagy(Post.all.order(id: :asc).includes([:rich_text_content]), items: 5)
 
     respond_to do |format|
       format.html
