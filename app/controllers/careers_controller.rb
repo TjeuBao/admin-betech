@@ -20,7 +20,7 @@ class CareersController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { @career }
+      format.json { render json: @career }
     end
   end
 

@@ -58,3 +58,6 @@ gem 'rubocop-rails', require: false
 gem 'pagy'
 gem 'paperclip', '~> 6.0.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+# Trix
+gem 'image_processing', '~> 1.0'

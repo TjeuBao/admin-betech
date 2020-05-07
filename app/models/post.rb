@@ -5,7 +5,6 @@
 # Table name: posts
 #
 #  id                 :bigint           not null, primary key
-#  content            :text             not null
 #  image_content_type :string
 #  image_file_name    :string
 #  image_file_size    :integer
@@ -15,6 +14,7 @@
 #  updated_at         :datetime         not null
 #
 class Post < ApplicationRecord
+  has_rich_text :content
   has_attached_file :image,
                     styles: { medium: '300x300>', thumb: '100x100>' },
                     default_url: '/images/:style/missing.png'

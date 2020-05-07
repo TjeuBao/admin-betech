@@ -1,6 +1,6 @@
 - content_for :page_title, @post.title
 section.section
-  .container
+  .container.mb-4
     nav.level
       /! Left side
       .level-left.mt-2
@@ -18,5 +18,5 @@ section.section
     h4.title
       = @post.title
     .content.mb-2
-      = @post.content
+      == @post.content
     = image_tag @post.image.url(:medium)
