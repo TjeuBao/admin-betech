@@ -32,7 +32,7 @@ section.section
               h5.title.is-4
                 = link_to post.title, post
             .content.mb-1
-              == post.content
+              = raw post.content
         .container.mt-2.mb-4
           = image_tag post.image.url(:medium)
 section.section
