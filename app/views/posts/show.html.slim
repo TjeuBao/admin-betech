@@ -18,5 +18,5 @@ section.section
     h4.title
       = @post.title
     .content.mb-2
-      = raw @post.content
+      = sanitize raw(@post.content)
     = image_tag @post.image.url(:medium)

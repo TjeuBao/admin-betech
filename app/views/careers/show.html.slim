@@ -18,7 +18,9 @@ section.section
     h4.title
       = @career.title
     .content
-      = raw @career.content
+      / @note https://stackoverflow.com/questions/35465655/why-is-my-view-being-flagged-as-an-xss-vulnerability
+      / Unescaped model attribute on issuess codelimae
+      = sanitize raw(@career.content)
       hr/
     .content
       h5 Time :

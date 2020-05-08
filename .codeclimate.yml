@@ -1,9 +1,6 @@
 plugins:
   brakeman:
     enabled: true
-    check:
-      cross_site_scripting:
-        enabled: false
   bundler-audit:
     enabled: true
   duplication:
