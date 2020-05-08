@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: @post }
+      format.json { render json: @post.as_json.merge(url:  @post.image.url) }
     end
   end
 
