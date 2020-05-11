@@ -7,7 +7,7 @@
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
-#  jobtype            :string           not null
+#  job_type           :string           not null
 #  status             :string           not null
 #  title              :string           not null
 #  created_at         :datetime         not null
@@ -22,6 +22,4 @@ class Career < ApplicationRecord
                                     content_type: ['image/jpeg', 'image/gif', 'image/png']
   validates :content, presence: true
   validates :title, presence: true
-  validates :jobtype, presence: true
-  validates :status, presence: true
 end

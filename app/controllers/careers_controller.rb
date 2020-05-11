@@ -25,7 +25,7 @@ class CareersController < ApplicationController
   end
 
   def create
-    @career = Career.create(career_params)
+    @career = Career.new(career_params)
     respond_to do |format|
       if @career.save
         format.html { redirect_to @career, notice: 'Career was successfully created.' }
@@ -64,6 +64,6 @@ class CareersController < ApplicationController
   end
 
   def career_params
-    params.require(:career).permit(:title, :content, :jobtype, :status, :image)
+    params.require(:career).permit(:title, :content, :job_type, :status, :image)
   end
 end

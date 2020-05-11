@@ -7,12 +7,19 @@
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
-#  jobtype            :string           not null
-#  status             :string           not null
+#  job_type           :string
+#  status             :string
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
 require 'rails_helper'
 
-RSpec.describe Career, type: :model
+RSpec.describe Career, type: :model do
+  context 'validetess' do
+    it { is_expected.to validate_presence_of :title }
+  end
+  context 'validates' do
+    it { is_expected.to validate_presence_of :content }
+  end
+end

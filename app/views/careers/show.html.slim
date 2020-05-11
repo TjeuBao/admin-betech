@@ -24,9 +24,9 @@ section.section
       hr/
     .content
       h5 Time :
-      = @career.jobtype
+      = @career.job_type
       hr/
     .content.mb-2
       h5 Status :
       = @career.status
-    = image_tag @career.image.url(:medium)
+    / = image_tag @career.image.url(:medium)

@@ -7,17 +7,23 @@
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
-#  jobtype            :string           not null
-#  status             :string           not null
+#  job_type           :string
+#  status             :string
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
 FactoryBot.define do
   factory :career do
-    title { "" }
-    content { "" }
-    jobtype { "" }
-    status { "MyString" }
+    title { 'Developer' }
+    content { 'Content' }
+    job_type { 'Full-time' }
+    status { 'MyString' }
+  end
+  trait :empty do
+    title { '' }
+    content { '' }
+    job_type { '' }
+    status { '' }
   end
 end

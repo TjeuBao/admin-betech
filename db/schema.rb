@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2020_05_08_034427) do
 
   create_table "careers", force: :cascade do |t|
     t.string "title", null: false
-    t.string "jobtype", null: false
-    t.string "status", null: false
+    t.string "job_type"
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image_file_name"
