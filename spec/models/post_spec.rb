@@ -5,7 +5,6 @@
 # Table name: posts
 #
 #  id                 :bigint           not null, primary key
-#  content            :text             not null
 #  image_content_type :string
 #  image_file_name    :string
 #  image_file_size    :integer

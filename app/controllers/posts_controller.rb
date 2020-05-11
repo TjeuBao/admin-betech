@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @pagy, @posts = pagy(Post.all.order(id: :asc), items: 5)
+    @pagy, @posts = pagy(Post.all.order(id: :asc).includes([:rich_text_content]), items: 5)
 
     respond_to do |format|
       format.html
@@ -22,12 +22,12 @@ class PostsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { @post }
+      format.json { render json: @post.as_json.merge(url: @post.image.url) }
     end
   end
 
   def create
-    @post = Post.create(post_params)
+    @post = Post.new(post_params)
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
