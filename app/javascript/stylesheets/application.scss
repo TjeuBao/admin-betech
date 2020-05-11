@@ -1,2 +1,5 @@
 @import './application/components/index';
 @import './application/pages/index';
+// application.scss
+//= require actiontext
+@import "./application/actiontext.scss";

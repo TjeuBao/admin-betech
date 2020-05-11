@@ -1,6 +1,6 @@
 - content_for :page_title, @post.title
 section.section
-  .container
+  .container.mb-4
     nav.level
       /! Left side
       .level-left.mt-2
@@ -15,8 +15,8 @@ section.section
         p.level-item
           = link_to  "Back", posts_path(page: @page), class:"button btn btn-dark btn-sm"
     hr/
-    h3.title
+    h4.title
       = @post.title
-    .content
-      = @post.content
+    .content.mb-2
+      = sanitize raw(@post.content)
     = image_tag @post.image.url(:medium)

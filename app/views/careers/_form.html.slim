@@ -1,0 +1,16 @@
+.section
+  = simple_form_for @career do |f|
+    .field.mt-2
+      .control
+        = f.input :title, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
+    .field.mt-2.mb-2
+      = f.label :content
+      = f.rich_text_area :content
+    .field.mt-2.mb-2
+      .control
+        = f.input :job_type, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
+    .field.mt-2.mb-2
+      .control
+        = f.input :status, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
+    / = f.input :image, as: :file
+    = f.button :submit, class: "btn btn-info mt-2"

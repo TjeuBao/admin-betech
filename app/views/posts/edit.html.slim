@@ -1,12 +1,2 @@
-/ h1.title Edit Post
-/ .section
-/   = simple_form_for @post do |f|
-/     .field
-/       .control
-/         = f.input :title, input_html: {class: 'input'}, wrapper:false, label_html: {class: 'label'}
-/     .field
-/       .control
-/         = f.input :content, input_html: {class: 'itextarea'}, wrapper:false, label_html: {class: 'label'}
-/     = f.button :submit, 'Edit post', class: 'button is-primary mt-2'
 - content_for :page_title, "Edit Post"
 = render 'form'

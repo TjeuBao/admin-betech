@@ -1,19 +1,19 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
-# Table name: posts
+# Table name: careers
 #
 #  id                 :bigint           not null, primary key
 #  image_content_type :string
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
+#  job_type           :string           not null
+#  status             :string           not null
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
-class Post < ApplicationRecord
+class Career < ApplicationRecord
   has_rich_text :content
   has_attached_file :image,
                     styles: { medium: '300x300>', thumb: '100x100>' },

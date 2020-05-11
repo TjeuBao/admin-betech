@@ -1,0 +1,32 @@
+- content_for :page_title, @career.title
+section.section
+  .container.mb-4
+    nav.level
+      /! Left side
+      .level-left.mt-2
+        p.level-item
+          strong Actions
+      /! Right side
+      .level-right.d-flex
+        p.level-item.mr-3
+          = link_to "Edit", edit_career_path(@career), class:"button btn btn-primary btn-sm"
+        p.level-item.mr-3
+          = link_to "Delete", career_path(@career), method: :delete, data: { confirm: "Are you sure?" }, class:"button btn btn-danger btn-sm"
+        p.level-item
+          = link_to  "Back", careers_path(page: @page), class:"button btn btn-dark btn-sm"
+    hr/
+    h4.title
+      = @career.title
+    .content
+      / @note https://stackoverflow.com/questions/35465655/why-is-my-view-being-flagged-as-an-xss-vulnerability
+      / Unescaped model attribute on issuess codelimae
+      = sanitize raw(@career.content)
+      hr/
+    .content
+      h5 Time :
+      = @career.job_type
+      hr/
+    .content.mb-2
+      h5 Status :
+      = @career.status
+    / = image_tag @career.image.url(:medium)
