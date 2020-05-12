@@ -4,7 +4,7 @@ class CareersController < ApplicationController
 
   def index
     @pagy, @careers = pagy(Career.all.order(id: :asc).includes([:rich_text_content]), items: 5)
-
+    # return api : return 6items or size items
     respond_to do |format|
       format.html
       format.json { render json: @careers }
