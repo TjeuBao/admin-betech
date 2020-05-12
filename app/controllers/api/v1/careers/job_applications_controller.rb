@@ -2,15 +2,8 @@ module Api
   module V1
     class CareersController < ApplicationController
       def create
-        @career = Career.new(career_params)
-
-        respond_to do |format|
-          if @career.save
-            format.json { render @career, status: :created, location: @career }
-          else
-            format.json { render json: @career.errors, status: :unprocessable_entity }
-          end
-        end
+        @career = Career.create(career_params)
+        render json: @career
       end
 
       def career_params
