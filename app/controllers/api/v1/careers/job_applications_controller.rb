@@ -1,6 +1,6 @@
 module Api
   module V1
-    module Career
+    class CareersController < ApplicationController
       def create
         @career = Career.new(career_params)
 
@@ -14,7 +14,12 @@ module Api
       end
 
       def career_params
-        params.require(:career).permit(:title, :content, :job_type, :status, :image)
+        params.require(:career).permit(:first_name,
+                                       :last_name,
+                                       :email,
+                                       :port_folio,
+                                       :answer,
+                                       :cv_upload)
       end
     end
   end
