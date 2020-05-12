@@ -40,8 +40,9 @@ section.section
             .content.mb-1
               = career.status
         .container.mt-2.mb-3
-          = image_tag career.image.url(:medium)
+          / = image_tag career.image.url(:medium)
 section.section
   .container.mb-3
     .d-flex.justify-content-center
-      == pagy_bootstrap_nav(@pagy)
+      - if @careers.count > 0
+          == pagy_bootstrap_nav(@pagy)

@@ -5,8 +5,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @pagy, @posts = pagy(Post.all.order(id: :asc).includes([:rich_text_content]), items: 5)
-
+    @pagy, @posts = pagy(Post.all.order(id: :desc).includes([:rich_text_content]), items: params[:size] || 6)
     respond_to do |format|
       format.html
       format.json { render json: @posts }
