@@ -22,7 +22,8 @@ class PostsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: @post.as_json.merge(url: @post.image.url) }
+      format.json { render json: PostSerializer.new(@post).serialized_json }
+      # format.json { render json: @post.as_json.merge(url: @post.image.url) }
     end
   end
 

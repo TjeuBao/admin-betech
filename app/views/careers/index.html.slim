@@ -44,5 +44,5 @@ section.section
 section.section
   .container.mb-3
     .d-flex.justify-content-center
-      - if @careers.count > 0
+      - if @careers.size > 0
           == pagy_bootstrap_nav(@pagy)

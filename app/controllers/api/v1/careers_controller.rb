@@ -7,7 +7,7 @@ module Api
       end
 
       def show
-        render json: @career.as_json.merge(url: @carere.image.url)
+        render json: CareerSerializer.new(@career).serialized_json
       end
     end
   end

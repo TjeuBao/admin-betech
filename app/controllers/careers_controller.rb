@@ -20,7 +20,8 @@ class CareersController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: @career }
+      format.json { render json: CareerSerializer.new(@career).serialized_json }
+      # FAST_APIJSON
     end
   end
 
