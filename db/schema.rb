@@ -46,16 +46,6 @@ ActiveRecord::Schema.define(version: 2020_05_12_081901) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "career_forms", force: :cascade do |t|
-    t.string "first_name", null: false
-    t.string "last_name", null: false
-    t.string "email", null: false
-    t.string "portfolio", null: false
-    t.string "feedback", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "careers", force: :cascade do |t|
     t.string "title", null: false
     t.string "job_type"
@@ -68,7 +58,7 @@ ActiveRecord::Schema.define(version: 2020_05_12_081901) do
     t.datetime "image_updated_at"
   end
 
-  create_table "job_submisstions", force: :cascade do |t|
+  create_table "job_submissions", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "email"

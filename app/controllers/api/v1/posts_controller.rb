@@ -10,5 +10,6 @@ module Api
         render json: PostSerializer.new(@post).serialized_json
         # render json: @post.as_json.merge(url: @post.image.url)
       end
+    end
   end
 end

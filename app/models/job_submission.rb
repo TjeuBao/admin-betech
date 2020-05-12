@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: job_submisstions
+# Table name: job_submissions
 #
 #  id         :bigint           not null, primary key
 #  answer     :text
@@ -12,12 +12,12 @@
 #  updated_at :datetime         not null
 #  career_id  :integer
 #
-class JobSubmisstion < ApplicationRecord
+class JobSubmission < ApplicationRecord
   belongs_to :career
-  has_attached_file :cv_upload, storage: :cloudinary,
-                                path: ':id/:style/:filename', presence: true
-  validates_attachment_content_type :cv_upload,
-                                    content_type: ['file/pdf', 'file/doc', 'file/docx']
+  has_attached_file :cv_upload, styles: { thumbnail: '60x60#' },
+                                storage: :cloudinary,
+                                path: ':id/:style/:filename'
+  validates_attachment :cv_upload, content_type: { content_type: 'application/pdf' }
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true

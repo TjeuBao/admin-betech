@@ -7,7 +7,7 @@ class CareersController < ApplicationController
     # return api : return 6items or size items
     respond_to do |format|
       format.html
-      format.json { render json: @careers }
+      format.json { render json: CareerSerializer.new(@career).serialized_json }
     end
   end
 
@@ -30,7 +30,7 @@ class CareersController < ApplicationController
     respond_to do |format|
       if @career.save
         format.html { redirect_to @career, notice: 'Career was successfully created.' }
-        format.json { render @career, status: :created, location: @career }
+        format.json { render json: CareerSerializer.new(@career).serialized_json, status: :created, location: @career }
       else
         format.html { render :new }
         format.json { render json: @career.errors, status: :unprocessable_entity }

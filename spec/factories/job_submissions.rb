@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: job_submisstions
+# Table name: job_submissions
 #
 #  id         :bigint           not null, primary key
 #  answer     :text
@@ -12,8 +12,13 @@
 #  updated_at :datetime         not null
 #  career_id  :integer
 #
-require 'rails_helper'
-
-RSpec.describe JobSubmisstion, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+FactoryBot.define do
+  factory :job_submisstion do
+    first_name { 'MyString' }
+    last_name { 'MyString' }
+    email { 'MyString' }
+    port_folio { 'MyString' }
+    answer { 'MyText' }
+    career_id { '' }
+  end
 end
