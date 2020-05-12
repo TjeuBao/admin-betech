@@ -4,9 +4,9 @@
 #
 #  id         :bigint           not null, primary key
 #  answer     :text
-#  email      :string
-#  first_name :string
-#  last_name  :string
+#  email      :string           not null
+#  first_name :string           not null
+#  last_name  :string           not null
 #  port_folio :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

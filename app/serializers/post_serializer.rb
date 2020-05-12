@@ -13,7 +13,11 @@
 #
 class PostSerializer
   include FastJsonapi::ObjectSerializer
+  include PostHelper
+  set_type :post
   attributes  :title,
-              :content,
-              :image
+              :content
+  attributes  :image do |post|
+    image_url(post)
+  end
 end

@@ -3,12 +3,11 @@ module Api
     module Careers
       class JobSubmission < ApplicationController
         def create
-          @job_submission = job_submission.new(submit_params)
+          @job_submission = JobSubmission.new(submit_params)
           respond_to do |format|
             if @job_submission.save
-              format.json { render @job_submission, status: :created, location: @job_submission }
+              format.json { render json: JobSubmissionSerializer.new(@job_submission).serialized_json, status: :created, location: @job_submission }
             else
-              format.html { render :new }
               format.json { render json: @job_submission.errors, status: :unprocessable_entity }
             end
           end

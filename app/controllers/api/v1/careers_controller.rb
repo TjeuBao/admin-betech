@@ -3,7 +3,7 @@ module Api
     class CareersController < ApplicationController
       def index
         @pagy, @careers = pagy(Career.all.order(id: :desc).includes([:rich_text_content]), items: params[:size] || 6)
-        render json: @careers
+        render json: CareerSerializer.new(@careers).serialized_json
       end
 
       def show
