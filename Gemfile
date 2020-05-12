@@ -66,3 +66,6 @@ gem 'image_processing', '~> 1.0'
 
 # API
 gem 'fast_jsonapi'
+
+# env
+gem 'dotenv-rails', groups: [:development, :test]
