@@ -1,1 +1,2 @@
 import './fileInput';
+import './activestorage'

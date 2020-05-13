@@ -5,11 +5,11 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @pagy, @posts = pagy(Post.all.order(id: :asc).includes([:rich_text_content]), items: 5)
-
+    @pagy, @posts = pagy(Post.all.order(id: :desc).includes([:rich_text_content]), items: params[:sie] || 6)
+    # return api : return 6items or size itemsz
     respond_to do |format|
       format.html
-      format.json { render json: @posts }
+      format.json { render json: serialize_json(@posts) }
     end
   end
 
@@ -22,7 +22,8 @@ class PostsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: @post.as_json.merge(url: @post.image.url) }
+      format.json { render json: serialize_json(@post) }
+      # format.json { render json: @post.as_json.merge(url: @post.image.url) }
     end
   end
 
@@ -31,7 +32,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render @post, status: :created, location: @post }
+        format.json { render json: serialize_json(@post), status: :created, location: @post }
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -43,7 +44,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render @post, status: :ok, location: @post }
+        format.json { render json: serialize_json(@post), status: :ok, location: @post }
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -67,5 +68,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content, :image)
+  end
+
+  def serialize_json(posts)
+    PostSerializer.new(posts).serialized_json
   end
 end

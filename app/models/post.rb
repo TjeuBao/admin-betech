@@ -15,9 +15,10 @@
 #
 class Post < ApplicationRecord
   has_rich_text :content
-  has_attached_file :image,
-                    styles: { medium: '300x300>', thumb: '100x100>' },
-                    default_url: '/images/:style/missing.png'
+  has_attached_file :image, storage: :cloudinary,
+                            path: ':id/:style/:filename',
+                            styles: { medium: '300x300>', thumb: '100x100>' },
+                            default_url: '/images/:style/missing.png'
   validates_attachment_content_type :image,
                                     content_type: ['image/jpeg', 'image/gif', 'image/png']
   validates :content, presence: true

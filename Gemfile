@@ -55,9 +55,17 @@ gem 'rubocop', '~> 0.79.0', require: false
 gem 'rubocop-rails', require: false
 
 # Others
+gem 'cloudinary'
 gem 'pagy'
 gem 'paperclip', '~> 6.0.0'
+gem 'paperclip-cloudinary'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Trix
 gem 'image_processing', '~> 1.0'
+
+# API
+gem 'fast_jsonapi'
+
+# env
+gem 'dotenv-rails', groups: %i[development test]

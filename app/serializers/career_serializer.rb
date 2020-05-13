@@ -13,11 +13,10 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
-require 'rails_helper'
-
-RSpec.describe Career, type: :model do
-  context 'validates' do
-    it { is_expected.to validate_presence_of :title }
-    it { is_expected.to validate_presence_of :content }
-  end
+class CareerSerializer
+  include FastJsonapi::ObjectSerializer
+  attributes  :title,
+              :content,
+              :job_type,
+              :status
 end
