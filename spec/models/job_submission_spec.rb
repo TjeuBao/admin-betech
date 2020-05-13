@@ -12,18 +12,12 @@
 #  updated_at :datetime         not null
 #  career_id  :integer
 #
+require 'rails_helper'
 
-# RSpec.describe JobSubmission, type: :model do
-#   context 'validetess' do
-#     it { is_expected.to validate_presence_of :first_name }
-#   end
-#   context 'validates' do
-#     it { is_expected.to validate_presence_of :last_name }
-#   end
-#   context 'validates' do
-#     it { is_expected.to validate_presence_of :email }
-#   end
-#   context 'validates' do
-#     it { is_expected.to validate_presence_of :cv_upload }
-#   end
-# end
+RSpec.describe JobSubmission, type: :model do
+  describe 'validates' do
+    it { is_expected.to validate_presence_of :first_name }
+    it { is_expected.to validate_presence_of :last_name }
+    it { is_expected.to validate_presence_of :email }
+  end
+end

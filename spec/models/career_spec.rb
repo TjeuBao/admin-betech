@@ -16,10 +16,8 @@
 require 'rails_helper'
 
 RSpec.describe Career, type: :model do
-  context 'validetess' do
-    it { is_expected.to validate_presence_of :title }
-  end
   context 'validates' do
+    it { is_expected.to validate_presence_of :title }
     it { is_expected.to validate_presence_of :content }
   end
 end

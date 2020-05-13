@@ -13,15 +13,15 @@
 #  career_id  :integer
 #
 FactoryBot.define do
-  factory :job_submisstion do
+  factory :job_submission do
     first_name { 'MyString' }
     last_name { 'MyString' }
     email { 'MyString' }
     port_folio { 'MyString' }
     answer { 'MyText' }
-    career_id { '' }
+    career { FactoryBot.create(:career) }
   end
-  trait :invaid_job_submisstion do
+  trait :invaid_job_submission do
     first_name { '' }
     last_name { '' }
     email { '' }

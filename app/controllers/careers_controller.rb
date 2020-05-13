@@ -7,7 +7,7 @@ class CareersController < ApplicationController
     # return api : return 6items or size items
     respond_to do |format|
       format.html
-      format.json { render json: json_career }
+      format.json { render json: serialized_json(@careers) }
     end
   end
 
@@ -20,7 +20,7 @@ class CareersController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: json_career }
+      format.json { render json: serialized_json(@career) }
       # FAST_APIJSON
     end
   end
@@ -30,7 +30,7 @@ class CareersController < ApplicationController
     respond_to do |format|
       if @career.save
         format.html { redirect_to @career, notice: 'Career was successfully created.' }
-        format.json { render json: json_career, status: :created, location: @career }
+        format.json { render json: serialized_json(@career), status: :created, location: @career }
       else
         format.html { render :new }
         format.json { render json: @career.errors, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class CareersController < ApplicationController
     respond_to do |format|
       if @career.update(career_params)
         format.html { redirect_to @career, notice: 'Career was successfully updated.' }
-        format.json { render json: json_career, status: :ok, location: @career }
+        format.json { render json: serialized_json(@career), status: :ok, location: @career }
       else
         format.html { render :edit }
         format.json { render json: @career.errors, status: :unprocessable_entity }
@@ -68,7 +68,7 @@ class CareersController < ApplicationController
     params.require(:career).permit(:title, :content, :job_type, :status, :image)
   end
 
-  def json_career
-    CareerSerializer.new(@career).serialized_json
+  def serialized_json(careers)
+    CareerSerializer.new(careers).serialized_json
   end
 end

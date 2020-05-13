@@ -9,7 +9,7 @@ class PostsController < ApplicationController
     # return api : return 6items or size itemsz
     respond_to do |format|
       format.html
-      format.json { render json: json_post }
+      format.json { render json: serialize_json(@posts) }
     end
   end
 
@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json { render json: json_post }
+      format.json { render json: serialize_json(@post) }
       # format.json { render json: @post.as_json.merge(url: @post.image.url) }
     end
   end
@@ -32,7 +32,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render json: json_post, status: :created, location: @post }
+        format.json { render json: serialize_json(@post), status: :created, location: @post }
       else
         format.html { render :new }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
-        format.json { render json: json_post, status: :ok, location: @post }
+        format.json { render json: serialize_json(@post), status: :ok, location: @post }
       else
         format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -70,7 +70,7 @@ class PostsController < ApplicationController
     params.require(:post).permit(:title, :content, :image)
   end
 
-  def json_post
-    PostSerializer.new(@post).serialized_json
+  def serialize_json(posts)
+    PostSerializer.new(posts).serialized_json
   end
 end

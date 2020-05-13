@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :careers
+  resources :careers do
+    resources :job_submissions
+  end
   devise_for :users
   resources :posts
   root 'home#index'
@@ -7,9 +9,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :posts, only: %i[index show]
-      resources :careers, only: %i[index show] do
-        resources :job_submisstion, only: :create
-      end
+      resources :careers, only: %i[index show]
+      resources :job_submissions
     end
   end
 end

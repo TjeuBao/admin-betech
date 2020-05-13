@@ -14,10 +14,9 @@
 #
 class JobSubmission < ApplicationRecord
   belongs_to :career
-  has_attached_file :cv_upload, styles: { thumbnail: '60x60#' },
-                                storage: :cloudinary,
-                                path: ':id/:style/:filename'
-  validates_attachment :cv_upload, content_type: { content_type: 'application/pdf' }
+  has_attached_file :cv_upload, storage: :cloudinary
+
+  # validates_attachment_content_type :cv_upload, content_type: ['application/pdf', 'application/docx']
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true
