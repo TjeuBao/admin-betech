@@ -12,8 +12,12 @@
 #  updated_at :datetime         not null
 #  career_id  :integer
 #
+# Foreign Keys
+#
+#  fk_rails_...  (career_id => careers.id)
+#
 class JobSubmission < ApplicationRecord
-  belongs_to :career
+  belongs_to :career, optional: true
   has_attached_file :cv_upload, storage: :cloudinary
 
   # validates_attachment_content_type :cv_upload, content_type: ['application/pdf', 'application/docx']

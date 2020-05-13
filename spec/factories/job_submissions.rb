@@ -12,6 +12,10 @@
 #  updated_at :datetime         not null
 #  career_id  :integer
 #
+# Foreign Keys
+#
+#  fk_rails_...  (career_id => careers.id)
+#
 FactoryBot.define do
   factory :job_submission do
     first_name { 'MyString' }

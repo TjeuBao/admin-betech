@@ -10,5 +10,7 @@ class CreateJobSubmissions < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+
+    add_foreign_key :job_submissions, :careers
   end
 end

@@ -92,4 +92,5 @@ ActiveRecord::Schema.define(version: 2020_05_13_033152) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "job_submissions", "careers"
 end

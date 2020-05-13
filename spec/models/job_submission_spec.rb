@@ -12,6 +12,10 @@
 #  updated_at :datetime         not null
 #  career_id  :integer
 #
+# Foreign Keys
+#
+#  fk_rails_...  (career_id => careers.id)
+#
 require 'rails_helper'
 
 RSpec.describe JobSubmission, type: :model do
