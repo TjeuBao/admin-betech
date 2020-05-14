@@ -15,7 +15,7 @@
 #
 class Post < ApplicationRecord
   has_rich_text :content
-  validates_presence_of :content
+
   has_attached_file :image, storage: :cloudinary,
                             path: ':id/:style/:filename',
                             styles: { medium: '300x300>', thumb: '100x100>' },

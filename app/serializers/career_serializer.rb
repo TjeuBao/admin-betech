@@ -19,4 +19,7 @@ class CareerSerializer
               :content,
               :job_type,
               :status
+  attributes :content do |career|
+    career.content.body.to_html
+  end
 end
