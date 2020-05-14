@@ -3,7 +3,7 @@ class CareersController < ApplicationController
   before_action :set_career, only: %i[show edit update destroy]
 
   def index
-    @pagy, @careers = pagy(Career.all.order(id: :asc).includes([:rich_text_content]), items: 5)
+    @pagy, @careers = pagy(Career.all.order(id: :asc), items: 5)
     # return api : return 6items or size items
     respond_to do |format|
       format.html

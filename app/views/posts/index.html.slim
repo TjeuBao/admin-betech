@@ -34,7 +34,8 @@ section.section
             .content.mb-1
               / = raw post.content
         .container.mt-2.mb-4
-          = image_tag post.image.url(:medium)
+          - if post.image.present?
+              = image_tag post.image.url(:medium)
 section.section
   .container.mb-3
     .d-flex.justify-content-center

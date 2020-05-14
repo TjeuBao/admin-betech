@@ -6,5 +6,5 @@
     .field.mt-2.mb-2
       = f.label :content
       = f.rich_text_area :content
-    = f.input :image, direct_upload: true, as: :file
+    = f.input :image, required: true, direct_upload: true, as: :file
     = f.button :submit, class: "btn btn-info mt-2"
