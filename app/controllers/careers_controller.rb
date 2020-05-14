@@ -3,12 +3,12 @@ class CareersController < ApplicationController
   before_action :set_career, only: %i[show edit update destroy]
 
   def index
-    @pagy, @careers = pagy(Career.all.order(id: :asc), items: 5)
+    @pagy, @careers = pagy(Career.all.order(id: :asc), items: params[:size] || 6)
     # return api : return 6items or size items
-    respond_to do |format|
-      format.html
-      format.json { render json: serialized_json(@careers) }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: serialized_json(@careers) }
+    # end
   end
 
   def new
@@ -17,20 +17,14 @@ class CareersController < ApplicationController
 
   def edit; end
 
-  def show
-    respond_to do |format|
-      format.html
-      format.json { render json: serialized_json(@career) }
-      # FAST_APIJSON
-    end
-  end
+  def show; end
 
   def create
     @career = Career.new(career_params)
     respond_to do |format|
       if @career.save
         format.html { redirect_to @career, notice: 'Career was successfully created.' }
-        format.json { render json: serialized_json(@career), status: :created, location: @career }
+        format.json { render :show, status: :created, location: @career }
       else
         format.html { render :new }
         format.json { render json: @career.errors, status: :unprocessable_entity }
@@ -42,7 +36,7 @@ class CareersController < ApplicationController
     respond_to do |format|
       if @career.update(career_params)
         format.html { redirect_to @career, notice: 'Career was successfully updated.' }
-        format.json { render json: serialized_json(@career), status: :ok, location: @career }
+        format.json { render :show, status: :ok, location: @career }
       else
         format.html { render :edit }
         format.json { render json: @career.errors, status: :unprocessable_entity }
@@ -66,9 +60,5 @@ class CareersController < ApplicationController
 
   def career_params
     params.require(:career).permit(:title, :content, :job_type, :status, :image)
-  end
-
-  def serialized_json(careers)
-    CareerSerializer.new(careers).serialized_json
   end
 end

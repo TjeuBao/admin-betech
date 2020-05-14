@@ -7,6 +7,7 @@ module Api
       end
 
       def show
+        @career = Career.find(params[:id])
         render json: CareerSerializer.new(@career).serialized_json
       end
     end
