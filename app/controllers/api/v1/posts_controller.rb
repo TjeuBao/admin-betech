@@ -7,6 +7,7 @@ module Api
       end
 
       def show
+        @post = Post.find(params[:id])
         render json: PostSerializer.new(@post).serialized_json
         # render json: @post.as_json.merge(url: @post.image.url)
       end

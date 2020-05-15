@@ -10,10 +10,19 @@
         | User
 .row
   .col-4
-    = link_to '#'
-      .card.text-white.bg-info
-        .card-body
-          .toll-free-box.text-center
-            h4
-              i.dripicons-document
-              | Users - 1
+    .card.text-white.bg-info
+      .card-body
+        .toll-free-box.text-center
+          .media-content.mb-2
+            h5.title.is-4 Hi Admin
+            = @user.first.email
+
+/ section.section
+/   .container
+/     .card
+/       .card-content
+/         .container
+/           .media
+/             .media-content.mb-2
+/               h5.title.is-4 Hi Admin
+/               = @user.first.email

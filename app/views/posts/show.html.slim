@@ -19,4 +19,5 @@ section.section
       = @post.title
     .content.mb-2
       = sanitize raw(@post.content)
+  - if @post.image.present?
     = image_tag @post.image.url(:medium)
