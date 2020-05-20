@@ -17,8 +17,8 @@ FactoryBot.define do
   factory :career do
     title { 'Developer' }
     content { 'Content' }
-    job_type { Career::JOB[0] }
-    status { Career::STATUSES[0] }
+    job_type { Career::JOB.sample }
+    status { Career::STATUSES.sample }
   end
   trait :empty do
     title { '' }

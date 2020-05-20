@@ -30,6 +30,6 @@ class Career < ApplicationRecord
   validates_inclusion_of :status, in: STATUSES
 
   def serializable_rich_content
-    ActionController::Base.helpers.sanitize(ActionController::Base.helpers.raw(content))
+    ActionController::Base.helpers.sanitize(ActionController::Base.helpers.raw(:content))
   end
 end
