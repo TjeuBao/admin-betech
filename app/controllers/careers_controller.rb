@@ -3,12 +3,7 @@ class CareersController < ApplicationController
   before_action :set_career, only: %i[show edit update destroy]
 
   def index
-    @pagy, @careers = pagy(Career.all.order(id: :asc), items: params[:size] || 6)
-    # return api : return 6items or size items
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: serialized_json(@careers) }
-    # end
+    @pagy, @careers = pagy(Career.all.order(created_at: :desc), items: params[:size] || 6)
   end
 
   def new
