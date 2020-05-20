@@ -31,6 +31,10 @@ section.section
             .media-content
               h5.title.is-4
                 = link_to post.title, post
+            .media-content
+              h5 Source :
+              h6.title.is-4
+                = post.source
             .content.mb-1
               / = raw post.content
         .container.mt-2.mb-4
