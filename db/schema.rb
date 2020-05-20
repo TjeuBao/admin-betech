@@ -64,13 +64,10 @@ ActiveRecord::Schema.define(version: 2020_05_20_022638) do
     t.string "email", null: false
     t.string "port_folio"
     t.text "answer"
+    t.string "cv_upload"
     t.integer "career_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "cv_upload_file_name"
-    t.string "cv_upload_content_type"
-    t.integer "cv_upload_file_size"
-    t.datetime "cv_upload_updated_at"
   end
 
   create_table "posts", force: :cascade do |t|

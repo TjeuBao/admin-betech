@@ -20,6 +20,6 @@ class CareerSerializer
               :job_type,
               :status
   attributes :content do |career|
-    career.content.body.to_html
+    ActionController::Base.helpers.sanitize(ActionController::Base.helpers.raw(career.content))
   end
 end
