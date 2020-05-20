@@ -19,7 +19,5 @@ class CareerSerializer
               :content,
               :job_type,
               :status
-  attributes :content do |career|
-    career.serializable_rich_content
-  end
+  attributes  :content, &:serializable_rich_content
 end
