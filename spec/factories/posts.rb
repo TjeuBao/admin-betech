@@ -9,6 +9,7 @@
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
+#  source             :string
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null

@@ -15,8 +15,13 @@ section.section
         p.level-item
           = link_to  "Back", posts_path(page: @page), class:"button btn btn-dark btn-sm"
     hr/
+    |Title :
     h4.title
       = @post.title
+    |Source :
+    h5.title
+      = @post.source
+    |Content :
     .content.mb-2
       = sanitize raw(@post.content)
   - if @post.image.present?
