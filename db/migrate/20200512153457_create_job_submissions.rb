@@ -6,6 +6,7 @@ class CreateJobSubmissions < ActiveRecord::Migration[6.0]
       t.string :email, null: false
       t.string :port_folio
       t.text :answer
+      t.string :cv_upload
       t.integer :career_id
 
       t.timestamps
