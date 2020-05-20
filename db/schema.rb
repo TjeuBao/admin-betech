@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_13_033152) do
+ActiveRecord::Schema.define(version: 2020_05_20_022638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,10 @@ ActiveRecord::Schema.define(version: 2020_05_13_033152) do
     t.integer "career_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "cv_upload_file_name"
+    t.string "cv_upload_content_type"
+    t.integer "cv_upload_file_size"
+    t.datetime "cv_upload_updated_at"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -77,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_033152) do
     t.string "image_content_type"
     t.integer "image_file_size"
     t.datetime "image_updated_at"
+    t.string "source"
   end
 
   create_table "users", force: :cascade do |t|
