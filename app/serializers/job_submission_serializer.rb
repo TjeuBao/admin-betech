@@ -23,5 +23,6 @@ class JobSubmissionSerializer
               :last_name,
               :email,
               :port_folio,
-              :answer
+              :answer,
+              :cv_upload
 end
