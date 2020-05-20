@@ -7,7 +7,8 @@
       = f.label :content
       = f.rich_text_area :content
     = f.input :image, required: true, direct_upload: true, as: :file
-    .field.mt-2
+    .field.mt-2.mb-2
       .control
         = f.input :source, label: 'Source :', input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
-    = f.button :submit, class: "btn btn-info mt-2"
+    = f.button :submit, class: "btn btn-info mb-2"
+    = link_to  "Back", :back, class:"btn btn-secondary mb-2 ml-4"
