@@ -16,7 +16,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     describe 'GET show' do
-      let(:post) { create(:post) }
+      let(:post) { create(:post, :with_image_from_file) }
 
       it 'render the posts#show' do
         get :show, params: { id: post.id }
@@ -32,7 +32,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     describe 'GET edit' do
-      let(:post) { create(:post) }
+      let(:post) { create(:post, :with_image_from_file) }
 
       it 'render the post#edit' do
         get :edit, params: { id: post.id }
@@ -42,7 +42,7 @@ RSpec.describe PostsController, type: :controller do
 
     describe 'POST create' do
       context 'with invalid attributes' do
-        let(:invalid_post_param) { attributes_for(:post, :invalid) }
+        let(:invalid_post_param) { attributes_for(:post, :invalid, :with_image_from_file) }
 
         it 'Post was not created' do
           expect { post :create, params: { post: invalid_post_param } }.not_to change(Post, :count)
@@ -50,7 +50,7 @@ RSpec.describe PostsController, type: :controller do
       end
 
       context 'Post was successfully created' do
-        let(:valid_post_param) { attributes_for(:post) }
+        let(:valid_post_param) { attributes_for(:post, :with_image_from_file) }
 
         it 'create a new post' do
           expect { post :create, params: { post: valid_post_param } }.to change { Post.count }.by(1)
@@ -59,10 +59,10 @@ RSpec.describe PostsController, type: :controller do
     end
 
     describe 'PATCH #update' do
-      let(:post) { create(:post) }
+      let(:post) { create(:post, :with_image_from_file) }
 
       context 'when failed to save post' do
-        let(:invalid_post_params) { attributes_for(:post, :invalid) }
+        let(:invalid_post_params) { attributes_for(:post, :invalid, :with_image_from_file) }
         it 'does not update post' do
           expect { patch :update, params: { id: post.id, post: invalid_post_params } }.not_to change(post, :title)
         end
@@ -82,7 +82,7 @@ RSpec.describe PostsController, type: :controller do
 
     describe 'DELETE post' do
       context 'Post was successfully destroyed' do
-        let!(:post) { create(:post) }
+        let!(:post) { create(:post, :with_image_from_file) }
 
         it 'delete post' do
           expect { delete :destroy, params: { id: post.id } }.to change { Post.count }.by(-1)
