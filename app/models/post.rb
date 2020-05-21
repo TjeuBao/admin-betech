@@ -21,6 +21,7 @@ class Post < ApplicationRecord
                             path: ':id/:style/:filename',
                             styles: { medium: '300x300>', thumb: '100x100>' },
                             default_url: '/images/:style/missing.png'
+  validates_attachment_presence :image
   validates_attachment_content_type :image, presence: true, content_type: ['image/jpeg', 'image/gif', 'image/png']
   validates :content, presence: true
   validates :title, presence: true
