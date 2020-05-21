@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :posts, only: %i[index show]
       resources :careers, only: %i[index show]
       resources :job_submissions
+      resources :subscribes
     end
   end
 end
