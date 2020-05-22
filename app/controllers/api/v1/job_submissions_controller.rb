@@ -10,11 +10,6 @@ module Api
         end
       end
 
-      # def index
-      #   @job_submission = JobSubmission.all
-      #   render json: JobSubmissionSerializer.new(@job_submission)
-      # end
-
       def submit_params
         params.require(:job_submission).permit(:first_name, :last_name, :email, :port_folio, :answer, :cv_upload, :career_id)
       end
