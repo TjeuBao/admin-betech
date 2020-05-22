@@ -32,4 +32,12 @@ class Career < ApplicationRecord
   def serializable_rich_content
     ActionController::Base.helpers.sanitize(ActionController::Base.helpers.raw(content))
   end
+
+  def self.search(search)
+    if search
+      find(:all, conditions: ['title LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
 end
