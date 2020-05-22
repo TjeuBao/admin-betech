@@ -6,11 +6,6 @@ class PostsController < ApplicationController
 
   def index
     @pagy, @posts = pagy(Post.all.order(id: :desc), items: params[:size] || 6)
-    # return api : return 6items or size itemsz
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: serialize_json(@posts) }
-    # end
   end
 
   def new
