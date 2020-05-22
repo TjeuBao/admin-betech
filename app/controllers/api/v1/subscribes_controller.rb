@@ -10,6 +10,11 @@ module Api
         end
       end
 
+      # def index
+      #   @subscribe = Subscribe.all
+      #   render json: SubscribeSerializer.new(@subscribe)
+      # end
+
       def subscribe_params
         params.require(:subscribe).permit(:name, :email, :subscribe_type)
       end

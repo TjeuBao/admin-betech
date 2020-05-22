@@ -8,7 +8,7 @@
 #  subscribe_type :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
-#Subscribe
+# Subscribe
 class Subscribe < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
