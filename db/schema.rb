@@ -81,10 +81,10 @@ ActiveRecord::Schema.define(version: 2020_05_21_104434) do
     t.string "source"
   end
 
-  create_table "subscribes", force: :cascade do |t|
+  create_table "subscriptions", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.string "subscribe_type", null: false
+    t.string "subscription_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,6 +1,6 @@
-class SubscribeSerializer
+class SubscriptionSerializer
   include FastJsonapi::ObjectSerializer
   attributes  :name,
               :email,
-              :subscribe_type
+              :subscription_type
 end
