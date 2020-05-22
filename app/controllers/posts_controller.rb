@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def index
     @pagy, @posts = pagy(Post.all.order(id: :desc), items: params[:size] || 6)
+    @posts = Post.search(params[:search])
   end
 
   def new

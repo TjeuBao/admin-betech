@@ -4,6 +4,7 @@ class CareersController < ApplicationController
 
   def index
     @pagy, @careers = pagy(Career.all.order(created_at: :desc), items: params[:size] || 6)
+    @careers = Career.search(params[:search])
   end
 
   def new
