@@ -9,15 +9,15 @@
       li.side-nav-title.side-nav-item
         | Navigation
       li.side-nav-item
-        = link_to root_path, class: 'side-nav-link' do
+        = link_to root_path, class: "side-nav-link #{active_items('home')}" do
           i.dripicons-user
           span Users
       li.side-nav-item
-        = link_to posts_path, class: 'side-nav-link' do
+        = link_to posts_path, class: "side-nav-link #{active_items('posts')}" do
           i.dripicons-document-new
           span Blogs
       li.side-nav-item
-        = link_to careers_path, class: 'side-nav-link' do
+        = link_to careers_path, class: "side-nav-link #{active_items('careers')}" do
           i.dripicons-briefcase
           span Careers
     .clearfix
