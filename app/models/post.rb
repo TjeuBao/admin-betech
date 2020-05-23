@@ -17,6 +17,8 @@
 class Post < ApplicationRecord
   has_rich_text :content
 
+  after_create :send_mail_subscription
+
   has_attached_file :image, storage: :cloudinary,
                             path: ':id/:style/:filename',
                             styles: { medium: '300x300>', thumb: '100x100>' },
@@ -25,12 +27,4 @@ class Post < ApplicationRecord
   validates_attachment_content_type :image, presence: true, content_type: ['image/jpeg', 'image/gif', 'image/png']
   validates :content, presence: true
   validates :title, presence: true
-
-  def self.search(search)
-    if search
-      find(:all, conditions: ['title LIKE ?', "%#{search}%"])
-    else
-      find(:all)
-    end
-  end
 end
