@@ -5,8 +5,15 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @pagy, @posts = pagy(Post.all.order(id: :desc), items: params[:size] || 6)
-    @posts = Post.search(params[:search])
+    if params[:search]
+      @pagy, @posts = pagy(search, items: params[:size] || 6)
+    else
+      @pagy, @posts = pagy(Post.all.order(id: :desc), items: params[:size] || 6)
+    end
+  end
+
+  def search
+    Post.where('title LIKE ?', '%' + params[:search] + '%')
   end
 
   def new
