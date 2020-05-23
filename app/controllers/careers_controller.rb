@@ -11,7 +11,7 @@ class CareersController < ApplicationController
   end
 
   def search
-    Career.where('lower(title) LIKE ?', '%' + params[:q].downcase + '%')
+    Career.where('lower(title) LIKE ?', '%' + params[:search].downcase + '%')
   end
 
   def new

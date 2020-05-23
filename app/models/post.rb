@@ -17,8 +17,6 @@
 class Post < ApplicationRecord
   has_rich_text :content
 
-  after_create :send_mail_subscription
-
   has_attached_file :image, storage: :cloudinary,
                             path: ':id/:style/:filename',
                             styles: { medium: '300x300>', thumb: '100x100>' },

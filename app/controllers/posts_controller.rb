@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def search
-    Post.where('title LIKE ?', '%' + params[:search] + '%')
+    Post.where('lower(title) LIKE ?', '%' + params[:search].downcase + '%')
   end
 
   def new
