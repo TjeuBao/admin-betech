@@ -14,8 +14,4 @@ module ApplicationHelper
   def active_items(item)
     'active' if controller_name == item
   end
-
-  def search_control
-    controller_name == 'home' ? '' : '/' + controller_name
-  end
 end
