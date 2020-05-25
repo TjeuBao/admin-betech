@@ -10,4 +10,8 @@ module ApplicationHelper
       notice: 'alert-info'
     }.fetch(flash_type.to_sym, 'alert-info')
   end
+
+  def active_items(item)
+    'active' if controller_name == item
+  end
 end
