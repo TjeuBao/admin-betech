@@ -30,9 +30,8 @@ class Post < ApplicationRecord
   private
 
   def send_mail
-    list_email = Subscription.where(subscription_type: 'post').pluck(:email)
-    SubscriptionMailer.email_subscription(list_email).deliver_now
     list_email_subscription_all = Subscription.where(subscription_type: '').pluck(:email)
-    SubscriptionMailer.email_subscription(list_email_subscription_all).deliver_now
+    list_email_post = Subscription.where(subscription_type: 'post').pluck(:email)
+    SubscriptionMailer.email_subscription(list_email_post + list_email_subscription_all).deliver_later
   end
 end
