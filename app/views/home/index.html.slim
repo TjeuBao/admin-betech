@@ -9,10 +9,20 @@
       h4.page-title
         | User
 .row
-  .col-4
-    .card.text-white.bg-info
-      .card-body
-        .toll-free-box.text-center
-          .media-content.mb-2
-            h5.title.is-4 Hi Admin
-            = current_user.email
+  .col
+    .container
+      .card.text-white.bg-info
+        .card-body
+          .toll-free-box.text-center
+            .media-content
+              h5.title.is-4 Admin Infomation
+              table.table.table-admin
+                tr
+                  th scope="col"  STT
+                  th scope="col"  ID
+                  th scope="col"  Email
+                - @user.each do |user|
+                    tr
+                      th = user.id
+                      td = user.id
+                      td = user.email
