@@ -14,7 +14,7 @@
 #  updated_at         :datetime         not null
 #
 class Career < ApplicationRecord
-  after_create :send_mail
+  after_commit :send_mail
   has_many :job_submisstion
   STATUSES = %i[open job_filled].map(&:to_s).map(&:titleize)
   JOB = %i[full_time part_time].map(&:to_s).map(&:titleize)
@@ -37,8 +37,7 @@ class Career < ApplicationRecord
   private
 
   def send_mail
-    list_email_subscription_all = Subscription.where(subscription_type: '').pluck(:email)
-    list_email_career = Subscription.where(subscription_type: 'career').pluck(:email)
-    SubscriptionMailer.email_subscription(list_email_career + list_email_subscription_all).deliver_later
+    list_email = Subscription.email_subscription_career.pluck(:email)
+    SubscriptionMailer.email_subscription(list_email).deliver_later
   end
 end

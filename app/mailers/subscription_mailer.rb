@@ -1,7 +1,7 @@
 class SubscriptionMailer < ApplicationMailer
-  default from: 'from@example.com'
+  default from: 'austin@goldenowl.asia'
 
   def email_subscription(list_email)
-    mail(to: list_email, subject: 'Sample Email') if list_email.any?
+    mail(to: list_email, subject: 'Subscription Email') if list_email.any?
   end
 end

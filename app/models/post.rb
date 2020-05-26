@@ -15,7 +15,7 @@
 #  updated_at         :datetime         not null
 #
 class Post < ApplicationRecord
-  after_create :send_mail
+  after_commit :send_mail
   has_rich_text :content
 
   has_attached_file :image, storage: :cloudinary,
@@ -30,8 +30,7 @@ class Post < ApplicationRecord
   private
 
   def send_mail
-    list_email_subscription_all = Subscription.where(subscription_type: '').pluck(:email)
-    list_email_post = Subscription.where(subscription_type: 'post').pluck(:email)
-    SubscriptionMailer.email_subscription(list_email_post + list_email_subscription_all).deliver_later
+    list_email = Subscription.email_subscription_post.pluck(:email)
+    SubscriptionMailer.email_subscription(list_email).deliver_later
   end
 end
