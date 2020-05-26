@@ -14,6 +14,7 @@
 #  updated_at         :datetime         not null
 #
 class Career < ApplicationRecord
+  after_create :send_mail
   has_many :job_submisstion
   STATUSES = %i[open job_filled].map(&:to_s).map(&:titleize)
   JOB = %i[full_time part_time].map(&:to_s).map(&:titleize)
@@ -31,5 +32,12 @@ class Career < ApplicationRecord
 
   def serializable_rich_content
     ActionController::Base.helpers.sanitize(ActionController::Base.helpers.raw(content))
+  end
+
+  private
+
+  def send_mail
+    list_email = Subscription.where(subscription_type: 'career' || '').pluck(:email)
+    SubscriptionMailer.email_subscription(list_email).deliver_now
   end
 end

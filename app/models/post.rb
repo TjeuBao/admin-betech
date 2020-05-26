@@ -15,6 +15,7 @@
 #  updated_at         :datetime         not null
 #
 class Post < ApplicationRecord
+  after_create :send_mail
   has_rich_text :content
 
   has_attached_file :image, storage: :cloudinary,
@@ -25,4 +26,13 @@ class Post < ApplicationRecord
   validates_attachment_content_type :image, presence: true, content_type: ['image/jpeg', 'image/gif', 'image/png']
   validates :content, presence: true
   validates :title, presence: true
+
+  private
+
+  def send_mail
+    list_email = Subscription.where(subscription_type: 'post').pluck(:email)
+    SubscriptionMailer.email_subscription(list_email).deliver_now
+    list_email_subscription_all = Subscription.where(subscription_type: '').pluck(:email)
+    SubscriptionMailer.email_subscription(list_email_subscription_all).deliver_now
+  end
 end
