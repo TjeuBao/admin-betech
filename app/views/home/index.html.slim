@@ -20,11 +20,13 @@
                 tr
                   th scope="col"  STT
                   th scope="col"  ID
+                  th scope="col"  UserName
                   th scope="col"  Email
                 - @users.each do |user|
                     tr
                       th = user.id
                       td = user.id
+                      td = user.email.split('@')[0]
                       td = user.email
 section.section
   .container.mb-3
