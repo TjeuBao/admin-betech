@@ -12,6 +12,6 @@
 class Subscription < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true
-  scope :email_subscription_post, -> { where("subscription_type ISNULL or  subscription_type = '' or subscription_type = 'post'") }
-  scope :email_subscription_career, -> { where("subscription_type ISNULL or  subscription_type = '' or subscription_type = 'career'") }
+  scope :email_subscription_post, -> { where("subscription_type IS NULL or  subscription_type = '' or subscription_type = 'post'") }
+  scope :email_subscription_career, -> { where("subscription_type IS NULL or  subscription_type = '' or subscription_type = 'career'") }
 end

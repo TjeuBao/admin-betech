@@ -63,7 +63,7 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # mailler default url
-  config.action_mailer.default_url_options = { host: 'http://eee.com' }
+  config.action_mailer.default_url_options = { host: ENV['DEFAULT_URL'] }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
