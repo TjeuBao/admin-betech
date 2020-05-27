@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   end
   devise_for :users
   resources :posts
+  get 'home', to: 'home#index'
   root 'home#index'
 
   namespace :api do
