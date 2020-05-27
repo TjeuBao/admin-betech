@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   include Pagy::Backend
   layout :layout_by_resource
 
-  DEFAULT_PAGE_NUMBER = 6
+  DEFAULT_PER_PAGE = 6
+  MAX_PER_PAGE = 20
 
   private
 
@@ -13,6 +14,8 @@ class ApplicationController < ActionController::Base
   end
 
   def per_page
-    params[:size] || DEFAULT_PAGE_NUMBER
+    return DEFAULT_PER_PAGE if params[:size].blank?
+
+    params[:size].to_i > MAX_PER_PAGE ? MAX_PER_PAGE : params[:size]
   end
 end

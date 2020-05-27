@@ -4,9 +4,9 @@ class CareersController < ApplicationController
 
   def index
     if params[:search]
-      @pagy, @careers = pagy(search, per_page)
+      @pagy, @careers = pagy(search, items: per_page)
     else
-      @pagy, @careers = pagy(Career.all.order(created_at: :desc), per_page)
+      @pagy, @careers = pagy(Career.all.order(created_at: :desc), items: per_page)
     end
   end
 
