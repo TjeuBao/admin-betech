@@ -3,5 +3,7 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!
 
-  def index; end
+  def index
+    @pagy, @users = pagy(User.all, items: params[:size] || 5)
+  end
 end

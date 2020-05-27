@@ -69,3 +69,5 @@ gem 'fast_jsonapi'
 
 # env
 gem 'dotenv-rails', groups: %i[development test]
+
+gem 'rails_12factor'
