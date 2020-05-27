@@ -22,9 +22,11 @@
                   th scope="col"  ID
                   th scope="col"  UserName
                   th scope="col"  Email
-                - @users.each_with_index do |user, index|
+                - i = 1
+                - @users.each do |user|
                     tr
-                      th = index + 1
+                      th = i
+                      - i += 1
                       td = user.id
                       td = user.email.split('@')[0]
                       td = user.email
