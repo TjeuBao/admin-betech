@@ -6,9 +6,9 @@ class PostsController < ApplicationController
 
   def index
     if params[:search]
-      @pagy, @posts = pagy(search, items: params[:size] || 6)
+      @pagy, @posts = pagy(search, per_page)
     else
-      @pagy, @posts = pagy(Post.all.order(id: :desc), items: params[:size] || 6)
+      @pagy, @posts = pagy(Post.all.order(id: :desc), per_page)
     end
   end
 
