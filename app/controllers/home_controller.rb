@@ -4,6 +4,6 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @pagy, @users = pagy(User.all, items: params[:size] || 5)
+    @pagy, @users = pagy(User.all, items: params[:size] || 3)
   end
 end
