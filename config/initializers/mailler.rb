@@ -3,6 +3,7 @@ if Rails.env.production? || Rails.env.staging?
     # send mail subscription
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
+      from: ENV['MAIL_ADMIN_SENDER'],
       user_name: ENV['USER_NAME'],
       password: ENV['PASSWORD'],
       domain: ENV['DOMAIN'],
