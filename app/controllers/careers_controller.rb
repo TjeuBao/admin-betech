@@ -5,7 +5,7 @@ class CareersController < ApplicationController
   def index
     career_relations =
       if params[:search]
-        Career.where('lower(title) LIKE ?', '%' + params[:search].downcase + '%')
+        Career.search(params[:search])
       else
         Career.all.order(created_at: :desc)
       end

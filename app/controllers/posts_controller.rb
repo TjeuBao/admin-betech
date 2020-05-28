@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   def index
     post_relations =
       if params[:search]
-        Post.where('lower(title) LIKE ?', '%' + params[:search].downcase + '%')
+        Post.search(params[:search])
       else
         Post.all.order(id: :desc)
       end
