@@ -5,13 +5,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    post_relations =
-      if params[:search]
-        Post.search(params[:search])
-      else
-        Post.all.order(id: :desc)
-      end
-    @pagy, @posts = pagy(post_relations, items: per_page)
+    @pagy, @posts = pagy(extract_post, items: per_page)
   end
 
   def new
@@ -63,5 +57,13 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content, :image, :source, :post_type)
+  end
+
+  def extract_post
+    if params[:search]
+      Post.search(params[:search])
+    else
+      Post.all.order(id: :desc)
+    end
   end
 end

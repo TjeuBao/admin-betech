@@ -3,13 +3,7 @@ class CareersController < ApplicationController
   before_action :set_career, only: %i[show edit update destroy]
 
   def index
-    career_relations =
-      if params[:search]
-        Career.search(params[:search])
-      else
-        Career.all.order(created_at: :desc)
-      end
-    @pagy, @careers = pagy(career_relations, items: per_page)
+    @pagy, @careers = pagy(extract_career, items: per_page)
   end
 
   def new
@@ -61,5 +55,13 @@ class CareersController < ApplicationController
 
   def career_params
     params.require(:career).permit(:title, :content, :job_type, :status, :image)
+  end
+
+  def extract_career
+    if params[:search]
+      Career.search(params[:search])
+    else
+      Career.all.order(id: :desc)
+    end
   end
 end
