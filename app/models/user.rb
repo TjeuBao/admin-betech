@@ -23,7 +23,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  scope :search, ->(search_string) { where('lower(email) LIKE ?', "%#{search_string.downcase}%")}
+  scope :search, ->(search_string) { where('lower(email) LIKE ?', "%#{search_string.downcase}%") }
 
   def user_name
     email.split('@')[0]

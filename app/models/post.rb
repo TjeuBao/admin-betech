@@ -27,7 +27,7 @@ class Post < ApplicationRecord
   validates_attachment_content_type :image, presence: true, content_type: ['image/jpeg', 'image/gif', 'image/png']
   validates :content, presence: true
   validates :title, presence: true
-  scope :search, ->(search_string) { where('lower(title) LIKE ?', "%#{search_string.downcase}%")}
+  scope :search, ->(search_string) { where('lower(title) LIKE ?', "%#{search_string.downcase}%") }
 
   private
 
