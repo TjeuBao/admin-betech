@@ -8,26 +8,6 @@
           li.breadcrumb-item Subscription
       h4.page-title
         | Subsctiption list
-/ section.section
-/   .container
-/     - @subscriptions.each do |subscription|
-/       .card
-/         .card-content
-/           .container
-/             .media
-/             .media-content
-/               h5 Id :
-/               h6.title.is-4
-/                 = subscription.id
-/             .media-content
-/               h5 Email :
-/               h6.title.is-4
-/                 = subscription.email
-/ section.section
-/   .container.mb-3
-/     .d-flex.justify-content-center
-/       - if @subscriptions.size > 0
-/           == pagy_bootstrap_nav(@pagy)
 .row
   .col
     .container

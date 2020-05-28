@@ -13,7 +13,6 @@ module Api
       end
 
       def index
-        @subscriptions = Subscription.new
         @pagy, @subscriptions = pagy(extract_subscription, items: per_page)
       end
 
