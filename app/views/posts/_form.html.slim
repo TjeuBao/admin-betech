@@ -10,5 +10,8 @@
     .field.mt-2.mb-2
       .control
         = f.input :source, label: 'Source :', input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
+    .field.mt-2.mb-2
+      .control
+        = f.input :post_type, label: 'Type :', input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
     = f.button :submit, class: "btn btn-info mb-2"
     = link_to  "Back", :back, class:"btn btn-secondary mb-2 ml-4"

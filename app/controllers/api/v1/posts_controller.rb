@@ -2,13 +2,13 @@ module Api
   module V1
     class PostsController < ApplicationController
       def index
-        @pagy, @posts = pagy(Post.all.order(id: :desc).includes([:rich_text_content]), items: params[:size] || 6)
-        render json: PostSerializer.new(@posts).serialized_json
+        @posts = Post.all
+        render json: PostSerializer.new(@posts)
       end
 
       def show
         @post = Post.find(params[:id])
-        render json: PostSerializer.new(@post).serialized_json
+        render json: PostSerializer.new(@post)
       end
     end
   end

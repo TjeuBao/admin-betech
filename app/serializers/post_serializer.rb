@@ -7,6 +7,7 @@
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
+#  post_type          :string
 #  source             :string
 #  title              :string           not null
 #  created_at         :datetime         not null
@@ -17,8 +18,8 @@ class PostSerializer
   set_type :post
   attributes  :title,
               :source,
-              :created_at,
-              :updated_at
+              :post_type,
+              :created_at
   attributes  :image do |post|
     post.image.url
   end

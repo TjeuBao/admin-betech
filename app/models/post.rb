@@ -9,6 +9,7 @@
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
+#  post_type          :string
 #  source             :string
 #  title              :string           not null
 #  created_at         :datetime         not null
@@ -26,6 +27,7 @@ class Post < ApplicationRecord
   validates_attachment_content_type :image, presence: true, content_type: ['image/jpeg', 'image/gif', 'image/png']
   validates :content, presence: true
   validates :title, presence: true
+  scope :search, ->(search_string) { where('lower(title) LIKE ?', "%#{search_string.downcase}%") }
 
   private
 

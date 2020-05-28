@@ -45,3 +45,4 @@ coverage/**/*
 
 #env
 .env
+sendgrid.env

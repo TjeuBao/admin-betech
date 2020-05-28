@@ -21,6 +21,9 @@ section.section
     |Source :
     h5.title
       = @post.source
+    |Type :
+    h5.title
+      = @post.post_type
     |Content :
     .content.mb-2
       = sanitize raw(@post.content)

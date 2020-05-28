@@ -5,15 +5,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    if params[:search]
-      @pagy, @posts = pagy(search, items: params[:size] || 6)
-    else
-      @pagy, @posts = pagy(Post.all.order(id: :desc), items: params[:size] || 6)
-    end
-  end
-
-  def search
-    Post.where('lower(title) LIKE ?', '%' + params[:search].downcase + '%')
+    @pagy, @posts = pagy(extract_post, items: per_page)
   end
 
   def new
@@ -64,6 +56,14 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :image, :source)
+    params.require(:post).permit(:title, :content, :image, :source, :post_type)
+  end
+
+  def extract_post
+    if params[:search]
+      Post.search(params[:search])
+    else
+      Post.all.order(id: :desc)
+    end
   end
 end

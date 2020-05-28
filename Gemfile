@@ -71,3 +71,5 @@ gem 'fast_jsonapi'
 gem 'dotenv-rails', groups: %i[development test]
 
 gem 'rails_12factor'
+
+gem 'sendgrid-ruby'

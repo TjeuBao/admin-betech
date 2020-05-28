@@ -29,6 +29,7 @@ class Career < ApplicationRecord
   validates :title, presence: true
   validates_inclusion_of :job_type, in: JOB
   validates_inclusion_of :status, in: STATUSES
+  scope :search, ->(search_string) { where('lower(title) LIKE ?', "%#{search_string.downcase}%") }
 
   def serializable_rich_content
     ActionController::Base.helpers.sanitize(ActionController::Base.helpers.raw(content))
