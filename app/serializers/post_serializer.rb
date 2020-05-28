@@ -19,8 +19,7 @@ class PostSerializer
   attributes  :title,
               :source,
               :post_type,
-              :created_at,
-              :updated_at
+              :created_at
   attributes  :image do |post|
     post.image.url
   end

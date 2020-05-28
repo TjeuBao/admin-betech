@@ -10,6 +10,8 @@ module Api
         end
       end
 
+      private
+
       def submit_params
         params.require(:job_submission).permit(:first_name, :last_name, :email, :port_folio, :answer, :cv_upload, :career_id)
       end
