@@ -3,15 +3,13 @@ class CareersController < ApplicationController
   before_action :set_career, only: %i[show edit update destroy]
 
   def index
-    if params[:search]
-      @pagy, @careers = pagy(search, items: per_page)
-    else
-      @pagy, @careers = pagy(Career.all.order(created_at: :desc), items: per_page)
-    end
-  end
-
-  def search
-    Career.where('lower(title) LIKE ?', '%' + params[:search].downcase + '%')
+    career_relations =
+      if params[:search]
+        Career.where('lower(title) LIKE ?', '%' + params[:search].downcase + '%')
+      else
+        Career.all.order(created_at: :desc)
+      end
+    @pagy, @careers = pagy(career_relations, items: params[:size] || 6)
   end
 
   def new
