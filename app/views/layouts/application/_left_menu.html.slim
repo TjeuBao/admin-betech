@@ -20,4 +20,8 @@
         = link_to careers_path, class: "side-nav-link #{active_items('careers')}" do
           i.dripicons-briefcase
           span Careers
+      li.side-nav-item
+        = link_to api_v1_subscriptions_path, class: "side-nav-link #{active_items('subscriptions')}" do
+          i.dripicons-briefcase
+          span Subscriptions
     .clearfix
