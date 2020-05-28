@@ -10,6 +10,6 @@ class HomeController < ApplicationController
       else
         User.all.order(id: :desc)
       end
-    @pagy, @users = pagy(user_relations, items: params[:size] || 6)
+    @pagy, @users = pagy(user_relations, items: per_page)
   end
 end

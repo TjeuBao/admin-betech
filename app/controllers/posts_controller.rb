@@ -11,7 +11,7 @@ class PostsController < ApplicationController
       else
         Post.all.order(id: :desc)
       end
-    @pagy, @posts = pagy(post_relations, items: params[:size] || 6)
+    @pagy, @posts = pagy(post_relations, items: per_page)
   end
 
   def new

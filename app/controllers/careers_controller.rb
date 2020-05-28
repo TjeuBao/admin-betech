@@ -9,7 +9,7 @@ class CareersController < ApplicationController
       else
         Career.all.order(created_at: :desc)
       end
-    @pagy, @careers = pagy(career_relations, items: params[:size] || 6)
+    @pagy, @careers = pagy(career_relations, items: per_page)
   end
 
   def new
