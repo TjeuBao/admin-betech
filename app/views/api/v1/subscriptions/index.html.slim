@@ -7,23 +7,24 @@
             = link_to 'Home', root_path
           li.breadcrumb-item Subscription
       h4.page-title
-        | Subsctiption list
+        | Subsctiption List
 .row
   .col
     .container
-      .card.text-white.bg-info
+      .card
         .card-body
-          .toll-free-box.text-center
-            .media-content
-              h5.title.is-4 Admin Infomation
-              table.table.table-admin
+          h4.header-title.mb-2 Subscription Email
+          .table-responsive-sm
+            table.table.table-centered.mb-0
+              tr
+                th scope="col" ID
+                th scope="col" Subscription Type
+                th scope="col" Email
+              - @subscriptions.each do |subscription|
                 tr
-                  th scope="col" ID
-                  th scope="col" Email
-                - @subscriptions.each do |subscription|
-                    tr
-                      td = subscription.id
-                      td = subscription.email
+                  td = subscription.id
+                  td = subscription.subscription_type
+                  td = subscription.email
 section.section
   .container.mb-3
     .d-flex.justify-content-center
