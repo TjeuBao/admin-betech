@@ -18,13 +18,15 @@
             table.table.table-centered.mb-0
               tr
                 th scope="col" ID
-                th scope="col" Subscription Type
+                th scope="col" Name
                 th scope="col" Email
+                th scope="col" Subscription Type
               - @subscriptions.each do |subscription|
                 tr
                   td = subscription.id
-                  td = subscription.subscription_type
+                  td = subscription.name
                   td = subscription.email
+                  td = subscription.subscription_type
 section.section
   .container.mb-3
     .d-flex.justify-content-center
