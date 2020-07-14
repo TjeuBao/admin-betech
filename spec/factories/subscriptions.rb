@@ -12,7 +12,7 @@
 FactoryBot.define do
   factory :subscription do
     name { 'MyString' }
-    email { 'MyString' }
+    email { 'MyString@gmail.com' }
     subscription_type { 'MyString' }
   end
   trait :invalid_subscription do
