@@ -23,5 +23,5 @@ class PostSerializer
   attributes  :image do |post|
     post.image.url
   end
-  attributes  :content, &:serializable_rich_content
+  attributes :content, &:serializable_rich_content
 end
