@@ -50,7 +50,7 @@ class CareersController < ApplicationController
   private
 
   def set_career
-    @career = Career.find(params[:id])
+    @career = Career.friendly.find(params[:id])
   end
 
   def career_params

@@ -24,8 +24,8 @@ FactoryBot.define do
     email { 'MyString' }
     port_folio { 'MyString' }
     answer { 'MyText' }
-    career_id { FactoryBot.create(:career) }
     cv_upload { 'drives.google.com/public/system/files/abc.pdf' }
+    association :career
   end
   trait :invaid_job_submission do
     first_name { '' }

@@ -10,12 +10,20 @@
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #  post_type          :string
+#  slug               :string
 #  source             :string
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
+# Indexes
+#
+#  index_posts_on_slug  (slug) UNIQUE
+#
 class Post < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   after_create_commit :send_mail
 
   has_rich_text :content
