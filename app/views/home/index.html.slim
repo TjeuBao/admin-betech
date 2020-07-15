@@ -11,21 +11,25 @@
 .row
   .col
     .container
-      .card.text-white.bg-info
+      .card
         .card-body
-          .toll-free-box.text-center
-            .media-content
-              h5.title.is-4 Admin Infomation
-              table.table.table-admin
-                tr
-                  th scope="col" ID
-                  th scope="col" UserName
-                  th scope="col" Email
-                - @users.each do |user|
-                    tr
-                      td = user.id
-                      td = user.user_name
-                      td = user.email
+          h4.header-title.mb-2 Admin Account
+          .table-responsive-sm
+            table.table.table-centered.mb-0
+              tr
+                th scope="col" ID
+                th scope="col" UserName
+                th scope="col" Email
+                th scope="col" Active ?
+              - @users.each do |user|
+                  tr
+                    td = user.id
+                    td = user.user_name
+                    td = user.email
+                    td
+                      div
+                        input#switch1 checked="checked" data-switch="success" type="checkbox" /
+                        label.mb-0.d-block data-off-label="No" data-on-label="Yes" for=""
 section.section
   .container.mb-3
     .d-flex.justify-content-center
