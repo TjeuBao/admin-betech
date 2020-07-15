@@ -10,6 +10,8 @@
 #  updated_at        :datetime         not null
 #
 class Subscription < ApplicationRecord
+  after_create_commit :send_mail
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
 
   validates :name, presence: true
@@ -19,4 +21,14 @@ class Subscription < ApplicationRecord
 
   scope :list_email_subscription_posts, -> { where(subscription_type: [nil, '', 'post']) }
   scope :list_email_subscription_careers, -> { where(subscription_type: [nil, '', 'career']) }
+
+  def user_name
+    email.split('@')[0]
+  end
+
+  private
+
+  def send_mail
+    SubscriptionMailer.subscribe_email_successfull(email, id).deliver_later
+  end
 end

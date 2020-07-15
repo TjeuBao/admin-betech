@@ -14,4 +14,11 @@ class SubscriptionMailer < ApplicationMailer
 
     mail(to: email, subject: 'Subscription Email')
   end
+
+  def subscribe_email_successfull(email, subscription_id = nil)
+    @subscription = Subscription.find_by(id: subscription_id)
+    return if email.nil? || @subscription.nil?
+
+    mail(to: email, subject: 'GOLDEN OWL - SUCCESS SUBSCRIPTION')
+  end
 end
