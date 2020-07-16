@@ -1,16 +1,39 @@
-h2 GOLDEN OWL - NEW BLOG
-p style=("font-size: 18px;")
-  | Hi mate,
-p style=("line-height: 1.7;")
-  | A new blog post is ready to explore. Please visit here: &nbsp
-  = link_to nil, post_url(@post)
-  br
-  | We hope it brings to you the insight knowledge.
-  br
-  | Have a great day!
-p style=("line-height: 1.7;")
-  span style=("font-size: 18px;")
-    | Sincerely,
-  br
-  span style=("font-size: 20px;")
-    | Golden Owl Consulting
+doctype html
+html lang="en"
+  head
+    meta charset="UTF-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    title Golden Owl Asia
+
+  body
+    h2 GOLDEN OWL - NEW BLOG
+    p style=("font-size: 18px; font-w")
+      | Hi mate,
+
+    p style=("line-height: 1.7;font-size: 18px;")
+      | A new blog post is ready to explore. Please visit here: 
+      = link_to nil, "https://golden-owl-web.herokuapp.com/blog/details/#{@post.slug}", style: "color: #086ADA"
+      br
+      | We hope it brings to you the insight knowledge.
+      br
+      | Have a great day!
+
+    p style=("font-size: 18px;")
+      | Sincerely,
+
+    img[src=[root_url, '/images/company-logo.png'].join() alt="Golden Owl log" width="90" height="90"] 
+
+    p style=("line-height: 1.2; font-size: 18px")
+      h3 Golden Owl Consulting - Dedicated IT remote resource
+      = link_to "Goldenowl.asia", "https://goldenowl.asia/", style: "color: #086ADA"
+      |  | Address: 
+      = link_to "538, CMT8 Street, Ward 11, District 3, HCMC, Vietnam", "https://www.google.com/maps/place/Ward+11,+538+C%C3%A1ch+M%E1%BA%A1ng+Th%C3%A1ng+8,+ph%C6%B0%E1%BB%9Dng+11,+Qu%E1%BA%ADn+3,+H%E1%BB%93+Ch%C3%AD+Minh/@10.780231,106.6645121,15z/data=!3m1!4b1!4m2!3m1!1s0x31752ed22b5f8907:0xda91b3a0b76a6f36", style: "color: #086ADA"
+      br
+      = link_to "Linkedin", "https://www.linkedin.com/organization-guest/company/golden-owl-consulting?challengeId=AQHAKkIhIDL6ZQAAAXNb3A6TWdfilvu5uzgfKpdRHqbTSNT_MAji0d7O4XDYBcfKiVsiiMP9_eNtSyD1teXirqZNzHHFMQd_0Q&submissionId=ae1b8f7e-6a7c-2216-91b4-f47ea6168a50", style: "color: #086ADA"
+      |  | 
+      = link_to "Facebook", "https://www.facebook.com/goldenowl.asia/", style: "color: #086ADA"
+      |  | 
+      = link_to "Twitter", "https://twitter.com/goldenowlasia?lang=en", style: "color: #086ADA"
+
+    p style=("line-height: 1.2; font-size: 18px")
+      | Any information contained in this email and any attachments is strictly private and confidential and intended solely for use of the addressee. Copying, forwarding or divulging the email contents without the express permission is strictly prohibited. Please notify us if you receive this email in error, and immediately delete it from your system. Our liability in connection with transmitting, or viruses in, this email and its attachments, is limited to re-supply.
