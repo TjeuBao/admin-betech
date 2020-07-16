@@ -37,6 +37,10 @@ class Post < ApplicationRecord
 
   scope :search, ->(search_string) { where('lower(title) LIKE ?', "%#{search_string.downcase}%") }
 
+  def serializable_rich_content
+    ActionController::Base.helpers.sanitize(ActionController::Base.helpers.raw(content))
+  end
+
   private
 
   def send_mail
