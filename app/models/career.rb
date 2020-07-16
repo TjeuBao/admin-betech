@@ -8,12 +8,20 @@
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #  job_type           :string
+#  slug               :string
 #  status             :string
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #
+# Indexes
+#
+#  index_careers_on_slug  (slug) UNIQUE
+#
 class Career < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   after_create_commit :send_mail
 
   has_many :job_submisstion
@@ -46,7 +54,7 @@ class Career < ApplicationRecord
   def send_mail
     return unless Career.last.status == 'Open'
 
-    list_emails = Subscription.list_email_subscription_careers.pluck(:email)
+    list_emails = Subscription.list_email_subscription_careers.pluck(:email).uniq
     list_emails.each do |email|
       SubscriptionMailer.subscription_email_for_career(email, id).deliver_later
     end
