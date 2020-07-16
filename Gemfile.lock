@@ -113,6 +113,8 @@ GEM
     fast_jsonapi (1.5)
       activesupport (>= 4.2)
     ffi (1.12.2)
+    friendly_id (5.2.5)
+      activerecord (>= 4.0.0)
     fuubar (2.5.0)
       rspec-core (~> 3.0)
       ruby-progressbar (~> 1.4)
@@ -363,6 +365,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   fast_jsonapi
+  friendly_id (~> 5.2.4)
   fuubar
   image_processing (~> 1.0)
   jbuilder (~> 2.7)

@@ -21,6 +21,9 @@
 #  index_posts_on_slug  (slug) UNIQUE
 #
 class Post < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   after_create_commit :send_mail
 
   has_rich_text :content

@@ -19,6 +19,9 @@
 #  index_careers_on_slug  (slug) UNIQUE
 #
 class Career < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   after_create_commit :send_mail
 
   has_many :job_submisstion
