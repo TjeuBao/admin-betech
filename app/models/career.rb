@@ -54,7 +54,7 @@ class Career < ApplicationRecord
   def send_mail
     return unless Career.last.status == 'Open'
 
-    list_emails = Subscription.list_email_subscription_careers.pluck(:email)
+    list_emails = Subscription.list_email_subscription_careers.pluck(:email).uniq
     list_emails.each do |email|
       SubscriptionMailer.subscription_email_for_career(email, id).deliver_later
     end
