@@ -10,6 +10,11 @@ module Api
         @post = Post.find(params[:id])
         render json: PostSerializer.new(@post)
       end
+
+      def related_posts
+        @posts = Post.where('id > ?', params[:id]).order(id: :desc).last(4) + [Post.where('id < ?', params[:id]).order(id: :desc).first]
+        render json: PostSerializer.new(@posts)
+      end
     end
   end
 end
