@@ -20,13 +20,19 @@
 #
 class PostSerializer
   include FastJsonapi::ObjectSerializer
+
   set_type :post
+
   attributes  :title,
               :source,
               :post_type,
-              :created_at
+              :created_at,
+              :updated_at,
+              :slug
+
   attributes  :image do |post|
     post.image.url
   end
+
   attributes :content, &:serializable_rich_content
 end
