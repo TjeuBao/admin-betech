@@ -21,6 +21,11 @@
 require 'rails_helper'
 
 RSpec.describe Career, type: :model do
+  describe 'factories' do
+    subject { FactoryBot.build :career }
+    it { should be_valid }
+  end
+
   context 'validates' do
     it { is_expected.to validate_presence_of :title }
     it { is_expected.to validate_presence_of :content }
