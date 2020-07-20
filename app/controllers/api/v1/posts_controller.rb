@@ -13,7 +13,7 @@ module Api
 
       def related_posts
         @posts = Post.where('id > ?', params[:id]).order(id: :desc).last(4) + [Post.where('id < ?', params[:id]).order(id: :desc).first]
-        render json: PostSerializer.new(@posts.compact)
+        render json: PostSerializer.new(@posts)
       end
     end
   end
