@@ -20,9 +20,14 @@
 #
 class CareerSerializer
   include FastJsonapi::ObjectSerializer
+
   attributes  :title,
               :content,
               :job_type,
-              :status
+              :status,
+              :created_at,
+              :updated_at,
+              :slug
+
   attributes  :content, &:serializable_rich_content
 end
