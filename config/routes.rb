@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :posts, only: %i[index show] do
         member do
-          get :related_posts
+          get 'related-posts', to: :related_posts
         end
       end
       resources :careers, only: %i[index show]
