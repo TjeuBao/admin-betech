@@ -11,7 +11,7 @@ RSpec.describe SubscriptionMailer, type: :mailer do
     it 'renders the headers' do
       expect(@mail.subject).to eq('Subscription Email')
       expect(@mail.to).to eq([@reveiver_email])
-      expect(@mail.from).to eq(['austin@goldenowl.asia'])
+      expect(@mail.from).to eq(['golden_owl@goldenowl.asia'])
     end
 
     it 'renders the body' do
@@ -30,7 +30,7 @@ RSpec.describe SubscriptionMailer, type: :mailer do
     it 'renders the headers' do
       expect(@mail.subject).to eq('Subscription Email')
       expect(@mail.to).to eq([@reveiver_email])
-      expect(@mail.from).to eq(['austin@goldenowl.asia'])
+      expect(@mail.from).to eq(['golden_owl@goldenowl.asia'])
     end
 
     it 'renders the body' do
