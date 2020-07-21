@@ -69,8 +69,7 @@ gem 'image_processing', '~> 1.0'
 gem 'fast_jsonapi'
 
 # env
+gem 'config'
 gem 'dotenv-rails', groups: %i[development test]
-
 gem 'rails_12factor'
-
 gem 'sendgrid-ruby'
