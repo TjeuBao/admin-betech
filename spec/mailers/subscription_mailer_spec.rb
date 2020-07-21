@@ -11,12 +11,12 @@ RSpec.describe SubscriptionMailer, type: :mailer do
     it 'renders the headers' do
       expect(@mail.subject).to eq('Subscription Email')
       expect(@mail.to).to eq([@reveiver_email])
-      expect(@mail.from).to eq(['austin@goldenowl.asia'])
+      expect(@mail.from).to eq(['golden_owl@goldenowl.asia'])
     end
 
     it 'renders the body' do
       expect(@mail.body.encoded).to include('GOLDEN OWL - NEW BLOG')
-      expect(@mail.body.encoded).to include(post_url(@post))
+      expect(@mail.body.encoded).to include("https://golden-owl-web.herokuapp.com/blog/details/#{@post.slug}")
     end
   end
 
@@ -30,12 +30,12 @@ RSpec.describe SubscriptionMailer, type: :mailer do
     it 'renders the headers' do
       expect(@mail.subject).to eq('Subscription Email')
       expect(@mail.to).to eq([@reveiver_email])
-      expect(@mail.from).to eq(['austin@goldenowl.asia'])
+      expect(@mail.from).to eq(['golden_owl@goldenowl.asia'])
     end
 
     it 'renders the body' do
       expect(@mail.body.encoded).to include('GOLDEN OWL - NEW CAREER')
-      expect(@mail.body.encoded).to include(career_url(@career))
+      expect(@mail.body.encoded).to include("https://golden-owl-web.herokuapp.com/careers/details/#{@career.slug}")
     end
   end
 end

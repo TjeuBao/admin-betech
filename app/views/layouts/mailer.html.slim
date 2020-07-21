@@ -2,22 +2,16 @@ doctype html
 html
   head
     meta[http-equiv="Content-Type" content="text/html; charset=utf-8"]
-    style
-      |  /* Email styles need to be inline */
     meta charset="UTF-8"
     meta content="width=device-width, initial-scale=1" name="viewport"
     meta name="x-apple-disable-message-reformatting"
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta content="telephone=no" name="format-detection"
+
     title
-    !--[if (mso 16)]
-    style type="text/css"
-    a {text-decoration: none;}
-    /style
-    ![endif]--
-    !--[if gte mso 9]stylesup { font-size: 100% !important; }/style![endif]--
-    !--[if !mso]!-- --
-    link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i" rel="stylesheet"
-    link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i" rel="stylesheet"
+      = full_title(yield(:title)) 
+
   body
-    = yield
+    .container style=("margin-left: 10%; margin-right: 10%;")
+      = yield
+      = render 'subscription_mailer/signature_email'

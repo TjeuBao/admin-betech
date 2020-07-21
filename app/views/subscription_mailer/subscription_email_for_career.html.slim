@@ -1,16 +1,13 @@
+- provide(:title, 'Subscription Email')
+
 h2 GOLDEN OWL - NEW CAREER
 p style=("font-size: 18px;")
   | Hi potential candidate,
-p style=("line-height: 1.7;")
-  | Golden Owl Consulting is looking for a talented employee for a job vacancy. &nbsp
-  = link_to nil, career_url(@career)
+
+p style=("line-height: 1.7;font-size: 18px;")
+  | Golden Owl Consulting is looking for a talented employee for a job vacancy. 
+  = link_to nil, Settings.company_info.career_url + @career.slug, style: "color: #086ADA"
   br
   | Should you are interested in this position, don't forget to submit your application.
   br
   | Have a great day!
-p style=("line-height: 1.7;")
-  span style=("font-size: 18px;")
-    | Sincerely,
-  br
-  span style=("font-size: 20px;")
-    | Golden Owl Consulting

@@ -1,5 +1,7 @@
 class SubscriptionMailer < ApplicationMailer
-  default from: 'austin@goldenowl.asia'
+  helper MailerHelper
+
+  default from: 'golden_owl@goldenowl.asia'
 
   def subscription_email_for_post(email, post_id = nil)
     @post = Post.find_by(id: post_id)
