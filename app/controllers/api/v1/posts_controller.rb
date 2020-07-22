@@ -13,47 +13,33 @@ module Api
       end
 
       def related_posts
-        t = 3
+        num_limited = 3
 
-        @new = Post.where('id > ?', @post.id)
-                   .includes([:rich_text_content])
-                   .order(id: :desc)
-                   .last(t)
+        posts = Post.order(id: :desc)
+        latest_posts = posts.where('id > ?', @post.id).last(num_limited)
+        oldest_posts = posts.where('id < ?', @post.id).first(num_limited)
 
-        @old = Post.where('id < ?', @post.id)
-                   .includes([:rich_text_content])
-                   .order(id: :desc)
-                   .last(t)
+        posts_closest = if latest_posts.empty? || oldest_posts.empty?
+                          oldest_posts.presence || latest_posts
+                        else
+                          calc_related_posts(latest_posts, oldest_posts, num_limited)
+                        end
 
-        if @new.blank?
-          @old = Post.where('id < ?', @post.id)
-                     .includes([:rich_text_content])
-                     .order(id: :desc)
-                     .first(t)
-
-          render json: PostSerializer.new(@old)
-        elsif @old.blank?
-          render json: PostSerializer.new(@new)
-        elsif @old.length == @new.length
-          @old = Post.where('id < ?', @post.id)
-                     .includes([:rich_text_content])
-                     .order(id: :desc)
-                     .first(1)
-          @new.shift
-          render json: PostSerializer.new(@new + @old)
-        elsif (@old.length - @new.length).positive? # > 0
-          @old = Post.where('id < ?', @post.id)
-                     .includes([:rich_text_content])
-                     .order(id: :desc)
-                     .first(t)
-          render json: PostSerializer.new(@new + @old.shift(t - @new.length))
-        else (@old.length - @new.length).negative? # < 0
-          @new.shift(t - (t - 1))
-          render json: PostSerializer.new(@new + @old.shift(t - @new.length))
-        end
+        render json: PostSerializer.new(posts_closest)
       end
 
       private
+
+      def calc_related_posts(latest_posts, oldest_posts, num_limited)
+        latest_posts_length = latest_posts.length
+
+        if latest_posts_length == num_limited
+          latest_posts[1..-1] + oldest_posts[0..0]
+        else
+          position = (num_limited - latest_posts_length - 1)
+          latest_posts + oldest_posts[0..position]
+        end
+      end
 
       def set_post
         @post = Post.friendly.find(params[:id])
