@@ -6,7 +6,7 @@
           = image_pack_tag 'users/avatar.svg', alt: 'user-image', class: 'rounded-circle'
         span
           span.account-position
-            = current_user.email
+            = current_user.email if current_user.present?
       .dropdown-menu.dropdown-menu-right.dropdown-menu-animated.profile-dropdown
         = link_to edit_user_registration_path, class: 'dropdown-item notify-item' do
           i.mdi.mdi-account-circle
