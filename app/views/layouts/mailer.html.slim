@@ -8,10 +8,12 @@ html
     meta http-equiv="X-UA-Compatible" content="IE=edge"
     meta content="telephone=no" name="format-detection"
 
-    title
-      = full_title(yield(:title)) 
+    link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Proxima+Nova"/
 
-  body
-    .container style=("margin-left: 10%; margin-right: 10%;")
+    title
+      = full_title(yield(:title))
+
+  body style=("font-family: 'Proxima Nova'")
+    .container style=("margin: 0 auto; width: 80%;")
       = yield
       = render 'subscription_mailer/signature_email'

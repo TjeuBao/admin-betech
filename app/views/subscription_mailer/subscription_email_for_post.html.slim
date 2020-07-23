@@ -1,11 +1,12 @@
 - provide(:title, 'Subscription Email')
 
-h2 GOLDEN OWL - NEW BLOG
-p style=("font-size: 18px;")
+h3 GOLDEN OWL - NEW BLOG
+
+p style=("font-size: 14px;")
   | Hi mate,
 
-p style=("line-height: 1.7;font-size: 18px;")
-  | A new blog post is ready to explore. Please visit here: 
+p style=("line-height: 1.5;font-size: 14px;")
+  | A new blog post is ready to explore. Please visit here:&nbsp;
   = link_to nil, Settings.company_info.blog_url + @post.slug, style: "color: #086ADA"
   br
   | We hope it brings to you the insight knowledge.
