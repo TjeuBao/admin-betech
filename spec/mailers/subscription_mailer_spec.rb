@@ -5,13 +5,15 @@ RSpec.describe SubscriptionMailer, type: :mailer do
     before do
       @post = FactoryBot.create(:post, :with_image_from_file)
       @reveiver_email = 'to_reveiver@gmail.com'
-      @mail = SubscriptionMailer.subscription_email_for_post('to_reveiver@gmail.com', @post.id)
+      @mail = SubscriptionMailer.subscription_email_for_post(
+        'to_reveiver@gmail.com', @post.id
+      )
     end
 
     it 'renders the headers' do
       expect(@mail.subject).to eq('Subscription Email')
       expect(@mail.to).to eq([@reveiver_email])
-      expect(@mail.from).to eq(['golden_owl@goldenowl.asia'])
+      expect(@mail.from).to eq([ENV['MAIL_ADMIN_SENDER']])
     end
 
     it 'renders the body' do
@@ -30,7 +32,7 @@ RSpec.describe SubscriptionMailer, type: :mailer do
     it 'renders the headers' do
       expect(@mail.subject).to eq('Subscription Email')
       expect(@mail.to).to eq([@reveiver_email])
-      expect(@mail.from).to eq(['golden_owl@goldenowl.asia'])
+      expect(@mail.from).to eq([ENV['MAIL_ADMIN_SENDER']])
     end
 
     it 'renders the body' do
