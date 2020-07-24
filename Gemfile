@@ -73,3 +73,6 @@ gem 'config'
 gem 'dotenv-rails', groups: %i[development test]
 gem 'rails_12factor'
 gem 'sendgrid-ruby'
+
+# Storage
+gem 'fog', '2.1.0'
