@@ -27,6 +27,8 @@ plugins:
         enabled: false
       Rubocop/Metrics/BlockLength:
         enabled: false
+      Rubocop/Metrics/MethodLength:
+        Max: 20
 ratings:
   paths:
     - 'app/**'
