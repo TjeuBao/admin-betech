@@ -1,19 +1,19 @@
-p style=("font-size: 18px;")
+p style=("font-size: 14px;")
   | Sincerely,
 
-img[src=[root_url, '/images/company-logo.png'].join() alt="Golden Owl logo" width="90" height="90"] 
+img[src=[root_url, '/images/company-logo.png'].join() alt="Golden Owl logo" width="90" height="90"]
 
-div style=("line-height: 1.2; font-size: 18px")
+div style=("line-height: 1.2; font-size: 14px")
   h3 Golden Owl Consulting - Dedicated IT remote resource
   = link_to "Goldenowl.asia", Settings.company_info.website, style: "color: #086ADA"
-  |  | Address: 
+  |  | Address:&nbsp;
   = link_to Settings.company_info.address, Settings.company_info.address_map_url, style: "color: #086ADA"
   br
   = link_to "Linkedin", Settings.company_info.linkedin_url, style: "color: #086ADA"
-  |  | 
+  |  |&nbsp;
   = link_to "Facebook", Settings.company_info.facebook_url, style: "color: #086ADA"
-  |  | 
+  |  |&nbsp;
   = link_to "Twitter", Settings.company_info.twitter_url, style: "color: #086ADA"
 
-p style=("line-height: 1.2; font-size: 18px; color: gray")
+p style=("line-height: 1.2; font-size: 14px; color: gray")
   = Settings.company_info.notice
