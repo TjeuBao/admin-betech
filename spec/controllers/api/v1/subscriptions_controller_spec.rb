@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 RSpec.describe Api::V1::SubscriptionsController, type: :controller do
@@ -12,11 +10,50 @@ RSpec.describe Api::V1::SubscriptionsController, type: :controller do
       end
     end
 
-    context 'Career was successfully created' do
-      let(:valid_subscription_param) { attributes_for(:subscription) }
-
+    context 'susscess created' do
       it 'create a new subscription' do
-        expect { post :create, params: { subscription: valid_subscription_param }, format: :json }.to change { Subscription.count }.by(1)
+        type_both = {
+          name: 'user',
+          email: 'user@gmail.com',
+          subscription_type: 'both'
+        }
+
+        type_post = {
+          name: 'user',
+          email: 'user@gmail.com',
+          subscription_type: 'post'
+        }
+
+        type_career = {
+          name: 'user',
+          email: 'user@gmail.com',
+          subscription_type: 'career'
+        }
+
+        expect { post :create, params: { subscription: type_both }, format: :json }
+          .to change { Subscription.count }.from(0).to(1)
+
+        expect { post :create, params: { subscription: type_post }, format: :json }
+          .to change { Subscription.count }.from(1).to(2)
+
+        expect { post :create, params: { subscription: type_career }, format: :json }
+          .to change { Subscription.count }.from(2).to(3)
+      end
+    end
+
+    context 'can not create subscription with type duplicate' do
+      type_career = {
+        name: 'user',
+        email: 'user@gmail.com',
+        subscription_type: 'career'
+      }
+
+      let(:subscription) { create(:subscription, :type_career) }
+
+      it 'can not create' do
+        count = Subscription.count
+        post :create, params: { subscription: type_career }, format: :json
+        expect(count).to eq 0
       end
     end
   end

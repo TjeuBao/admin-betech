@@ -4,7 +4,7 @@
 #
 #  id                :bigint           not null, primary key
 #  email             :string           not null
-#  name              :string           not null
+#  name              :string
 #  subscription_type :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null

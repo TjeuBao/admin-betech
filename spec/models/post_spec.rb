@@ -39,12 +39,28 @@ RSpec.describe Post, type: :model do
     it { expect(subject.serializable_rich_content).to eq ActionController::Base.helpers.raw(subject.content) }
   end
 
-  describe '.sent email' do
+  describe '.sent email with subcription type is post' do
     let(:post) { FactoryBot.create(:post, :with_image_from_file) }
     let!(:subscription) { FactoryBot.create(:subscription, email: 'test@host.com', subscription_type: 'post') }
 
     it 'sends a mail' do
-      expect(SubscriptionMailer).to receive_message_chain(:subscription_email_for_post, :deliver_later)
+      expect(SubscriptionMailer).to receive_message_chain(
+        :subscription_email_for_post,
+        :deliver_later
+      )
+      post
+    end
+  end
+
+  describe '.sent email with subcription type is both' do
+    let(:post) { FactoryBot.create(:post, :with_image_from_file) }
+    let!(:subscription) { FactoryBot.create(:subscription, email: 'test@host.com', subscription_type: 'both') }
+
+    it 'sends a mail' do
+      expect(SubscriptionMailer).to receive_message_chain(
+        :subscription_email_for_post,
+        :deliver_later
+      )
       post
     end
   end
