@@ -11,8 +11,8 @@ module Api
 
         result = {
           link: {
-            preview_page_url: check_preview_url(@pagy.items, @pagy.prev),
-            next_page_url: check_next_url(@pagy.items, @pagy.next)
+            preview_page_url: pagenation_url(@pagy.items, @pagy.prev),
+            next_page_url: pagenation_url(@pagy.items, @pagy.next)
           },
           posts: PostSerializer.new(@posts)
         }
@@ -36,16 +36,10 @@ module Api
 
       private
 
-      def check_preview_url(pagy_items, pagy_prev)
-        return if pagy_prev.blank?
+      def pagenation_url(pagy_items, pagy_page)
+        return if pagy_page.blank?
 
-        "#{ENV['ADMIN_PANEL_POST_URL']}?size=#{pagy_items}&page=#{pagy_prev}"
-      end
-
-      def check_next_url(pagy_items, pagy_next)
-        return if pagy_next.blank?
-
-        "#{ENV['ADMIN_PANEL_POST_URL']}?size=#{pagy_items}&page=#{pagy_next}"
+        "#{ENV['ADMIN_PANEL_POST_URL']}?size=#{pagy_items}&page=#{pagy_page}"
       end
 
       def set_post
