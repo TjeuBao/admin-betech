@@ -12,6 +12,8 @@
 class Subscription < ApplicationRecord
   after_create_commit :send_mail
 
+  has_many :job_submisstions
+
   SUBSCRIPTION_TYPE = %w[both post career].freeze
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze

@@ -9,15 +9,11 @@ module Api
       def index
         @pagy, @posts = pagy(extract_post, items: per_page)
 
-        result = {
-          link: {
-            preview_page_url: pagenation_url(@pagy.items, @pagy.prev),
-            next_page_url: pagenation_url(@pagy.items, @pagy.next)
-          },
-          posts: PostSerializer.new(@posts)
+        links = {
+          preview_page_url: pagenation_url(@pagy.items, @pagy.prev),
+          next_page_url: pagenation_url(@pagy.items, @pagy.next)
         }
-
-        render json: result
+        render json: PostSerializer.new(@posts, links: links)
       end
 
       def show

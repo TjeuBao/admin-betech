@@ -14,7 +14,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     it 'returns all the post' do
       get :index, format: :json
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response['posts']['data'].length).to eq(1)
+      expect(parsed_response['data'].length).to eq(1)
     end
   end
 
@@ -25,11 +25,11 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       parsed_response = JSON.parse(response.body)
 
       expect(response.status).to eq(200)
-      expect(parsed_response['posts']['data']).to_not be_nil
-      expect(parsed_response['posts']['data'][0]['id']).to eq post_lists[3].id.to_s
-      expect(parsed_response['posts']['data'][1]['id']).to eq post_lists[2].id.to_s
-      expect(parsed_response['link']['preview_page_url']).to be_nil
-      expect(parsed_response['link']['next_page_url']).to eq "#{ENV['ADMIN_PANEL_POST_URL']}?size=2&page=2"
+      expect(parsed_response['data']).to_not be_nil
+      expect(parsed_response['data'][0]['id']).to eq post_lists[3].id.to_s
+      expect(parsed_response['data'][1]['id']).to eq post_lists[2].id.to_s
+      expect(parsed_response['links']['preview_page_url']).to be_nil
+      expect(parsed_response['links']['next_page_url']).to eq "#{ENV['ADMIN_PANEL_POST_URL']}?size=2&page=2"
     end
 
     it 'return last page' do
@@ -37,11 +37,11 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       parsed_response = JSON.parse(response.body)
 
       expect(response.status).to eq(200)
-      expect(parsed_response['posts']['data']).to_not be_nil
-      expect(parsed_response['posts']['data'][0]['id']).to eq post_lists[1].id.to_s
-      expect(parsed_response['posts']['data'][1]['id']).to eq post_lists[0].id.to_s
-      expect(parsed_response['link']['preview_page_url']).to eq "#{ENV['ADMIN_PANEL_POST_URL']}?size=2&page=1"
-      expect(parsed_response['link']['next_page_url']).to be_nil
+      expect(parsed_response['data']).to_not be_nil
+      expect(parsed_response['data'][0]['id']).to eq post_lists[1].id.to_s
+      expect(parsed_response['data'][1]['id']).to eq post_lists[0].id.to_s
+      expect(parsed_response['links']['preview_page_url']).to eq "#{ENV['ADMIN_PANEL_POST_URL']}?size=2&page=1"
+      expect(parsed_response['links']['next_page_url']).to be_nil
     end
   end
 
