@@ -7,8 +7,17 @@ module Api
       before_action :prepare_posts, only: :related_posts
 
       def index
-        @posts = Post.all
-        render json: PostSerializer.new(@posts)
+        @pagy, @posts = pagy(extract_post, items: per_page)
+
+        result = {
+          link: {
+            preview_page_url: pagenation_url(@pagy.items, @pagy.prev),
+            next_page_url: pagenation_url(@pagy.items, @pagy.next)
+          },
+          posts: PostSerializer.new(@posts)
+        }
+
+        render json: result
       end
 
       def show
@@ -26,6 +35,12 @@ module Api
       end
 
       private
+
+      def pagenation_url(pagy_items, pagy_page)
+        return if pagy_page.blank?
+
+        "#{ENV['ADMIN_PANEL_POST_URL']}?size=#{pagy_items}&page=#{pagy_page}"
+      end
 
       def set_post
         @post = Post.friendly.find(params[:id])
@@ -51,6 +66,14 @@ module Api
         posts = Post.order(id: :desc)
         @latest_posts = posts.where('id > ?', @post.id).last(@quality)
         @oldest_posts = posts.where('id < ?', @post.id).first(@quality)
+      end
+
+      def extract_post
+        if params[:search]
+          Post.search(params[:search])
+        else
+          Post.all.order(id: :desc)
+        end
       end
     end
   end

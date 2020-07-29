@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::V1::PostsController, type: :controller do
-  describe 'GET index' do
+  describe 'GET index without pagy' do
     let!(:post) { create(:post, :with_image_from_file) }
 
     it 'has a 200 status code' do
@@ -14,7 +14,34 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     it 'returns all the post' do
       get :index, format: :json
       parsed_response = JSON.parse(response.body)
-      expect(parsed_response['data'].length).to eq(1)
+      expect(parsed_response['posts']['data'].length).to eq(1)
+    end
+  end
+
+  describe 'GET Index with Pagy' do
+    let!(:post_lists) { create_list(:post, 4, :with_image_from_file) }
+    it 'return first page' do
+      get :index, params: { size: 2, page: 1 }
+      parsed_response = JSON.parse(response.body)
+
+      expect(response.status).to eq(200)
+      expect(parsed_response['posts']['data']).to_not be_nil
+      expect(parsed_response['posts']['data'][0]['id']).to eq post_lists[3].id.to_s
+      expect(parsed_response['posts']['data'][1]['id']).to eq post_lists[2].id.to_s
+      expect(parsed_response['link']['preview_page_url']).to be_nil
+      expect(parsed_response['link']['next_page_url']).to eq "#{ENV['ADMIN_PANEL_POST_URL']}?size=2&page=2"
+    end
+
+    it 'return last page' do
+      get :index, params: { size: 2, page: 2 }
+      parsed_response = JSON.parse(response.body)
+
+      expect(response.status).to eq(200)
+      expect(parsed_response['posts']['data']).to_not be_nil
+      expect(parsed_response['posts']['data'][0]['id']).to eq post_lists[1].id.to_s
+      expect(parsed_response['posts']['data'][1]['id']).to eq post_lists[0].id.to_s
+      expect(parsed_response['link']['preview_page_url']).to eq "#{ENV['ADMIN_PANEL_POST_URL']}?size=2&page=1"
+      expect(parsed_response['link']['next_page_url']).to be_nil
     end
   end
 
