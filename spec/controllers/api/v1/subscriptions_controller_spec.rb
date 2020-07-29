@@ -40,21 +40,5 @@ RSpec.describe Api::V1::SubscriptionsController, type: :controller do
           .to change { Subscription.count }.from(2).to(3)
       end
     end
-
-    context 'can not create subscription with type duplicate' do
-      type_career = {
-        name: 'user',
-        email: 'user@gmail.com',
-        subscription_type: 'career'
-      }
-
-      let(:subscription) { create(:subscription, :type_career) }
-
-      it 'can not create' do
-        count = Subscription.count
-        post :create, params: { subscription: type_career }, format: :json
-        expect(count).to eq 0
-      end
-    end
   end
 end
