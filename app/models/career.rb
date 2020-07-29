@@ -20,20 +20,20 @@
 #
 class Career < ApplicationRecord
   extend FriendlyId
-  friendly_id :title, use: :slugged
+
+  STATUSES = %w[open job_filled].freeze
+  JOB = %w[full_time part_time].freeze
 
   after_create_commit :send_mail
 
+  enum status: STATUSES.zip(STATUSES.map(&:titleize)).to_h
+  enum job_type: JOB.zip(JOB.map(&:titleize)).to_h
+
   has_many :job_submisstion
 
-  STATUSES = %i[open job_filled].map(&:to_s).map(&:titleize)
-  JOB = %i[full_time part_time].map(&:to_s).map(&:titleize)
-
+  friendly_id :title, use: :slugged
   has_rich_text :content
-  has_attached_file :image, storage: :cloudinary,
-                            path: ':id/:style/:filename',
-                            styles: { medium: '300x300>', thumb: '100x100>' },
-                            default_url: '/images/:style/missing.png'
+  has_attached_file :image, styles: { medium: '300x300>', thumb: '100x100>' }
 
   validates_attachment_content_type :image,
                                     content_type: ['image/jpeg', 'image/gif', 'image/png']
@@ -52,7 +52,7 @@ class Career < ApplicationRecord
   private
 
   def send_mail
-    return unless Career.last.status == 'Open'
+    return unless open?
 
     list_emails = Subscription.list_email_subscription_careers.pluck(:email).uniq
     list_emails.each do |email|

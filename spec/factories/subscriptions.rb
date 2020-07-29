@@ -4,17 +4,18 @@
 #
 #  id                :bigint           not null, primary key
 #  email             :string           not null
-#  name              :string           not null
+#  name              :string
 #  subscription_type :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
 FactoryBot.define do
   factory :subscription do
-    name { 'MyString' }
-    email { 'MyString@gmail.com' }
-    subscription_type { 'MyString' }
+    name { 'mystring' }
+    email { 'mystring@gmail.com' }
+    subscription_type { 'both' }
   end
+
   trait :invalid_subscription do
     name { '' }
     email { '' }

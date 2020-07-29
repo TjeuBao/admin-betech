@@ -18,13 +18,13 @@
             table.table.table-centered.mb-0
               tr
                 th scope="col" ID
-                th scope="col" Name
+                / th scope="col" Name
                 th scope="col" Email
                 th scope="col" Subscription Type
               - @subscriptions.each do |subscription|
                 tr
                   td = subscription.id
-                  td = subscription.name
+                  / td = subscription.name
                   td = subscription.email
                   td = subscription.subscription_type
 section.section

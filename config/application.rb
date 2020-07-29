@@ -15,17 +15,5 @@ module AdminGoldenowlAsia
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
-
-    if Rails.env.test? || Rails.env.development?
-      config.paperclip_defaults = {
-        storage: :fog,
-        fog_credentials: {
-          provider: 'Local',
-          local_root: "#{Rails.root}/public/uploads"
-        },
-        fog_directory: '',
-        fog_host: 'localhost'
-      }
-    end
   end
 end

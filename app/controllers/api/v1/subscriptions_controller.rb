@@ -6,13 +6,16 @@ module Api
       skip_before_action :verify_authenticity_token, only: %i[create]
 
       def create
-        @subscription = Subscription.first_or_create(subscription_params)
-        if @subscription.persisted?
+        @subscription = Subscription.find_or_initialize_by(
+          subscription_params.slice(:email, :subscription_type)
+        )
+        @subscription.assign_attributes(subscription_params)
+
+        if @subscription.save
           render json:
             SubscriptionSerializer.new(@subscription), status: :created
         else
-          render json:
-            @subscription.errors, status: :unprocessable_entity
+          render json: @subscription.errors, status: :unprocessable_entity
         end
       end
 
@@ -23,7 +26,7 @@ module Api
       private
 
       def subscription_params
-        params.require(:subscription).permit(:email, :subscription_type)
+        params.require(:subscription).permit(:name, :email, :subscription_type)
       end
 
       def extract_subscription
