@@ -22,6 +22,8 @@
 #
 class Post < ApplicationRecord
   extend FriendlyId
+  include ConvertImageUrl
+
   friendly_id :title, use: :slugged
 
   after_create_commit :send_mail

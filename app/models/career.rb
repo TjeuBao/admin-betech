@@ -20,6 +20,7 @@
 #
 class Career < ApplicationRecord
   extend FriendlyId
+  include ConvertImageUrl
 
   STATUSES = %w[open job_filled].freeze
   JOB = %w[full_time part_time].freeze
