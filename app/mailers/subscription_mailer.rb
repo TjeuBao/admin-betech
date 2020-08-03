@@ -1,8 +1,6 @@
 class SubscriptionMailer < ApplicationMailer
   helper MailerHelper
 
-  default from: ENV['MAIL_ADMIN_SENDER']
-
   def subscription_email_for_post(email, post_id = nil)
     @post = Post.find_by(id: post_id)
     return if email.nil? || @post.nil?
