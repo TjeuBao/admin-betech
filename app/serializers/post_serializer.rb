@@ -30,9 +30,7 @@ class PostSerializer
               :updated_at,
               :slug
 
-  attributes  :image do |post|
-    post.image.url
-  end
+  attributes :image, &:image_url
 
   attributes :content, &:serializable_rich_content
 end
