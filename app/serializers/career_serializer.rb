@@ -23,11 +23,17 @@ class CareerSerializer
 
   attributes  :title,
               :content,
-              :job_type,
-              :status,
               :created_at,
               :updated_at,
               :slug
 
   attributes  :content, &:serializable_rich_content
+
+  attributes :status do |object|
+    object.status.gsub('_', ' ').titleize
+  end
+
+  attributes :job_type do |object|
+    object.job_type.gsub('_', ' ').titleize
+  end
 end
