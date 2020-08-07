@@ -3,11 +3,14 @@
 h3 GOLDEN OWL - NEW BLOG
 
 p style=("font-size: 14px;")
-  | Hi mate,
+  | Knock! Knock!
 
 p style=("line-height: 1.5;font-size: 14px;")
-  | A new blog post is ready to explore. Please visit here:&nbsp;
-  = link_to @post.slug, Settings.company_info.blog_url + @post.slug, style: "color: #086ADA"
+  | A new post has just launched -&nbsp;
+  span style=("font-weight: bold;")
+    = @post.title.capitalize
+  |. Please feel free to explore here:&nbsp;
+  = link_to nil, Settings.company_info.blog_url + @post.slug, style: "color: #086ADA"
   br
   | We hope it brings to you the insight knowledge.
   br
