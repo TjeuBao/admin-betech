@@ -18,7 +18,7 @@ RSpec.describe SubscriptionMailer, type: :mailer do
 
     it 'renders the body' do
       expect(@mail.body.encoded).to include('GOLDEN OWL - NEW BLOG')
-      expect(@mail.body.encoded).to include("https://goldenowl.asia/blog/details/#{@post.slug}")
+      expect(@mail.body.encoded).to include(@post.slug)
     end
   end
 
@@ -37,7 +37,7 @@ RSpec.describe SubscriptionMailer, type: :mailer do
 
     it 'renders the body' do
       expect(@mail.body.encoded).to include('GOLDEN OWL - NEW CAREER')
-      expect(@mail.body.encoded).to include("https://goldenowl.asia/careers/details/#{@career.slug}")
+      expect(@mail.body.encoded).to include("https://goldenowl.asia/careers")
     end
   end
 end
