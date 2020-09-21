@@ -11,11 +11,11 @@
 #  port_folio :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  career_id  :integer
+#  careers_id :bigint
 #
-# Foreign Keys
+# Indexes
 #
-#  fk_rails_...  (career_id => careers.id)
+#  index_job_submissions_on_careers_id  (careers_id)
 #
 FactoryBot.define do
   factory :job_submission do
@@ -33,7 +33,6 @@ FactoryBot.define do
     email { '' }
     port_folio { '' }
     answer { '' }
-    career_id { '' }
     cv_upload { '' }
   end
 end
