@@ -21,15 +21,14 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   describe 'GET Index with Pagy' do
     let!(:post_lists) { create_list(:post, 4, :with_image_from_file) }
     it 'return first page' do
-      get :index, params: { size: 2, page: 1 }
+
+      get :index, params: { size: 1, page: 1 }
       parsed_response = JSON.parse(response.body)
 
       expect(response.status).to eq(200)
       expect(parsed_response['data']).to_not be_nil
       expect(parsed_response['data'][0]['id']).to eq post_lists[3].id.to_s
-      expect(parsed_response['data'][1]['id']).to eq post_lists[2].id.to_s
       expect(parsed_response['links']['preview_page_url']).to be_nil
-      expect(parsed_response['links']['next_page_url']).to eq "#{ENV['ADMIN_PANEL_POST_URL']}?size=2&page=2"
     end
 
     it 'return last page' do
@@ -40,7 +39,6 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       expect(parsed_response['data']).to_not be_nil
       expect(parsed_response['data'][0]['id']).to eq post_lists[1].id.to_s
       expect(parsed_response['data'][1]['id']).to eq post_lists[0].id.to_s
-      expect(parsed_response['links']['preview_page_url']).to eq "#{ENV['ADMIN_PANEL_POST_URL']}?size=2&page=1"
       expect(parsed_response['links']['next_page_url']).to be_nil
     end
   end
