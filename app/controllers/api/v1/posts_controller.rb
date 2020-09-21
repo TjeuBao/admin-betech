@@ -34,6 +34,7 @@ module Api
 
       def pagenation_url(pagy_items, pagy_page)
         return if pagy_page.blank?
+
         "#{request.original_url}?size=#{pagy_items}&page=#{pagy_page}"
       end
 
