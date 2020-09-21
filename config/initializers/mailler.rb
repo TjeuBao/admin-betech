@@ -4,9 +4,9 @@ if Rails.env.production? || Rails.env.staging?
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       from: ENV['MAIL_ADMIN_SENDER'],
-      user_name: ENV['USER_NAME'],
-      password: ENV['PASSWORD'],
-      domain: ENV['DOMAIN'],
+      user_name: ENV['SENDGRID_USERNAME'],
+      password: ENV['SENDGRID_PASSWORD'],
+      domain: ENV['SENDGRID_DOMAIN'],
       address: 'smtp.sendgrid.net',
       port: '587',
       authentication: 'plain',
