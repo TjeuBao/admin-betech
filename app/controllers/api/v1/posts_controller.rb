@@ -13,6 +13,7 @@ module Api
           preview_page_url: pagenation_url(@pagy.items, @pagy.prev),
           next_page_url: pagenation_url(@pagy.items, @pagy.next)
         }
+
         render json: PostSerializer.new(@posts, links: links)
       end
 

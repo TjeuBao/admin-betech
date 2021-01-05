@@ -3,21 +3,21 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post_category_options, only: %i[new create edit update]
 
   def index
     @pagy, @posts = pagy(extract_post, items: per_page)
   end
 
+  def show; end
+
   def new
     @post = Post.new
   end
 
-  def edit; end
-
-  def show; end
-
   def create
     @post = Post.new(post_params)
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -28,6 +28,8 @@ class PostsController < ApplicationController
       end
     end
   end
+
+  def edit; end
 
   def update
     respond_to do |format|
@@ -43,6 +45,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
+
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully deleted.' }
       format.json { head :no_content }
@@ -55,8 +58,12 @@ class PostsController < ApplicationController
     @post = Post.friendly.find(params[:id])
   end
 
+  def set_post_category_options
+    @post_category_options = PostCategory.pluck(:title, :id)
+  end
+
   def post_params
-    params.require(:post).permit(:title, :content, :image, :source, :post_type)
+    params.require(:post).permit(:post_category_id, :title, :content, :image, :source, :post_type)
   end
 
   def extract_post

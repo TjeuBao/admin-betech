@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::PostsController, type: :controller do
   describe 'GET index without pagy' do
-    let!(:post) { create(:post, :with_image_from_file) }
+    let(:post_category) { create(:post_category) }
+    let!(:post) { create(:post, :with_image_from_file, post_category_id: post_category.id) }
 
     it 'has a 200 status code' do
       get :index
@@ -19,7 +20,8 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   end
 
   describe 'GET Index with Pagy' do
-    let!(:post_lists) { create_list(:post, 4, :with_image_from_file) }
+    let(:post_category) { create(:post_category) }
+    let!(:post_lists) { create_list(:post, 4, :with_image_from_file, post_category_id: post_category.id) }
     it 'return first page' do
 
       get :index, params: { size: 1, page: 1 }
@@ -44,7 +46,8 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   end
 
   describe "GET 'show' " do
-    let!(:post) { create(:post, :with_image_from_file) }
+    let(:post_category) { create(:post_category) }
+    let!(:post) { create(:post, :with_image_from_file, post_category_id: post_category.id) }
 
     it 'returns a successful 200 response' do
       get :show, params: { id: post.id }
@@ -68,7 +71,8 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   end
 
   describe '#related posts' do
-    let!(:post_list) { create_list(:post, 10, :with_image_from_file) }
+    let(:post_category) { create(:post_category) }
+    let!(:post_list) { create_list(:post, 10, :with_image_from_file, post_category_id: post_category.id) }
     let(:num_limited) { 3 }
     let(:param) { post_list.first.id }
 
@@ -138,7 +142,8 @@ RSpec.describe Api::V1::PostsController, type: :controller do
   end
 
   describe '#related posts (total post <= num_limit)' do
-    let!(:post_list) { create_list(:post, 3, :with_image_from_file) }
+    let(:post_category) { create(:post_category) }
+    let!(:post_list) { create_list(:post, 3, :with_image_from_file, post_category_id: post_category.id) }
     let(:param) { ((Post.first.id + Post.first.id) / 2) + 1 }
     before { get :related_posts, params: { id: param }, format: :json }
 

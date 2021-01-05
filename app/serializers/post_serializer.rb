@@ -13,10 +13,12 @@
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  post_category_id   :bigint
 #
 # Indexes
 #
-#  index_posts_on_slug  (slug) UNIQUE
+#  index_posts_on_post_category_id  (post_category_id)
+#  index_posts_on_slug              (slug) UNIQUE
 #
 class PostSerializer
   include FastJsonapi::ObjectSerializer
