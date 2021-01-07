@@ -13,6 +13,10 @@
           i.dripicons-user
           span Users
       li.side-nav-item
+        = link_to post_categories_path, class: "side-nav-link #{active_items('post_categories')}" do
+          i.dripicons-menu
+          span Post Categories
+      li.side-nav-item
         = link_to posts_path, class: "side-nav-link #{active_items('posts')}" do
           i.dripicons-document-new
           span Blogs

@@ -11,11 +11,11 @@
 #  port_folio :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  careers_id :bigint
+#  career_id  :integer
 #
-# Indexes
+# Foreign Keys
 #
-#  index_job_submissions_on_careers_id  (careers_id)
+#  fk_rails_...  (career_id => careers.id)
 #
 FactoryBot.define do
   factory :job_submission do

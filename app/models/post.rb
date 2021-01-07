@@ -15,10 +15,12 @@
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  post_category_id   :bigint
 #
 # Indexes
 #
-#  index_posts_on_slug  (slug) UNIQUE
+#  index_posts_on_post_category_id  (post_category_id)
+#  index_posts_on_slug              (slug) UNIQUE
 #
 class Post < ApplicationRecord
   extend FriendlyId
@@ -38,7 +40,12 @@ class Post < ApplicationRecord
   validates :content, presence: true
   validates :title, presence: true
 
-  scope :search, ->(search_string) { where('lower(title) LIKE ?', "%#{search_string.downcase}%") }
+  belongs_to :post_category
+
+  scope :search, lambda { |search_string|
+    joins("INNER JOIN action_text_rich_texts ON action_text_rich_texts.record_id = posts.id AND record_type = 'Post'")
+      .where('posts.title ILIKE ? OR action_text_rich_texts.body ILIKE ?', "%#{search_string}%", "%#{search_string}%")
+  }
 
   def serializable_rich_content
     ActionController::Base.helpers.sanitize(ActionController::Base.helpers.raw(content))

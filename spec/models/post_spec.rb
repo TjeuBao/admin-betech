@@ -15,16 +15,19 @@
 #  title              :string           not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  post_category_id   :bigint
 #
 # Indexes
 #
-#  index_posts_on_slug  (slug) UNIQUE
+#  index_posts_on_post_category_id  (post_category_id)
+#  index_posts_on_slug              (slug) UNIQUE
 #
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   describe 'factories' do
-    subject { FactoryBot.build :post, :with_image_from_file }
+    let(:post_category) { FactoryBot.create(:post_category) }
+    subject { FactoryBot.build :post, :with_image_from_file, post_category_id: post_category.id }
     it { should be_valid }
   end
 
@@ -34,13 +37,18 @@ RSpec.describe Post, type: :model do
     it { should validate_presence_of(:image) }
   end
 
+  describe 'assocation' do
+    it { is_expected.to belong_to :post_category }
+  end
+
   describe 'serializable_rich_content' do
     subject { FactoryBot.build(:post, :with_image_from_file, content: 'Test content') }
     it { expect(subject.serializable_rich_content).to eq ActionController::Base.helpers.raw(subject.content) }
   end
 
   describe '.sent email with subcription type is post' do
-    let(:post) { FactoryBot.create(:post, :with_image_from_file) }
+    let(:post_category) { FactoryBot.create(:post_category) }
+    let(:post) { FactoryBot.create(:post, :with_image_from_file, post_category_id: post_category.id) }
     let!(:subscription) { FactoryBot.create(:subscription, email: 'test@host.com', subscription_type: 'post') }
 
     it 'sends a mail' do
@@ -53,7 +61,8 @@ RSpec.describe Post, type: :model do
   end
 
   describe '.sent email with subcription type is both' do
-    let(:post) { FactoryBot.create(:post, :with_image_from_file) }
+    let(:post_category) { FactoryBot.create(:post_category) }
+    let(:post) { FactoryBot.create(:post, :with_image_from_file, post_category_id: post_category.id) }
     let!(:subscription) { FactoryBot.create(:subscription, email: 'test@host.com', subscription_type: 'both') }
 
     it 'sends a mail' do
