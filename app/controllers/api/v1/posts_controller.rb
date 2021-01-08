@@ -70,11 +70,9 @@ module Api
       end
 
       def extract_post
-        if params[:search]
-          Post.search(params[:search])
-        else
-          Post.all.order(id: :desc)
-        end
+        return Post.search(params[:search]) if params[:search]
+
+        Post.all.order(id: :desc)
       end
     end
   end
