@@ -31,6 +31,10 @@ module Api
 
         "#{original_url}?size=#{pagy_items}&page=#{pagy_page}"
       end
+
+      def original_url
+        request.original_url[/\A[^?]+/]
+      end
     end
   end
 end
