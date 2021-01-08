@@ -1,9 +1,10 @@
 module Api
   module V1
     class PostCategoriesController < ApplicationController
+      before_action :set_post_category, only: %i[filter_post_by_category]
+
       def filter_post_by_category
-        categories = PostCategory.find(params[:id])
-        @pagy, @posts = pagy(categories.posts, items: per_page)
+        @pagy, @posts = pagy(@post_category.posts, items: per_page)
 
         links = {
           preview_page_url: pagenation_url(@pagy.items, @pagy.prev),
@@ -20,6 +21,10 @@ module Api
       end
 
       private
+
+      def set_post_category
+        @post_category = PostCategory.friendly.find(params[:id])
+      end
 
       def pagenation_url(pagy_items, pagy_page)
         return if pagy_page.blank?
