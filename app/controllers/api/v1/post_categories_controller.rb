@@ -4,10 +4,11 @@ module Api
       before_action :set_post_category, only: %i[filter_post_by_category]
 
       def filter_post_by_category
-        @pagy, @posts = pagy(@post_category.posts, items: per_page)
+        ordered_posts = @post_category.posts.available.order(id: :desc)
+        @pagy, @posts = pagy(ordered_posts, items: per_page)
 
         links = {
-          preview_page_url: pagenation_url(@pagy.items, @pagy.prev),
+          previous_page_url: pagenation_url(@pagy.items, @pagy.prev),
           next_page_url: pagenation_url(@pagy.items, @pagy.next)
         }
 

@@ -30,7 +30,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       expect(response.status).to eq(200)
       expect(parsed_response['data']).to_not be_nil
       expect(parsed_response['data'][0]['id']).to eq post_lists[3].id.to_s
-      expect(parsed_response['links']['preview_page_url']).to be_nil
+      expect(parsed_response['links']['previous_page_url']).to be_nil
     end
 
     it 'return last page' do

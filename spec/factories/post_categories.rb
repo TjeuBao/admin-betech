@@ -3,6 +3,7 @@
 # Table name: post_categories
 #
 #  id         :bigint           not null, primary key
+#  deleted_at :datetime
 #  slug       :string
 #  title      :string           not null
 #  created_at :datetime         not null

@@ -5,6 +5,7 @@
 # Table name: posts
 #
 #  id                 :bigint           not null, primary key
+#  deleted            :boolean          default(FALSE)
 #  image_content_type :string
 #  image_file_name    :string
 #  image_file_size    :integer
@@ -32,7 +33,7 @@ class Post < ApplicationRecord
 
   has_rich_text :content
 
-  has_attached_file :image, styles: { medium: '300x300>', thumb: '100x100>' }
+  has_attached_file :image, preserve_files: true, styles: { medium: '300x300>', thumb: '100x100>' }
 
   validates_attachment_presence :image
   validates_attachment_content_type :image, presence: true, content_type: ['image/jpeg', 'image/gif', 'image/png']
@@ -42,6 +43,7 @@ class Post < ApplicationRecord
 
   belongs_to :post_category
 
+  scope :available, -> { where deleted: false }
   scope :search, lambda { |search_string|
     joins("INNER JOIN action_text_rich_texts ON action_text_rich_texts.record_id = posts.id AND record_type = 'Post'")
       .where('posts.title ILIKE ? OR action_text_rich_texts.body ILIKE ?', "%#{search_string}%", "%#{search_string}%")
@@ -55,6 +57,7 @@ class Post < ApplicationRecord
 
   def send_mail
     list_emails = Subscription.list_email_subscription_posts.pluck(:email).uniq
+
     list_emails.each do |email|
       SubscriptionMailer.subscription_email_for_post(email, id).deliver_later
     end

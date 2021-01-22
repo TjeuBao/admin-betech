@@ -88,11 +88,15 @@ RSpec.describe PostsController, type: :controller do
     describe 'DELETE post' do
       context 'Post was successfully destroyed' do
         let(:post_category) { create(:post_category) }
-        let!(:post) { create(:post, :with_image_from_file, post_category_id: post_category.id) }
+        let!(:post) { create(:post, :with_image_from_file, :available, post_category_id: post_category.id) }
 
         it 'delete post' do
-          expect { delete :destroy, params: { id: post.id } }.to change { Post.count }.by(-1)
+          expect do
+            delete :destroy, params: { id: post.id }
+            post.reload
+          end.to change { post.deleted }.from(false).to(true)
         end
+
         it 'redirect to index' do
           delete :destroy, params: { id: post.id }
           expect(response).to redirect_to posts_path

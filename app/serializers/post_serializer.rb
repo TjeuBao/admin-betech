@@ -3,6 +3,7 @@
 # Table name: posts
 #
 #  id                 :bigint           not null, primary key
+#  deleted            :boolean          default(FALSE)
 #  image_content_type :string
 #  image_file_name    :string
 #  image_file_size    :integer

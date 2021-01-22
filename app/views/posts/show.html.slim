@@ -15,20 +15,21 @@ section.section
         p.level-item
           = link_to  "Back", posts_path(page: @page), class:"button btn btn-dark btn-sm"
     hr/
-    |Title :
+    | Title:
     h4.title
       = @post.title
-    |Category :
+    | Category:
     h4.title
-      = @post.post_category.title
-    |Source :
+      = @post.post_category&.title
+    | Source:
     h5.title
       = @post.source
-    |Type :
+    | Type:
     h5.title
       = @post.post_type
-    |Content :
+    | Content:
     .content.mb-2
       = sanitize raw(@post.content)
+
   - if @post.image.present?
     = image_tag @post.image_url(:medium)

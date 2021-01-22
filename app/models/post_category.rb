@@ -3,6 +3,7 @@
 # Table name: post_categories
 #
 #  id         :bigint           not null, primary key
+#  deleted_at :datetime
 #  slug       :string
 #  title      :string           not null
 #  created_at :datetime         not null
@@ -15,9 +16,19 @@
 class PostCategory < ApplicationRecord
   extend FriendlyId
 
+  acts_as_paranoid
+
   friendly_id :title, use: :slugged
 
   validates :title, presence: true, uniqueness: true
 
-  has_many :posts, dependent: :destroy
+  has_many :posts
+
+  before_destroy :delete_posts
+
+  private
+
+  def delete_posts
+    posts.update_all(deleted: true)
+  end
 end

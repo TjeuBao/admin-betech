@@ -13,13 +13,13 @@ section.section
         p.level-item
           = link_to  "Back", post_categories_path(page: @page), class:"button btn btn-dark btn-sm"
     hr/
-    |Title :
+    | Title:
     h4.title
       = @post_category.title
 
     - if @posts.size > 0
       hr/
-      |Post :
+      | Blog:
       h4.title
       - @posts.each do |post|
         .card
@@ -31,4 +31,4 @@ section.section
                   = link_to post.title, post
       .container.mb-3
         .d-flex.justify-content-center
-            == pagy_bootstrap_nav(@pagy)
+          == pagy_bootstrap_nav(@pagy)

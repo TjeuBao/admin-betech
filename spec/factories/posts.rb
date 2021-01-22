@@ -5,6 +5,7 @@
 # Table name: posts
 #
 #  id                 :bigint           not null, primary key
+#  deleted            :boolean          default(FALSE)
 #  image_content_type :string
 #  image_file_name    :string
 #  image_file_size    :integer
@@ -35,5 +36,13 @@ FactoryBot.define do
 
   trait :with_image_from_file do
     image { Rack::Test::UploadedFile.new("#{Rails.root}/spec/support/fixtures/test.jpg") }
+  end
+
+  trait :available do
+    deleted { false }
+  end
+
+  trait :deleted do
+    deleted { true }
   end
 end

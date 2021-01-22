@@ -6,8 +6,8 @@
           li.breadcrumb-item
             = link_to 'Home', root_path
           li.breadcrumb-item Blog
-      h4.page-title
-        | Blog
+      h4.page-title Blog
+
 section.hero.is-primary.is-medium
   .hero-head
     nav.navbar
@@ -15,7 +15,7 @@ section.hero.is-primary.is-medium
         .navbar-brand
         #navbarMenuHeroA.navbar-menu
           .navbar-end
-            = link_to "Create New Post", new_post_path, class:"navbar-item"
+            = link_to "Create New Blog", new_post_path, class:"navbar-item"
   .hero-body
     .container.has-text-centered
       h1.title
@@ -32,15 +32,15 @@ section.section
               h5.title.is-4
                 = link_to post.title, post
             .media-content
-              h5 Post Category :
+              h5 Blog Category:
               h6.title.is-4
-                = post.post_category.title
+                = post.post_category&.title
             .media-content
-              h5 Source :
+              h5 Source:
               h6.title.is-4
                 = post.source
             .media-content
-              h5 Type :
+              h5 Type:
               h6.title.is-4
                 = post.post_type
             .content.mb-1
@@ -48,6 +48,7 @@ section.section
         .container.mt-2.mb-4
           - if post.image.present?
               = image_tag post.image_url(:medium)
+
 section.section
   .container.mb-3
     .d-flex.justify-content-center

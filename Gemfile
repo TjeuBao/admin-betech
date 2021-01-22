@@ -76,3 +76,5 @@ gem 'sendgrid-ruby'
 
 # Storage
 gem 'fog', '2.1.0'
+
+gem 'paranoia'

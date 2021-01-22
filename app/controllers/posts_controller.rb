@@ -44,7 +44,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
+    @post.update(deleted: true)
 
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully deleted.' }
@@ -67,8 +67,8 @@ class PostsController < ApplicationController
   end
 
   def extract_post
-    return Post.search(params[:search]) if params[:search]
+    return Post.available.search(params[:search]) if params[:search]
 
-    Post.all.order(id: :desc)
+    Post.available.order(id: :desc)
   end
 end
