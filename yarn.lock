@@ -6900,6 +6900,11 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
+summernote-image-title@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/summernote-image-title/-/summernote-image-title-0.2.2.tgz#865a2c3a6512254803584324c56a3f89113aa6ea"
+  integrity sha512-xCPZJ9Nv3WnRtedE+94SJ4Q8tZXqvJcENDr6IwR8Prpy8X0iFz2d+edjH2pU0FZBYnByo/DqDrS9uwQ9QAKrCA==
+
 supports-color@6.1.0, supports-color@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-6.1.0.tgz#0764abc69c63d5ac842dd4867e8d025e880df8f3"

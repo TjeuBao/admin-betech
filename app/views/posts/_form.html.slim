@@ -9,7 +9,7 @@
         = f.select :post_category_id, @post_category_options
     .field.mt-2.mb-3
       = f.label :content
-      = f.rich_text_area :content
+      = f.text_area :content, 'data-provider': :summernote, class: 'form-control'
     = f.input :image, required: true, direct_upload: true, as: :file
     .field.mt-2.mb-2
       .control
