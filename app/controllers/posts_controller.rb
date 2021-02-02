@@ -63,7 +63,14 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:post_category_id, :title, :content, :image, :source, :post_type)
+    params.require(:post).permit(
+      :post_category_id,
+      :title,
+      :content,
+      :image,
+      :source,
+      :post_type
+    )
   end
 
   def extract_post
