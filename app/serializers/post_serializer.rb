@@ -8,6 +8,9 @@
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
+#  meta_description   :string
+#  meta_keyword       :string
+#  meta_title         :string
 #  post_type          :string
 #  slug               :string
 #  source             :string
@@ -31,9 +34,14 @@ class PostSerializer
               :post_type,
               :created_at,
               :updated_at,
-              :slug
+              :slug,
+              :meta_title,
+              :meta_keyword,
+              :meta_description
 
   attributes :image, &:image_url
 
   attributes :content, &:serializable_rich_content
+
+  attributes :post_category, &:title
 end

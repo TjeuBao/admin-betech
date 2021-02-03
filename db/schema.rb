@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_19_080626) do
+ActiveRecord::Schema.define(version: 2021_02_02_095307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,9 @@ ActiveRecord::Schema.define(version: 2021_01_19_080626) do
     t.string "slug"
     t.bigint "post_category_id"
     t.boolean "deleted", default: false
+    t.string "meta_title"
+    t.string "meta_keyword"
+    t.string "meta_description"
     t.index ["post_category_id"], name: "index_posts_on_post_category_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
   end

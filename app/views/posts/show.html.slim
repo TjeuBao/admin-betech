@@ -21,6 +21,15 @@ section.section
     | Category:
     h4.title
       = @post.post_category&.title
+    | Meta Title:
+    h5.title
+      = @post.meta_title
+    | Meta Keyword:
+    h5.title
+      = @post.meta_keyword
+    | Meta Description:
+    h5.title
+      = @post.meta_description
     | Source:
     h5.title
       = @post.source

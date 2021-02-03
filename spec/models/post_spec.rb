@@ -10,6 +10,9 @@
 #  image_file_name    :string
 #  image_file_size    :integer
 #  image_updated_at   :datetime
+#  meta_description   :string
+#  meta_keyword       :string
+#  meta_title         :string
 #  post_type          :string
 #  slug               :string
 #  source             :string
