@@ -161,7 +161,7 @@ GEM
       railties (>= 5.0.0)
     faker (2.18.0)
       i18n (>= 1.6, < 2)
-    faraday (1.4.2)
+    faraday (1.4.3)
       faraday-em_http (~> 1.0)
       faraday-em_synchrony (~> 1.0)
       faraday-excon (~> 1.1)
@@ -257,7 +257,7 @@ GEM
     fog-ecloud (0.3.0)
       fog-core
       fog-xml
-    fog-google (1.14.0)
+    fog-google (1.15.0)
       fog-core (<= 2.1.0)
       fog-json (~> 1.2)
       fog-xml (~> 0.1.0)
@@ -420,7 +420,7 @@ GEM
     os (1.1.1)
     ovirt-engine-sdk (4.4.1)
       json (>= 1, < 3)
-    pagy (4.10.0)
+    pagy (4.10.1)
     paperclip (6.0.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
