@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :teches
   resources :careers do
     resources :job_submissions
   end
