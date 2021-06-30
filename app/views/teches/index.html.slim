@@ -24,15 +24,20 @@ section.hero.is-primary.is-medium
 
 section.section
   .container
-    - @teches.each do |tech|
       .card
         .card-content
           .container
             .media
             .media-content
-              h5.title.is-4
-                = link_to tech.name, tech
-
+             .table-responsive-sm
+                table.table.table-centered.mb-0
+                  tr
+                    th scope="col" ID
+                    th scope="col" TechName
+                  - @teches.each do |tech|
+                      tr
+                        td = tech.id
+                        td = link_to tech.name, tech
 section.section
   .container.mb-3
     .d-flex.justify-content-center

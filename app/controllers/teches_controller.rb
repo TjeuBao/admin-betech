@@ -1,5 +1,5 @@
 class TechesController < ApplicationController
-  before_action :set_tech, only: %i[ show edit update destroy ]
+  before_action :set_tech, only: %i[show edit update destroy]
 
   def index
     @pagy, @teches = pagy(Tech, items: per_page)
@@ -13,8 +13,7 @@ class TechesController < ApplicationController
     @tech = Tech.new
   end
 
-  def edit
-  end
+  def edit end
 
   def create
     @tech = Tech.new(tech_params)
