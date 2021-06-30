@@ -8,5 +8,5 @@
 #  updated_at :datetime         not null
 #
 class Tech < ApplicationRecord
-  validates :name,  presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 end
