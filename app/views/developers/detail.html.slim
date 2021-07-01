@@ -1,0 +1,55 @@
+section.section
+  .row
+    .col-md-12
+      .bg-light.p-2.p-lg-4
+        h2.mt-0 Detail
+        #company-list-left.py-2
+          .card.mb-0.mt-2
+            .card-body
+              .media
+                .media-body
+                  p Full Name:
+                  h4.mb-1.mt-0
+                    = @developer.full_name
+          .card.mb-0.mt-2
+            .card-body
+              .media
+                .media-body
+                  p Company Name:
+                  h4.mb-1.mt-0
+                    = @developer.company_name
+          .card.mb-0.mt-2
+            .card-body
+              .media
+                .media-body
+                  p Belong to team:
+                  h4.mb-1.mt-0
+                    = @developer.belong_team
+          .card.mb-0.mt-2
+            .card-body
+              .media
+                .media-body
+                  p Level:
+                  h4.mb-1.mt-0
+                    = @developer.level
+          .card.mb-0.mt-2
+            .card-body
+              .media
+                .media-body
+                  p Projects:
+                  h4.mb-1.mt-0
+                    - @developer.projects.each do |p|
+                      = p.name
+                      br
+          .card.mb-0.mt-2
+            .card-body
+              .media
+                .media-body
+                  p TechStack:
+                  h4.mb-1.mt-0
+                    - @developer.projects.each do |p|
+                      - p.teches.each do |t|
+                        - if t.name != @temp
+                          = t.name
+                          br
+                        - @temp = t.name

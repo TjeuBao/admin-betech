@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :developers
+  resources :developers do 
+    get 'detail', on: :member
+  end
   resources :projects
   resources :teches
   resources :careers do

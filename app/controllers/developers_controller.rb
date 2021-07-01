@@ -1,5 +1,5 @@
 class DevelopersController < ApplicationController
-  before_action :set_developer, only: %i[show edit update destroy]
+  before_action :set_developer, only: %i[show edit update destroy detail]
   before_action :set_project_options, only: %i[new edit]
   def index
     @pagy, @developers = pagy(Developer, items: per_page)
@@ -30,7 +30,6 @@ class DevelopersController < ApplicationController
     end
   end
 
-  # PATCH/PUT /developers/1 or /developers/1.json
   def update
     respond_to do |format|
       if @developer.update(developer_params)
@@ -43,13 +42,16 @@ class DevelopersController < ApplicationController
     end
   end
 
-  # DELETE /developers/1 or /developers/1.json
   def destroy
     @developer.destroy
     respond_to do |format|
       format.html { redirect_to developers_url, notice: 'Developer was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def detail 
+    @pagy, @developers = pagy(Developer, items: per_page)
   end
 
   private
