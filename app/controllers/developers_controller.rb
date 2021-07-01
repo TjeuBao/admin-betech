@@ -50,7 +50,7 @@ class DevelopersController < ApplicationController
     end
   end
 
-  def detail 
+  def detail
     @pagy, @developers = pagy(Developer, items: per_page)
   end
 
