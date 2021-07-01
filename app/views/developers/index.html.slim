@@ -40,6 +40,8 @@ section.section
                       th scope="col" Belong to team                    
                       th scope="col" Level
                       th scope="col" Project
+                      th scope="col" TechStack
+                      th scope="col" Detail
                     - @developers.each do |d|
                         tr
                           td = d.id
@@ -51,6 +53,14 @@ section.section
                             - d.projects.each do |p|
                               = link_to p.name, p
                               br
+                          td
+                            - d.projects.each do |p|
+                              - p.teches.each do |t|
+                                - if t.name != @temp
+                                  = t.name
+                                  br
+                                - @temp = t.name
+                          td = link_to "Detail", detail_developer_path(d)
 
 section.section
   .container.mb-3
