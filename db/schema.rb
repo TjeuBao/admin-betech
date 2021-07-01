@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_29_120016) do
+ActiveRecord::Schema.define(version: 2021_07_01_001729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,20 @@ ActiveRecord::Schema.define(version: 2021_06_29_120016) do
     t.datetime "image_updated_at"
     t.string "slug"
     t.index ["slug"], name: "index_careers_on_slug", unique: true
+  end
+
+  create_table "developers", force: :cascade do |t|
+    t.string "infomation"
+    t.string "level"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "developers_projects", id: false, force: :cascade do |t|
+    t.bigint "developer_id", null: false
+    t.bigint "project_id", null: false
+    t.index ["developer_id", "project_id"], name: "index_developers_projects_on_developer_id_and_project_id"
+    t.index ["project_id", "developer_id"], name: "index_developers_projects_on_project_id_and_developer_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -110,6 +124,20 @@ ActiveRecord::Schema.define(version: 2021_06_29_120016) do
     t.string "meta_description"
     t.index ["post_category_id"], name: "index_posts_on_post_category_id"
     t.index ["slug"], name: "index_posts_on_slug", unique: true
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "projects_teches", id: false, force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.bigint "tech_id", null: false
+    t.index ["project_id", "tech_id"], name: "index_projects_teches_on_project_id_and_tech_id"
+    t.index ["tech_id", "project_id"], name: "index_projects_teches_on_tech_id_and_project_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|

@@ -1,19 +1,21 @@
 # == Schema Information
 #
-# Table name: teches
+# Table name: developers
 #
 #  id         :bigint           not null, primary key
-#  name       :string
+#  infomation :string
+#  level      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
 require 'rails_helper'
 
-RSpec.describe Tech, type: :model do
+RSpec.describe Developer, type: :model do
   describe 'validates' do
-    it { is_expected.to validate_presence_of :name }
+    it { is_expected.to validate_presence_of :infomation }
+    it { is_expected.to validate_presence_of :level }
   end
-  
+
   describe 'assocation' do
     it { is_expected.to have_and_belong_to_many(:projects) }
   end
