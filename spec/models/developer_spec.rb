@@ -19,7 +19,9 @@ require 'rails_helper'
 
 RSpec.describe Developer, type: :model do
   describe 'validates' do
-    it { is_expected.to validate_presence_of :information }
+    it { is_expected.to validate_presence_of :full_name }
+    it { is_expected.to validate_presence_of :company_name }
+    it { is_expected.to validate_presence_of :belong_team }
     it { is_expected.to validate_presence_of :level }
   end
 
