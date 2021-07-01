@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 class Developer < ApplicationRecord
-    has_and_belongs_to_many :projects
-    validates :infomation, presence: true, uniqueness: true
-    validates :level, presence: true
+  has_and_belongs_to_many :projects
+  validates :infomation, presence: true, uniqueness: true
+  validates :level, presence: true
 end
