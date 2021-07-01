@@ -1,6 +1,6 @@
 class DevelopersController < ApplicationController
   before_action :set_developer, only: %i[show edit update destroy]
-  before_action :set_project_options
+  before_action :set_project_options, only: %i[new edit]
   def index
     @pagy, @developers = pagy(Developer, items: per_page)
   end
@@ -63,6 +63,6 @@ class DevelopersController < ApplicationController
   end
 
   def developer_params
-    params.require(:developer).permit({ project_ids: [] }, :infomation, :level)
+    params.require(:developer).permit({ project_ids: [] }, :full_name, :company_name, :belong_team, :level)
   end
 end

@@ -29,22 +29,29 @@ section.section
           .container
             .media
             .media-content
-             .table-responsive-sm
-                table.table.table-centered.mb-0
-                  tr
-                    th scope="col" ID
-                    th scope="col" Name
-                    th scope="col" Description
-                    th scope="col" TechStack
-                  - @projects.each do |p|
+              .card-body
+                h4.header-title.mb-2 About projects
+                .table-responsive-sm
+                    table.table.table-centered.mb-0
                       tr
-                        td = p.id
-                        td = link_to p.name, p
-                        td = p.description
-                        td
-                          - p.teches.each do |t|
-                            = t.name
-                            br
+                        th scope="col" ID
+                        th scope="col" Name
+                        th scope="col" Description
+                        th scope="col" TechStack
+                        th scope="col" Active ?
+                      - @projects.each do |p|
+                          tr
+                            td = p.id
+                            td = link_to p.name, p
+                            td = p.description
+                            td
+                              - p.teches.each do |t|
+                                = t.name
+                                br
+                            td
+                              div
+                                input#switch1 checked="checked" data-switch="success" type="checkbox" /
+                                label.mb-0.d-block data-off-label="No" data-on-label="Yes" for=""
 
 section.section
   .container.mb-3

@@ -8,6 +8,10 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
+# Indexes
+#
+#  index_projects_on_name  (name) UNIQUE
+#
 FactoryBot.define do
   factory :project do
     name { "MyString" }

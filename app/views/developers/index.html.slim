@@ -29,22 +29,28 @@ section.section
           .container
             .media
             .media-content
-             .table-responsive-sm
-                table.table.table-centered.mb-0
-                  tr
-                    th scope="col" ID
-                    th scope="col" Infomation
-                    th scope="col" Level
-                    th scope="col" Project
-                  - @developers.each do |d|
-                      tr
-                        td = d.id
-                        td = link_to d.infomation, d
-                        td = d.level
-                        td
-                          - d.projects.each do |p|
-                            = link_to p.name, p
-                            br
+              .card-body
+                h4.header-title.mb-2 Developers
+                .table-responsive-sm
+                  table.table.table-centered.mb-0
+                    tr
+                      th scope="col" ID
+                      th scope="col" Full name
+                      th scope="col" Company name
+                      th scope="col" Belong to team                    
+                      th scope="col" Level
+                      th scope="col" Project
+                    - @developers.each do |d|
+                        tr
+                          td = d.id
+                          td = link_to d.full_name, d
+                          td = link_to d.company_name, d
+                          td = d.belong_team
+                          td = d.level
+                          td
+                            - d.projects.each do |p|
+                              = link_to p.name, p
+                              br
 
 section.section
   .container.mb-3

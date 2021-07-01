@@ -1,4 +1,4 @@
-- content_for :page_title, @developer.infomation
+- content_for :page_title, @developer.company_name
 section.section
   .container.mb-4
     nav.level
@@ -13,9 +13,9 @@ section.section
         p.level-item
           = link_to  "Back", developers_path(page: @page), class:"button btn btn-dark btn-sm"
     hr/
-    | Infomation:
+    | Company name:
     h4.title
-      = @developer.infomation
+      = @developer.company_name
     | Level:
     h4.title
       = @developer.level

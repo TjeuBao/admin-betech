@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_01_001729) do
+ActiveRecord::Schema.define(version: 2021_07_01_164137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,10 +61,14 @@ ActiveRecord::Schema.define(version: 2021_07_01_001729) do
   end
 
   create_table "developers", force: :cascade do |t|
-    t.string "infomation"
     t.string "level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "full_name"
+    t.string "company_name"
+    t.string "belong_team"
+    t.index ["company_name"], name: "index_developers_on_company_name", unique: true
+    t.index ["full_name"], name: "index_developers_on_full_name", unique: true
   end
 
   create_table "developers_projects", id: false, force: :cascade do |t|
@@ -131,6 +135,7 @@ ActiveRecord::Schema.define(version: 2021_07_01_001729) do
     t.string "description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_projects_on_name", unique: true
   end
 
   create_table "projects_teches", id: false, force: :cascade do |t|

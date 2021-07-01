@@ -1,10 +1,12 @@
 .section
   = simple_form_for @developer do |f|
     .field.mt-2.mb-3
-      .control
-        .field.mt-2.mb-3
-          = f.label :Infomation
-          = f.text_area :infomation, class: 'form-control'      
+      .field.mt-2.mb-3
+          = f.input :full_name, class: 'form-control'
+      .field.mt-2.mb-3
+          = f.input :company_name, class: 'form-control' 
+      .field.mt-2.mb-3
+          = f.input :belong_team, class: 'form-control'       
       .field.mt-2.mb-3
         = f.label :Project
         = f.select :project_ids, options_for_select(@project_options), { }, { class: "select2 form-control select2-multiple", :multiple => true, :size => 5    }
