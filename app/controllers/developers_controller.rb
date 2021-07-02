@@ -13,6 +13,8 @@ class DevelopersController < ApplicationController
     @developer = Developer.new
   end
 
+  def edit; end
+
   def create
     @developer = Developer.new(developer_params)
 

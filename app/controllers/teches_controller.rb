@@ -13,6 +13,8 @@ class TechesController < ApplicationController
     @tech = Tech.new
   end
 
+  def edit; end
+
   def create
     @tech = Tech.new(tech_params)
 
