@@ -60,6 +60,7 @@ gem 'friendly_id', '~> 5.2.4'
 gem 'pagy'
 gem 'paperclip', '~> 6.0.0'
 gem 'paperclip-cloudinary'
+gem 'select2-rails'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Trix

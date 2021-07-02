@@ -1,0 +1,29 @@
+
+.card
+  .card-body
+    span.float-left.m-2.mr-4
+      = image_pack_tag 'users/avatar.svg', alt: 'user-image', class: 'rounded-circle'
+    .media-body
+      h4.mt-1.mb-1
+        = @developer.full_name
+      p.font-13
+        = @developer.level
+      ul.mb-0.list-inline
+        li.list-inline-item.mr-3
+          h5.mb-1
+            | Projects
+          p.mb-0.font-13
+            - @developer.projects.each do |p|
+              = p.name
+              br
+            br
+        li.list-inline-item
+          h5.mb-1
+            | TechStack
+          p.mb-0.font-13
+            - @developer.projects.each do |p|
+              - p.teches.each do |t|
+                - if t.name != @temp
+                  p.mb-0.mt-0.font-13
+                    = t.name
+                - @temp = t.name

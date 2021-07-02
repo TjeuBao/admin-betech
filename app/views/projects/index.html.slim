@@ -1,0 +1,60 @@
+.row
+  .col-12
+    .page-title-box
+      .page-title-right
+        ol.breadcrumb.m-0
+          li.breadcrumb-item
+            = link_to 'Home', root_path
+          li.breadcrumb-item Technologies
+      h4.page-title
+        | Project List
+
+section.hero.is-primary.is-medium
+  .hero-head
+    nav.navbar
+      .container
+        .navbar-brand
+        #navbarMenuHeroA.navbar-menu
+          .navbar-end
+            = link_to "Create New Project", new_project_path, class:"navbar-item"
+  .hero-body
+    .container.has-text-centered
+      h1.title
+        = yield :page_title
+
+section.section
+  .container
+      .card
+        .card-content
+          .container
+            .media
+            .media-content
+              .card-body
+                h4.header-title.mb-2 About projects
+                .table-responsive-sm
+                    table.table.table-centered.mb-0
+                      tr
+                        th scope="col" ID
+                        th scope="col" Name
+                        th scope="col" Description
+                        th scope="col" TechStack
+                        th scope="col" Active ?
+                      - @projects.each do |p|
+                          tr
+                            td = p.id
+                            td = link_to p.name, p
+                            td = p.description
+                            td
+                              - p.teches.each do |t|
+                                = t.name
+                                br
+                            td
+                              div
+                                input#switch1 checked="checked" data-switch="success" type="checkbox" /
+                                label.mb-0.d-block data-off-label="No" data-on-label="Yes" for=""
+
+section.section
+  .container.mb-3
+    .d-flex.justify-content-center
+      - if @projects.size > 0
+        == pagy_bootstrap_nav(@pagy)
