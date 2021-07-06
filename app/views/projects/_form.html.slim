@@ -4,11 +4,22 @@
       .control
         = f.input :name, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
       .field.mt-2.mb-3
-        = f.label :Technology
-        = f.select :tech_ids, options_for_select(@technology_options), { }, { class: "select2 form-control select2-multiple", :multiple => true, :size => 5, id: "technology-select" }
+        = f.label :Frontend
+        = f.select :tech_ids, options_for_select(@frontend_options), { }, { class: "select2 form-control select2-multiple", :multiple => true, :size => 5, id: "frontend-select" }
+      .field.mt-2.mb-3
+        = f.label :Backend
+        = f.select :tech_ids, options_for_select(@backend_options), { }, { class: "select2 form-control select2-multiple", :multiple => true, :size => 5, id: "db-select" }        
+      .field.mt-2.mb-3
+        = f.label :Database
+        = f.select :tech_ids, options_for_select(@db_options), { }, { class: "select2 form-control select2-multiple", :multiple => true, :size => 5, id: "backend-select" }        
       .field.mt-2.mb-3
         = f.input :description, 'data-provider': :summernote, class: 'form-control'
+        .field.mt-2.mb-3
+            = f.input :image, required: true, direct_upload: true, as: :file
       = f.button :submit, class: "btn btn-info mb-2"
       = link_to  "Back", :back, class:"btn btn-secondary mb-2 ml-4"
 javascript:
-   $('#technology-select').select2();
+  $('#frontend-select').select2();
+  $('#backend-select').select2();
+  $('#db-select').select2();
+

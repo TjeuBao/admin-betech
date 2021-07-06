@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resources :developers do 
     get 'detail', on: :member
   end
-  resources :projects
+  resources :projects do 
+    get 'detail', on: :member
+  end
   resources :teches
   resources :careers do
     resources :job_submissions

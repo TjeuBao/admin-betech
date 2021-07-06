@@ -36,10 +36,12 @@ section.section
                       tr
                         th scope="col" ID
                         th scope="col" TechName
+                        th scope="col" TechType
                       - @teches.each do |tech|
                           tr
                             td = tech.id
                             td = link_to tech.name, tech
+                            td = tech.tech_type
 section.section
   .container.mb-3
     .d-flex.justify-content-center

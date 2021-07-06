@@ -1,0 +1,46 @@
+.card
+  h3.card-header
+    = @project.name
+  .card-body
+    h5.card-title
+      | Description
+    p.card-text
+      = @project.description
+  .card-body
+    h5.card-title
+      | Frontend
+    p.card-text
+      - @project.teches.each do |t|
+        - if t.tech_type == "frontend"
+          = t.name
+          br
+  .card-body
+    h5.card-title
+      | Backend
+    p.card-text
+      - @project.teches.each do |t|
+        - if t.tech_type == "backend"
+          = t.name
+          br
+  .card-body
+    h5.card-title
+      | DB
+    p.card-text
+      - @project.teches.each do |t|
+        - if t.tech_type == "db"
+          = t.name
+          br 
+  .card-body
+    h5.card-title
+        | Diagram
+    - if @project.image.present?
+      = image_tag @project.image, width: "300px"
+  .card-body
+    h5.card-title
+      | Developers list
+    p.card-text
+      - @project.developers.each do |d|
+        = link_to d.company_name, detail_developer_path(d)
+        br
+  .card-body
+    = link_to '<i class="mdi mdi-pencil mr-1"></i> Edit'.html_safe, edit_project_path(@project), class:"button btn btn-primary btn-sm"
