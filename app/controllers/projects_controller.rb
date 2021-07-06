@@ -56,10 +56,12 @@ class ProjectsController < ApplicationController
   end
 
   def set_technology_options
-    @technology_options = Tech.pluck(:name, :id)
+    @frontend_options = Tech.frontend.pluck(:name, :id)
+    @backend_options = Tech.backend.pluck(:name, :id)
+    @db_options = Tech.db.pluck(:name, :id)
   end
 
   def project_params
-    params.require(:project).permit({ tech_ids: [] }, :name, :description, :techstack)
+    params.require(:project).permit({ tech_ids: [] }, :name, :description, :techstack, :image)
   end
 end

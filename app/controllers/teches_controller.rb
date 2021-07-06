@@ -56,6 +56,6 @@ class TechesController < ApplicationController
   end
 
   def tech_params
-    params.require(:tech).permit(:name)
+    params.require(:tech).permit(:name, :tech_type)
   end
 end

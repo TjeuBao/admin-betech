@@ -5,7 +5,7 @@
         ol.breadcrumb.m-0
           li.breadcrumb-item
             = link_to 'Home', root_path
-          li.breadcrumb-item Technologies
+          li.breadcrumb-item Projects
       h4.page-title
         | Project List
 
@@ -37,7 +37,9 @@ section.section
                         th scope="col" ID
                         th scope="col" Name
                         th scope="col" Description
-                        th scope="col" TechStack
+                        th scope="col" Frontend
+                        th scope="col" Backend
+                        th scope="col" DB
                         th scope="col" Active ?
                       - @projects.each do |p|
                           tr
@@ -45,7 +47,15 @@ section.section
                             td = link_to p.name, p
                             td = p.description
                             td
-                              - p.teches.each do |t|
+                              - p.teches.frontend.each do |t|
+                                = t.name
+                                br
+                            td
+                              - p.teches.backend.each do |t|
+                                = t.name
+                                br
+                            td
+                              - p.teches.db.each do |t|
                                 = t.name
                                 br
                             td
