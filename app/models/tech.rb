@@ -13,5 +13,5 @@ class Tech < ApplicationRecord
   enum tech_type: TECH_TYPES.zip(TECH_TYPES.map(&:titleize)).to_h
   has_and_belongs_to_many :projects
   validates :name, presence: true, uniqueness: true
-  validates_inclusion_of :tech_type, in: 
+  validates_inclusion_of :tech_type, in: TECH_TYPES
 end
