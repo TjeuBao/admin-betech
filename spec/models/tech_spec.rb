@@ -13,15 +13,7 @@ require 'rails_helper'
 RSpec.describe Tech, type: :model do
   describe 'validates' do
     it { is_expected.to validate_presence_of :name }
-    it do
-      should define_enum_for(:tech_type)
-        .with_values(
-          frontend: 'Frontend',
-          backend: 'Backend',
-          db: 'Db'
-        )
-        .backed_by_column_of_type(:string)
-    end
+    it { is_expected.to validate_presence_of :tech_type }
   end
   
   describe 'assocation' do
