@@ -47,20 +47,17 @@ section.section
                             td = link_to p.name, p
                             td = p.description
                             td
-                              - p.teches.each do |t|
-                                - if t.tech_type == "frontend"
-                                  = t.name
-                                  br
+                              - p.teches.frontend.each do |t|
+                                = t.name
+                                br
                             td
-                              - p.teches.each do |t|
-                                - if t.tech_type == "backend"
-                                  = t.name
-                                  br
+                              - p.teches.backend.each do |t|
+                                = t.name
+                                br
                             td
-                              - p.teches.each do |t|
-                                - if t.tech_type == "db"
-                                  = t.name
-                                  br
+                              - p.teches.db.each do |t|
+                                = t.name
+                                br
                             td
                               div
                                 input#switch1 checked="checked" data-switch="success" type="checkbox" /

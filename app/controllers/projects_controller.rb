@@ -56,9 +56,9 @@ class ProjectsController < ApplicationController
   end
 
   def set_technology_options
-    @frontend_options = Tech.where(tech_type: 'frontend').pluck(:name, :id)
-    @backend_options = Tech.where(tech_type: 'backend').pluck(:name, :id)
-    @db_options = Tech.where(tech_type: 'db').pluck(:name, :id)
+    @frontend_options = Tech.frontend.pluck(:name, :id)
+    @backend_options = Tech.backend.pluck(:name, :id)
+    @db_options = Tech.db.pluck(:name, :id)
   end
 
   def project_params

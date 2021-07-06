@@ -10,26 +10,23 @@
     h5.card-title
       | Frontend
     p.card-text
-      - @project.teches.each do |t|
-        - if t.tech_type == "frontend"
-          = t.name
-          br
+      - @project.teches.frontend.each do |t|
+        = t.name
+        br
   .card-body
     h5.card-title
       | Backend
     p.card-text
-      - @project.teches.each do |t|
-        - if t.tech_type == "backend"
-          = t.name
-          br
+      - @project.teches.backend.each do |t|
+        = t.name
+        br
   .card-body
     h5.card-title
       | DB
     p.card-text
-      - @project.teches.each do |t|
-        - if t.tech_type == "db"
-          = t.name
-          br 
+      - @project.teches.db.each do |t|
+        = t.name
+        br 
   .card-body
     h5.card-title
         | Diagram
