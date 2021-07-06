@@ -13,8 +13,6 @@ require 'rails_helper'
 RSpec.describe Tech, type: :model do
   describe 'validates' do
     it { is_expected.to validate_presence_of :name }
-  end
-  describe 'validates' do
     it { is_expected.to validate_presence_of :tech_type }
   end
   

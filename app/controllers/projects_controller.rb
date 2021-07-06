@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: %i[show edit update destroy detail]
+  before_action :set_project, only: %i[show edit update destroy]
   before_action :set_technology_options
   def index
     @pagy, @projects = pagy(Project, items: per_page)
@@ -49,10 +49,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def detail
-    @pagy, @projects = pagy(Project, items: per_page)
-  end
-
   private
 
   def set_project
@@ -60,12 +56,12 @@ class ProjectsController < ApplicationController
   end
 
   def set_technology_options
-    @frontend_options = Tech.where(tech_type: "frontend").pluck(:name, :id)
-    @backend_options = Tech.where(tech_type: "backend").pluck(:name, :id)
-    @db_options = Tech.where(tech_type: "db").pluck(:name, :id)
+    @frontend_options = Tech.where(tech_type: 'frontend').pluck(:name, :id)
+    @backend_options = Tech.where(tech_type: 'backend').pluck(:name, :id)
+    @db_options = Tech.where(tech_type: 'db').pluck(:name, :id)
   end
 
   def project_params
-    params.require(:project).permit({ tech_ids: [] }, :name, :description, :techstack, :image )
+    params.require(:project).permit({ tech_ids: [] }, :name, :description, :techstack, :image)
   end
 end

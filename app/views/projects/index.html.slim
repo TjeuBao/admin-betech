@@ -40,7 +40,6 @@ section.section
                         th scope="col" Frontend
                         th scope="col" Backend
                         th scope="col" DB
-                        th scope="col" Detail
                         th scope="col" Active ?
                       - @projects.each do |p|
                           tr
@@ -62,8 +61,6 @@ section.section
                                 - if t.tech_type == "db"
                                   = t.name
                                   br
-                            td
-                              = link_to "Detail", detail_project_path(p)
                             td
                               div
                                 input#switch1 checked="checked" data-switch="success" type="checkbox" /
