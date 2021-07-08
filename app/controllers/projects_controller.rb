@@ -62,6 +62,6 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit({ tech_ids: [] }, :name, :description, :techstack, :image)
+    params.require(:project).permit({ tech_ids: [] }, :name, :description, :techstack, :image, :end_date)
   end
 end

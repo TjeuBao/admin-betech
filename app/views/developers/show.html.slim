@@ -28,12 +28,9 @@ section.section
         br
     | TechStack:
     h4.title
-      - @developer.projects.each do |p|
-        - p.teches.each do |t|
-          - if t.name != @temp
-            = t.name
-            br
-          - @temp = t.name
+      - @developer.teches.each do |t|
+        = t.name  
+        br
     - if @developers.size > 0
       .container.mb-3
         .d-flex.justify-content-center

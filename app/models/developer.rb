@@ -16,7 +16,11 @@
 #  index_developers_on_full_name     (full_name) UNIQUE
 #
 class Developer < ApplicationRecord
-  has_and_belongs_to_many :projects
+  has_many :developer_projects
+  has_many :projects, through: :developer_projects
+  has_many :developer_teches
+  has_many :teches, through: :developer_teches
+  accepts_nested_attributes_for :developer_projects, allow_destroy: true
   validates :full_name, presence: true, uniqueness: true
   validates :company_name, presence: true, uniqueness: true
   validates :belong_team, presence: true

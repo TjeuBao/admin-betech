@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_06_071011) do
+ActiveRecord::Schema.define(version: 2021_07_08_043547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,6 +60,25 @@ ActiveRecord::Schema.define(version: 2021_07_06_071011) do
     t.index ["slug"], name: "index_careers_on_slug", unique: true
   end
 
+  create_table "developer_projects", force: :cascade do |t|
+    t.bigint "developer_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "current"
+    t.index ["developer_id"], name: "index_developer_projects_on_developer_id"
+    t.index ["project_id"], name: "index_developer_projects_on_project_id"
+  end
+
+  create_table "developer_teches", force: :cascade do |t|
+    t.bigint "developer_id", null: false
+    t.bigint "tech_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["developer_id"], name: "index_developer_teches_on_developer_id"
+    t.index ["tech_id"], name: "index_developer_teches_on_tech_id"
+  end
+
   create_table "developers", force: :cascade do |t|
     t.string "level"
     t.datetime "created_at", precision: 6, null: false
@@ -69,13 +88,6 @@ ActiveRecord::Schema.define(version: 2021_07_06_071011) do
     t.string "belong_team"
     t.index ["company_name"], name: "index_developers_on_company_name", unique: true
     t.index ["full_name"], name: "index_developers_on_full_name", unique: true
-  end
-
-  create_table "developers_projects", id: false, force: :cascade do |t|
-    t.bigint "developer_id", null: false
-    t.bigint "project_id", null: false
-    t.index ["developer_id", "project_id"], name: "index_developers_projects_on_developer_id_and_project_id"
-    t.index ["project_id", "developer_id"], name: "index_developers_projects_on_project_id_and_developer_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -135,6 +147,7 @@ ActiveRecord::Schema.define(version: 2021_07_06_071011) do
     t.string "description", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "end_date"
     t.index ["name"], name: "index_projects_on_name", unique: true
   end
 
@@ -173,5 +186,9 @@ ActiveRecord::Schema.define(version: 2021_07_06_071011) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "developer_projects", "developers"
+  add_foreign_key "developer_projects", "projects"
+  add_foreign_key "developer_teches", "developers"
+  add_foreign_key "developer_teches", "teches"
   add_foreign_key "job_submissions", "careers"
 end

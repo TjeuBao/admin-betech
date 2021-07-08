@@ -40,6 +40,7 @@ section.section
                       th scope="col" Belong to team                    
                       th scope="col" Level
                       th scope="col" Project
+                      th scope="col" Current Project
                       th scope="col" TechStack
                       th scope="col" Detail
                     - @developers.each do |d|
@@ -54,12 +55,14 @@ section.section
                               = link_to p.name, p
                               br
                           td
-                            - d.projects.each do |p|
-                              - p.teches.each do |t|
-                                - if t.name != @temp
-                                  = t.name
-                                  br
-                                - @temp = t.name
+                            - d.developer_projects.each do |dp|
+                              - if dp.current?
+                                = link_to dp.project.name, dp.project
+                                br
+                          td
+                            - d.teches.each do |t|
+                              = t.name  
+                              br
                           td = link_to "Detail", detail_developer_path(d)
 
 section.section

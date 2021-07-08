@@ -20,9 +20,9 @@
           h5.mb-1
             | TechStack
           p.mb-0.font-13
+            - @temp = []
             - @developer.projects.each do |p|
-              - p.teches.each do |t|
-                - if t.name != @temp
-                  p.mb-0.mt-0.font-13
-                    = t.name
-                - @temp = t.name
+              - @temp = @temp + p.teches.all
+            - @temp.uniq.each do |t|
+              = t.name
+              br

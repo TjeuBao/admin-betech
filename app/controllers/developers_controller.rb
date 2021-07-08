@@ -1,6 +1,7 @@
 class DevelopersController < ApplicationController
   before_action :set_developer, only: %i[show edit update destroy detail]
   before_action :set_project_options, only: %i[new edit]
+  after_action :set_tech_stack
   def index
     @pagy, @developers = pagy(Developer, items: per_page)
   end
@@ -63,7 +64,21 @@ class DevelopersController < ApplicationController
     @project_options = Project.pluck(:name, :id)
   end
 
+  def set_tech_stack
+    @developers = Developer.all
+    @developers.each do |d|
+      @temp = []
+      @temp2 = []
+      d.projects.each do |p|
+        @temp = @temp + p.teches.all
+      end
+      @temp2 = @temp2 + @temp.uniq
+      d.teches = @temp2.uniq
+    end
+    
+  end
+
   def developer_params
-    params.require(:developer).permit({ project_ids: [] }, :full_name, :company_name, :belong_team, :level)
+    params.require(:developer).permit({ project_ids: [],tech_ids: [] }, :full_name, :company_name, :belong_team, :level, developer_projects_attributes: [:current, :id])
   end
 end
