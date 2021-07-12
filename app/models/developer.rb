@@ -25,4 +25,11 @@ class Developer < ApplicationRecord
   validates :company_name, presence: true, uniqueness: true
   validates :belong_team, presence: true
   validates :level, presence: true
+
+  def self.filter_developer(params)
+    where('tech_id = ?', params)
+  end
+  def self.filter_day(params)
+    where("projects.end_date <= ? AND developer_projects.current = ?", Date.today + params, true)
+  end
 end

@@ -31,6 +31,18 @@ section.section
             .media-content
               .card-body
                 h4.header-title.mb-2 Developers
+                .field.mb-3.float-md-right.ml-3
+                  = link_to "Clear", developers_path 
+                = form_tag("/developers", method: 'get') do
+                  = hidden_field_tag("developer[tech_id]", @current_technology)
+                  .field.mb-3.float-md-right
+                    = collection_select(:developer, :day, DayFromNow.all, :day, :day, {:prompt => "Select days", :selected => @current_day}, onchange: "this.form.submit();")
+                = form_tag("/developers", method: 'get') do
+                  = hidden_field_tag("developer[day]", @current_day)  
+                  .field.mb-3.float-md-right.mr-2
+                    = collection_select(:developer, :tech_id, Tech.all, :id, :name, {:prompt => "Select technology"}, onchange: "this.form.submit();")
+                .field.mb-3.float-md-right
+                  span.header-title.mr-3 style=("font-weight: bold;") Filter:
                 .table-responsive-sm
                   table.table.table-centered.mb-0
                     tr
@@ -43,30 +55,29 @@ section.section
                       th scope="col" Current Project
                       th scope="col" TechStack
                       th scope="col" Detail
-                    - @developers.each do |d|
-                        tr
-                          td = d.id
-                          td = link_to d.full_name, d
-                          td = link_to d.company_name, d
-                          td = d.belong_team
-                          td = d.level
-                          td
-                            - d.projects.each do |p|
-                              = link_to p.name, p
-                              br
-                          td
-                            - d.developer_projects.each do |dp|
-                              - if dp.current?
-                                = link_to dp.project.name, dp.project
+                      - @developers.each do |d|
+                          tr
+                            td = d.id
+                            td = link_to d.full_name, d
+                            td = link_to d.company_name, d
+                            td = d.belong_team
+                            td = d.level
+                            td
+                              - d.projects.each do |p|
+                                = link_to p.name, p
                                 br
-                          td
-                            - d.teches.each do |t|
-                              = t.name  
-                              br
-                          td = link_to "Detail", detail_developer_path(d)
-
-section.section
-  .container.mb-3
-    .d-flex.justify-content-center
-      - if @developers.size > 0
-        == pagy_bootstrap_nav(@pagy)
+                            td
+                              - d.developer_projects.each do |dp|
+                                - if dp.current?
+                                  = link_to dp.project.name, dp.project
+                                  br
+                            td
+                              - d.teches.each do |t|
+                                = t.name  
+                                br
+                            td = link_to "Detail", detail_developer_path(d)
+  section.section
+    .container.mb-3
+      .d-flex.justify-content-center
+        - if @developers.size > 0
+          == pagy_bootstrap_nav(@pagy)

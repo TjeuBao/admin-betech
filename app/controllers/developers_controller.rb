@@ -4,6 +4,20 @@ class DevelopersController < ApplicationController
   after_action :set_tech_stack
   def index
     @pagy, @developers = pagy(Developer, items: per_page)
+    @current_day = params[:developer][:day] if params[:developer]
+    @current_technology = params[:developer][:tech_id] if params[:developer]
+    @developers2 = Developer.left_outer_joins(:projects).where('developer_projects.current IS NULL').uniq
+    if params[:developer] && params[:developer][:day] != '' && params[:developer][:tech_id] != ''
+      @developers1 = Developer.joins(:projects, :teches).filter_day(params[:developer][:day].to_d)
+      @developers1 = @developers1.filter_developer(params[:developer][:tech_id]).uniq
+      @developers = (@developers1 + @developers2).uniq
+    elsif params[:developer] && params[:developer][:day] != ''
+      @developers1 = Developer.joins(:projects).filter_day(params[:developer][:day].to_d)
+      @developers = (@developers1 + @developers2).uniq
+    elsif params[:developer] && params[:developer][:tech_id] != ''
+      @developers = Developer.joins(:teches).filter_developer(params[:developer][:tech_id])
+      @developers = (@developers1 + @developers2).uniq
+    end
   end
 
   def show
@@ -70,15 +84,14 @@ class DevelopersController < ApplicationController
       @temp = []
       @temp2 = []
       d.projects.each do |p|
-        @temp = @temp + p.teches.all
+        @temp += p.teches.all
       end
-      @temp2 = @temp2 + @temp.uniq
+      @temp2 += @temp.uniq
       d.teches = @temp2.uniq
     end
-    
   end
 
   def developer_params
-    params.require(:developer).permit({ project_ids: [],tech_ids: [] }, :full_name, :company_name, :belong_team, :level, developer_projects_attributes: [:current, :id])
+    params.require(:developer).permit({ project_ids: [], tech_ids: [] }, :full_name, :company_name, :belong_team, :level, developer_projects_attributes: [:current, :id])
   end
 end
