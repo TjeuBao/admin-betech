@@ -1,14 +1,12 @@
 class DevelopersController < ApplicationController
   before_action :set_developer, only: %i[show edit update destroy detail]
   before_action :set_project_options
-  before_action :fetch_current_day, :fetch_current_technology, :fetch_current_developer, only: %i[index]
+  before_action :fetch_current_day_tech, :fetch_current_technology, :fetch_current_developer, only: %i[index]
   before_action :fetch_filter_tech, :fetch_filter_day, :fetch_filter_tech_day, only: %i[index]
   after_action :set_tech_stack
   def index
     @pagy, @developers = pagy(Developer.includes(:projects, :teches), items: per_page)
-    if params[:developer] && params[:day] != '' && params[:developer][:tech_id] != ''
-      fetch_filter_tech_day
-    end
+    fetch_filter_tech_day
     fetch_filter_day
     fetch_filter_tech
   end
@@ -84,8 +82,9 @@ class DevelopersController < ApplicationController
     end
   end
 
-  def fetch_current_day
+  def fetch_current_day_tech
     @current_day = params[:day] if params[:developer]
+    @tech = params[:developer][:tech_id] if params[:developer]
   end
 
   def fetch_current_technology
@@ -113,6 +112,8 @@ class DevelopersController < ApplicationController
   end
 
   def fetch_filter_tech_day
+    return unless params[:developer] && params[:day] != '' && @tech != ''
+
     fetch_filter_day + fetch_filter_tech
   end
 
