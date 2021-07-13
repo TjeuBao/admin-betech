@@ -10,7 +10,6 @@ class DevelopersController < ApplicationController
     @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).uniq if params[:developer] && params[:day] != '' && params[:developer][:tech_id] != ''
     @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).or(@developers_current).uniq if params[:developer] && params[:day] != ''
     @developers = Developer.joins(:projects, :teches).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).includes(:projects, :teches).uniq 
-    end
   end
 
   def show
