@@ -6,7 +6,9 @@ class DevelopersController < ApplicationController
   after_action :set_tech_stack
   def index
     @pagy, @developers = pagy(Developer.includes(:projects, :teches), items: per_page)
-    fetch_filter_tech_day
+    if params[:developer] && params[:day] != '' && params[:developer][:tech_id] != ''
+      fetch_filter_tech_day
+    end
     fetch_filter_day
     fetch_filter_tech
   end
@@ -111,8 +113,6 @@ class DevelopersController < ApplicationController
   end
 
   def fetch_filter_tech_day
-    return unless params[:developer] && params[:day] != '' && params[:developer][:tech_id] != ''
-
     fetch_filter_day + fetch_filter_tech
   end
 
