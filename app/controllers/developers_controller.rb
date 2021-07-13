@@ -9,7 +9,7 @@ class DevelopersController < ApplicationController
     @pagy, @developers = pagy(Developer.includes(:projects, :teches), items: per_page)
     @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).uniq if params[:developer] && params[:day] != '' && params[:developer][:tech_id] != ''
     @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).or(@developers_current).uniq if params[:developer] && params[:day] != ''
-    @developers = Developer.joins(:projects, :teches).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).includes(:projects, :teches).uniq 
+    @developers = Developer.joins(:projects, :teches).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).includes(:projects, :teches).uniq if params[:developer] && params[:developer][:tech_id] != ''
   end
 
   def show
