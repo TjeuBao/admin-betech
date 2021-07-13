@@ -3,16 +3,13 @@ class DevelopersController < ApplicationController
   before_action :set_project_options
   before_action :set_current_day, only: %i[index]
   before_action :set_current_technology, only: %i[index]
+  before_action :fetch_current_developer, only: %i[index]
   after_action :set_tech_stack
   def index
     @pagy, @developers = pagy(Developer.includes(:projects, :teches), items: per_page)
-    @developers_current = Developer.joins(:projects, :teches).filter_current
-    if params[:developer] && params[:day] != '' && params[:developer][:tech_id] != ''
-      @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).uniq
-    elsif params[:developer] && params[:day] != ''
-      @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).or(@developers_current).uniq
-    elsif params[:developer] && params[:developer][:tech_id] != ''
-      @developers = Developer.joins(:projects, :teches).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).includes(:projects, :teches).uniq
+    @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).uniq if params[:developer] && params[:day] != '' && params[:developer][:tech_id] != ''
+    @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).or(@developers_current).uniq if params[:developer] && params[:day] != ''
+    @developers = Developer.joins(:projects, :teches).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).includes(:projects, :teches).uniq 
     end
   end
 
@@ -88,11 +85,15 @@ class DevelopersController < ApplicationController
   end
 
   def set_current_day
-    @current_day = params[:day] if params[:developer] 
+    @current_day = params[:day] if params[:developer]
   end
 
   def set_current_technology
     @current_technology = params[:developer][:tech_id] if params[:developer]
+  end
+
+  def fetch_current_developer
+    @developers_current = Developer.joins(:projects, :teches).filter_current
   end
 
   def developer_params
