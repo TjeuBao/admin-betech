@@ -37,4 +37,8 @@ class Developer < ApplicationRecord
   def self.filter_current
     where('developer_projects.current IS NULL')
   end
+
+  def self.fetch_filter_by_tech
+    @developers = Developer.joins(:projects, :teches).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).includes(:projects, :teches).uniq 
+  end
 end
