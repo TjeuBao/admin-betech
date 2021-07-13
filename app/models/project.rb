@@ -14,6 +14,8 @@
 #  index_projects_on_name  (name) UNIQUE
 #
 class Project < ApplicationRecord
+  DAYS_FROM_NOW = [10, 30, 60].freeze
+  
   has_and_belongs_to_many :teches
   has_many :developer_projects
   has_many :developers, through: :developer_projects

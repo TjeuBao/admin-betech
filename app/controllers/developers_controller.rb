@@ -1,22 +1,18 @@
 class DevelopersController < ApplicationController
   before_action :set_developer, only: %i[show edit update destroy detail]
-  before_action :set_project_options, only: %i[new edit]
+  before_action :set_project_options
+  before_action :set_current_day, only: %i[index]
+  before_action :set_current_technology, only: %i[index]
   after_action :set_tech_stack
   def index
-    @pagy, @developers = pagy(Developer, items: per_page)
-    @current_day = params[:developer][:day] if params[:developer]
-    @current_technology = params[:developer][:tech_id] if params[:developer]
-    @developers2 = Developer.left_outer_joins(:projects).where('developer_projects.current IS NULL').uniq
-    if params[:developer] && params[:developer][:day] != '' && params[:developer][:tech_id] != ''
-      @developers1 = Developer.joins(:projects, :teches).filter_day(params[:developer][:day].to_d)
-      @developers1 = @developers1.filter_developer(params[:developer][:tech_id]).uniq
-      @developers = (@developers1 + @developers2).uniq
-    elsif params[:developer] && params[:developer][:day] != ''
-      @developers1 = Developer.joins(:projects).filter_day(params[:developer][:day].to_d)
-      @developers = (@developers1 + @developers2).uniq
+    @pagy, @developers = pagy(Developer.includes(:projects, :teches), items: per_page)
+    @developers_current = Developer.joins(:projects, :teches).filter_current
+    if params[:developer] && params[:day] != '' && params[:developer][:tech_id] != ''
+      @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).uniq
+    elsif params[:developer] && params[:day] != ''
+      @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).or(@developers_current).uniq
     elsif params[:developer] && params[:developer][:tech_id] != ''
-      @developers = Developer.joins(:teches).filter_developer(params[:developer][:tech_id])
-      @developers = (@developers1 + @developers2).uniq
+      @developers = Developer.joins(:projects, :teches).filter_developer(params[:developer][:tech_id]).or(@developers_current.filter_developer(params[:developer][:tech_id])).includes(:projects, :teches).uniq
     end
   end
 
@@ -91,7 +87,15 @@ class DevelopersController < ApplicationController
     end
   end
 
+  def set_current_day
+    @current_day = params[:day] if params[:developer] 
+  end
+
+  def set_current_technology
+    @current_technology = params[:developer][:tech_id] if params[:developer]
+  end
+
   def developer_params
-    params.require(:developer).permit({ project_ids: [], tech_ids: [] }, :full_name, :company_name, :belong_team, :level, developer_projects_attributes: [:current, :id])
+    params.require(:developer).permit({ project_ids: [], tech_ids: [] }, :full_name, :company_name, :belong_team, :level, developer_projects_attributes: %i[current id])
   end
 end

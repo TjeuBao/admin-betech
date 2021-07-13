@@ -29,7 +29,12 @@ class Developer < ApplicationRecord
   def self.filter_developer(params)
     where('tech_id = ?', params)
   end
+
   def self.filter_day(params)
-    where("projects.end_date <= ? AND developer_projects.current = ?", Date.today + params, true)
+    where('projects.end_date <= ? AND developer_projects.current = ?', Date.today + params, true)
+  end
+
+  def self.filter_current
+    where('developer_projects.current IS NULL')
   end
 end

@@ -36,11 +36,11 @@ section.section
                 = form_tag("/developers", method: 'get') do
                   = hidden_field_tag("developer[tech_id]", @current_technology)
                   .field.mb-3.float-md-right
-                    = collection_select(:developer, :day, DayFromNow.all, :day, :day, {:prompt => "Select days", :selected => @current_day}, onchange: "this.form.submit();")
+                    = select_tag(:day, options_for_select(Project::DAYS_FROM_NOW, :selected => @current_day ), {:prompt => "Select day",  onchange: "this.form.submit();"})
                 = form_tag("/developers", method: 'get') do
-                  = hidden_field_tag("developer[day]", @current_day)  
+                  = hidden_field_tag("day", @current_day)  
                   .field.mb-3.float-md-right.mr-2
-                    = collection_select(:developer, :tech_id, Tech.all, :id, :name, {:prompt => "Select technology"}, onchange: "this.form.submit();")
+                    = collection_select(:developer, :tech_id, Tech.all, :id, :name, {:prompt => "Select technology", :selected => @current_technology}, onchange: "this.form.submit();")
                 .field.mb-3.float-md-right
                   span.header-title.mr-3 style=("font-weight: bold;") Filter:
                 .table-responsive-sm
