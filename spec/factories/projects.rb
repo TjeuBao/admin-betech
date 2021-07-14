@@ -17,6 +17,6 @@ FactoryBot.define do
   factory :project do
     name { "MyString" }
     description { "MyString" }
-    techstack { "MyString" }
+    end_date { Date.today }
   end
 end
