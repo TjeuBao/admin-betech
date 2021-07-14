@@ -32,16 +32,15 @@ class Developer < ApplicationRecord
 
   def self.filter_day(params)
     available_developer = []
-    current = Developer.joins(:developer_projects).where("developer_projects.current = true")
+    current = Developer.joins(:developer_projects).where('developer_projects.current = true')
     Developer.all.each do |developer|
       end_date = developer.projects.maximum(:end_date)
       available_developer.push(developer) if end_date <= Date.today + params
     end
-    return available_developer & current
+    available_developer & current
   end
 
   def self.filter_current
     where('developer_projects.current IS NULL')
   end
-  
 end
