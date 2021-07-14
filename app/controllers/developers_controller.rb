@@ -94,25 +94,25 @@ class DevelopersController < ApplicationController
   end
 
   def fetch_filter_tech
-    return unless params[:developer] && @current_tech != '' && @cur_day == ''
+    return unless params[:developer] && @cur_tech != '' && @cur_day == ''
 
     @developers = Developer.joins(:projects, :teches).filter_developer(params[:developer][:tech_id]).or(@developers_current).includes(:projects, :teches).uniq
   end
 
   def fetch_filter_day
-    return unless params[:developer] && @cur_day != '' && @current_tech == ''
+    return unless params[:developer] && @cur_day != '' && @cur_tech == ''
 
     @developers = Developer.filter_day(params[:day].to_d).uniq + @developers_current.uniq
   end
 
   def fetch_filter_tech_day
-    return unless params[:developer] && @cur_day != '' && @current_tech != ''
+    return unless params[:developer] && @cur_day != '' && @cur_tech != ''
 
     @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).filter_developer(params[:developer][:tech_id]).uniq
   end
 
   def fetch_filter_tech_day_main
-    return unless params[:developer] && @cur_day != '' && @current_tech != ''
+    return unless params[:developer] && @cur_day != '' && @cur_tech != ''
 
     @developers = fetch_filter_tech_day + @developers_current.uniq
   end
