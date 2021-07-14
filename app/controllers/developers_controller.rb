@@ -108,7 +108,7 @@ class DevelopersController < ApplicationController
   def fetch_filter_day
     return unless params[:developer] && params[:day] != ''
 
-    @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).or(@developers_current).uniq
+    @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).uniq + @developers_current.uniq
   end
 
   def fetch_filter_tech_day
