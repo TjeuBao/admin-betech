@@ -25,9 +25,9 @@ RSpec.describe Developer, type: :model do
     it { is_expected.to validate_presence_of :level }
   end
 
-  describe 'assocation' do
+  describe 'association' do
     it { is_expected.to have_many(:projects).through(:developer_projects) }
     it { is_expected.to have_many(:teches).through(:developer_teches) }
-    it{ should accept_nested_attributes_for :developer_projects }
+    it { should accept_nested_attributes_for :developer_projects }
   end
 end

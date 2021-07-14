@@ -26,9 +26,8 @@ class Developer < ApplicationRecord
   validates :belong_team, presence: true
   validates :level, presence: true
 
-  def self.filter_developer(params)
-    where('tech_id = ?', params)
-  end
+  scope :filter_developer, ->(params) { where('tech_id = ?', params) }
+  scope :filter_current, -> { where('developer_projects.current IS NULL') }
 
   def self.filter_day(params)
     available_developer = []
@@ -37,10 +36,7 @@ class Developer < ApplicationRecord
       end_date = developer.projects.maximum(:end_date)
       available_developer.push(developer) if end_date <= Date.today + params
     end
-    available_developer & current
-  end
-
-  def self.filter_current
-    where('developer_projects.current IS NULL')
+    available_developer &= current
+    Developer.where(id: available_developer.pluck(:id))
   end
 end
