@@ -49,6 +49,8 @@ class DevelopersController < ApplicationController
   end
 
   def destroy
+    @developer.developer_projects.destroy_all
+    @developer.developer_teches.destroy_all
     @developer.destroy
     respond_to do |format|
       format.html { redirect_to developers_url, notice: 'Developer was successfully destroyed.' }
