@@ -5,3 +5,21 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Tech.create([
+    {
+        name: "Rails",
+        tech_type: 1
+    },
+    {
+        name: "ReactJS",
+        tech_type: 0
+    },
+    {
+        name: "NodeJS",
+        tech_type: 1
+    },
+    {
+        name: "PHP",
+        tech_type: 1
+    },
+])
