@@ -17,7 +17,9 @@
 #
 FactoryBot.define do
   factory :developer do
-    information { "MyString" }
+    belong_team { "MyString" }
+    company_name { "MyString" }
+    full_name { "MyString" }
     level { "MyString" }
   end
 end

@@ -11,6 +11,13 @@
         = f.label :Project
         = f.select :project_ids, options_for_select(@project_options), { }, { class: "select2 form-control select2-multiple", :multiple => true, :size => 5, id: 'project-select' }
       .field.mt-2.mb-3
+        h5.list Check current project
+        = f.simple_fields_for :developer_projects do |ff|
+          - project = ff.object.project 
+          = project.name 
+          p
+            = ff.check_box :current
+      .field.mt-2.mb-3
         = f.input :level, 'data-provider': :summernote, class: 'form-control'
       = f.button :submit, class: "btn btn-info mb-2"
       = link_to  "Back", :back, class:"btn btn-secondary mb-2 ml-4"

@@ -16,9 +16,27 @@
 #  index_developers_on_full_name     (full_name) UNIQUE
 #
 class Developer < ApplicationRecord
-  has_and_belongs_to_many :projects
+  has_many :developer_projects
+  has_many :projects, through: :developer_projects
+  has_many :developer_teches
+  has_many :teches, through: :developer_teches
+  accepts_nested_attributes_for :developer_projects, allow_destroy: true
   validates :full_name, presence: true, uniqueness: true
   validates :company_name, presence: true, uniqueness: true
   validates :belong_team, presence: true
   validates :level, presence: true
+
+  scope :with_teches, ->(params) { where('tech_id = ?', params) }
+  scope :not_have_current_project, -> { where('developer_projects.current IS NULL') }
+
+  def self.free_after_x_days(params)
+    available_developer = []
+    current = Developer.joins(:developer_projects).where('developer_projects.current = true')
+    Developer.all.each do |developer|
+      end_date = developer.projects.maximum(:end_date)
+      available_developer.push(developer) if end_date <= Date.today + params
+    end
+    available_developer &= current
+    Developer.where(id: available_developer.pluck(:id))
+  end
 end

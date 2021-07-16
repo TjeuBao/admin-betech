@@ -4,6 +4,7 @@
 #
 #  id          :bigint           not null, primary key
 #  description :string           not null
+#  end_date    :date
 #  name        :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -22,6 +23,6 @@ RSpec.describe Project, type: :model do
 
   describe 'assocation' do
     it { is_expected.to have_and_belong_to_many(:teches) }
-    it { is_expected.to have_and_belong_to_many(:developers) }
+    it { is_expected.to have_many(:developers) }
   end
 end
