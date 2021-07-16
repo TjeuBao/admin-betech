@@ -1,12 +1,14 @@
 class DevelopersController < ApplicationController
-  before_action :set_developer, :set_project_options, only: %i[show edit update destroy detail]
-  before_action :fetch_current_day_tech, :fetch_current_developer, :fetch_filter_tech, :fetch_filter_day, :fetch_filter_tech_day, :fetch_filter_tech_day_main, only: %i[index]
+  before_action :set_developer, only: %i[show edit update destroy detail]
+  before_action :set_project_options, only: %i[new edit]
+  before_action :fetch_current_day_tech, :fetch_current_developer, only: %i[index]
   after_action :set_tech_stack
   def index
-    @pagy, @developers = pagy(Developer.includes(:projects, :teches), items: per_page)
-    fetch_filter_tech_day_main
-    fetch_filter_day
+    @developers = Developer.includes(:projects, :teches)
+    fetch_filter_tech_day
+    fetch_free_after_x_days
     fetch_filter_tech
+    @pagy, @developers = pagy_array(@developers.uniq, items: per_page)
   end
 
   def show
@@ -14,6 +16,7 @@ class DevelopersController < ApplicationController
   end
 
   def new
+    @project_options = Project.pluck(:name, :id)
     @developer = Developer.new
   end
 
@@ -69,11 +72,11 @@ class DevelopersController < ApplicationController
 
   def set_tech_stack
     @developers = Developer.all
-    @developers.each do |d|
+    @developers.includes(:teches).each do |d|
       @temp = []
       @temp2 = []
-      d.projects.each do |p|
-        @temp += p.teches.all
+      d.projects.includes(:teches).each do |p|
+        @temp += p.teches
       end
       @temp2 += @temp.uniq
       d.teches = @temp2.uniq
@@ -87,34 +90,28 @@ class DevelopersController < ApplicationController
 
   def fetch_current_developer
     if params[:developer] && params[:developer][:tech_id] != ''
-      @developers_current = Developer.joins(:projects, :teches).filter_current.filter_developer(params[:developer][:tech_id])
+      @developers_current = Developer.joins(:projects, :teches).not_have_current_project.with_teches(params[:developer][:tech_id])
     else
-      @developers_current = Developer.joins(:projects, :teches).filter_current
+      @developers_current = Developer.joins(:projects, :teches).not_have_current_project
     end
   end
 
   def fetch_filter_tech
     return unless params[:developer] && @cur_tech != '' && @cur_day == ''
 
-    @developers = Developer.joins(:projects, :teches).filter_developer(params[:developer][:tech_id]).or(@developers_current).includes(:projects, :teches).uniq
+    @developers = Developer.joins(:projects, :teches).with_teches(params[:developer][:tech_id]).or(@developers_current)
   end
 
-  def fetch_filter_day
+  def fetch_free_after_x_days
     return unless params[:developer] && @cur_day != '' && @cur_tech == ''
 
-    @developers = Developer.filter_day(params[:day].to_d).uniq + @developers_current.uniq
+    @developers = Developer.joins(:projects, :teches).free_after_x_days(params[:day].to_d).or(@developers_current)
   end
 
   def fetch_filter_tech_day
     return unless params[:developer] && @cur_day != '' && @cur_tech != ''
 
-    @developers = Developer.joins(:projects, :teches).filter_day(params[:day].to_d).filter_developer(params[:developer][:tech_id]).uniq
-  end
-
-  def fetch_filter_tech_day_main
-    return unless params[:developer] && @cur_day != '' && @cur_tech != ''
-
-    @developers = fetch_filter_tech_day + @developers_current.uniq
+    @developers = Developer.joins(:projects, :teches).free_after_x_days(params[:day].to_d).with_teches(params[:developer][:tech_id]).or(@developers_current)
   end
 
   def developer_params

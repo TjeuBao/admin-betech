@@ -26,10 +26,10 @@ class Developer < ApplicationRecord
   validates :belong_team, presence: true
   validates :level, presence: true
 
-  scope :filter_developer, ->(params) { where('tech_id = ?', params) }
-  scope :filter_current, -> { where('developer_projects.current IS NULL') }
+  scope :with_teches, ->(params) { where('tech_id = ?', params) }
+  scope :not_have_current_project, -> { where('developer_projects.current IS NULL') }
 
-  def self.filter_day(params)
+  def self.free_after_x_days(params)
     available_developer = []
     current = Developer.joins(:developer_projects).where('developer_projects.current = true')
     Developer.all.each do |developer|

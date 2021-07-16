@@ -21,8 +21,7 @@
             | TechStack
           p.mb-0.font-13
             - @temp = []
-            - @developer.projects.each do |p|
-              - @temp = @temp + p.teches.all
-            - @temp.uniq.each do |t|
-              = t.name
+            - @developer.teches.each do |t|
+              = t.name  
               br
+ 

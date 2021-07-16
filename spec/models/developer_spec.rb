@@ -31,31 +31,31 @@ RSpec.describe Developer, type: :model do
     it { should accept_nested_attributes_for :developer_projects }
   end
   
-  describe 'filter_current' do
+  describe 'not_have_current_project' do
     let(:project) { FactoryBot.create(:project) }
     let(:developer) { FactoryBot.create(:developer, project_ids: project.id) }
     let(:developer_project) { FactoryBot.create(:developer_project, developer_id: developer.id, project_id: project.id) }
     it {
-      expect(Developer.joins(:projects).filter_current).to include(developer_project.developer)
+      expect(Developer.joins(:projects).not_have_current_project).to include(developer_project.developer)
     }
   end
 
-  describe 'filter_developer' do
+  describe 'with_teches' do
     let(:tech)  { FactoryBot.create(:tech, tech_type: 'frontend') }
     let(:developer) { FactoryBot.create(:developer, tech_ids: tech.id) }
     let(:developer_tech) { FactoryBot.create(:developer_tech, developer_id: developer.id, tech_id: tech.id) }
     it {
-      expect(Developer.joins(:teches).filter_developer(tech.id)).to include(developer_tech.developer)
+      expect(Developer.joins(:teches).with_teches(tech.id)).to include(developer_tech.developer)
     }
   end
 
-  describe 'filter_day' do
+  describe 'free_after_x_days' do
     let(:project) { FactoryBot.create(:project) }
     let(:developer) { FactoryBot.create(:developer, project_ids: project.id) }
     let(:developer_project) { FactoryBot.create(:developer_project, developer_id: developer.id, project_id: project.id, current: true) }
     it {
       developer_project
-      expect(Developer.joins(:projects).filter_day(Project::DAYS_FROM_NOW[0].to_d)).to include(developer_project.developer)
+      expect(Developer.joins(:projects).free_after_x_days(Project::DAYS_FROM_NOW[0].to_d)).to include(developer_project.developer)
     }
   end
 end
