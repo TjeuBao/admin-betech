@@ -34,13 +34,13 @@ section.section
                 .field.mb-3.float-md-right.ml-3
                   = link_to "Clear", developers_path 
                 = form_tag("/developers", method: 'get') do
-                  = hidden_field_tag("developer[tech_id]", @cur_tech)
+                  = hidden_field_tag("filter[tech_ids]", @cur_tech)
                   .field.mb-3.float-md-right
                     = select_tag(:day, options_for_select(Project::DAYS_FROM_NOW, :selected => @cur_day ), {:prompt => "Select day",  onchange: "this.form.submit();"})
                 = form_tag("/developers", method: 'get') do
                   = hidden_field_tag("day", @cur_day)  
                   .field.mb-3.float-md-right.mr-2
-                    = collection_select(:developer, :tech_id, Tech.all, :id, :name, {:prompt => "Select technology", :selected => @cur_tech}, onchange: "this.form.submit();")
+                    = collection_select(:filter, :tech_ids, Tech.all, :id, :name, {:prompt => "Select technology", :selected => @cur_tech}, onchange: "this.form.submit();")
                 .field.mb-3.float-md-right
                   span.header-title.mr-3 style=("font-weight: bold;") Filter:
                 .table-responsive-sm
