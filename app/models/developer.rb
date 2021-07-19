@@ -33,7 +33,6 @@ class Developer < ApplicationRecord
     available_developer = []
     Developer.all.each do |developer|
       current = developer.developer_projects.where('current = true')
-      next unless current.present?
 
       max_end_date = find_max_end_date(current, 0, current[0].project.end_date)
       available_developer.push(developer) if max_end_date <= Date.today + params
