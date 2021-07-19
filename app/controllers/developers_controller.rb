@@ -2,6 +2,7 @@ class DevelopersController < ApplicationController
   before_action :set_developer, only: %i[show edit update destroy detail]
   before_action :set_project_options, only: %i[new edit]
   before_action :fetch_current_day_tech, :fetch_current_developer, only: %i[index]
+  after_action :set_tech_stack, only: %i[create update]
   def index
     @developers = Developer.all
     fetch_filter_tech_day
@@ -32,7 +33,6 @@ class DevelopersController < ApplicationController
         format.json { render json: @developer.errors, status: :unprocessable_entity }
       end
     end
-    set_tech_stack
   end
 
   def update
@@ -45,7 +45,6 @@ class DevelopersController < ApplicationController
         format.json { render json: @developer.errors, status: :unprocessable_entity }
       end
     end
-    set_tech_stack
   end
 
   def destroy
