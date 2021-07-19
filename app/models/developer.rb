@@ -30,26 +30,7 @@ class Developer < ApplicationRecord
   scope :not_have_current_project, -> { where('developer_projects.current IS NULL') }
   scope :have_current_project, -> { where('developer_projects.current = true') }
   def self.free_after_x_days(params)
-    available_developer = []
-    developer_have_current_project = Developer.have_current_project
-    developer_have_current_project.all.each do |developer|
-      current = developer.developer_projects.where('current = true')
-      max_end_date = find_max_end_date(current, 0, current[0].project.end_date)
-      available_developer.push(developer) if max_end_date <= Date.today + params
-    end
-    Developer.where(id: available_developer.pluck(:id))
-  end
-
-  def self.find_max_end_date(current, index, max)
-    while index < current.count
-      b = current[index].project.end_date
-      if max > b
-        max
-      elsif max < b
-        max = b
-      end
-      index += 1
-    end
-    max
+    available_developer_ids = Developer.joins(:projects).where('current = ?', true).group(:id).having('max(projects.end_date) <= ?', Date.today + params).pluck(:id)
+    Developer.where(id: available_developer_ids)
   end
 end
