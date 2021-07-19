@@ -31,12 +31,25 @@ class Developer < ApplicationRecord
 
   def self.free_after_x_days(params)
     available_developer = []
-    current = Developer.joins(:developer_projects).where('developer_projects.current = true')
     Developer.all.each do |developer|
-      end_date = developer.projects.maximum(:end_date)
-      available_developer.push(developer) if end_date <= Date.today + params
+      current = developer.developer_projects.where('current = true')
+      if current.present?
+        n = 0
+        end_date = Date.today
+        max = current[0].project.end_date
+        while n < current.count
+          b = current[n].project.end_date
+          if max > b
+            max
+          elsif max < b
+            max = b
+          end 
+          n += 1
+        end
+        end_date = max
+        available_developer.push(developer) if end_date <= Date.today + params
+      end
     end
-    available_developer &= current
     Developer.where(id: available_developer.pluck(:id))
   end
 end
