@@ -31,7 +31,12 @@ section.section
             .media-content
               .card-body
                 h4.header-title.mb-2 Technologies
-                .table-responsive-sm
+                = form_tag("/teches", method: 'get') do
+                  .field.mb-3.float-md-right.mr-2
+                    = select_tag(:tech_type, options_for_select(Tech.tech_types, :selected => @current_type ), {:prompt => "Select tech type",  onchange: "this.form.submit();"})
+                  .field.mb-3.float-md-right
+                    span.header-title.mr-3 style=("font-weight: bold;") Filter:    
+                  .table-responsive-sm
                     table.table.table-centered.mb-0
                       tr
                         th scope="col" ID

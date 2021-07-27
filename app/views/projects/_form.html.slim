@@ -4,6 +4,10 @@
       .control
         = f.input :name, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
       .field.mt-2.mb-3
+        = f.label :Client
+        .control
+          = f.select :client_id, @client_options
+      .field.mt-2.mb-3
         = f.label :Frontend
         = f.select :tech_ids, options_for_select(@frontend_options), { }, { class: "select2 form-control select2-multiple", :multiple => true, :size => 5, id: "frontend-select" }
       .field.mt-2.mb-3
@@ -13,10 +17,21 @@
         = f.label :Database
         = f.select :tech_ids, options_for_select(@db_options), { }, { class: "select2 form-control select2-multiple", :multiple => true, :size => 5, id: "backend-select" }        
       .field.mt-2.mb-3
+        = f.input :deployment, 'data-provider': :summernote, class: 'form-control'
+      .field.mt-2.mb-3
         = f.input :description, 'data-provider': :summernote, class: 'form-control'
+      .field.mt-2.mb-3
+        = f.input :website, 'data-provider': :summernote, class: 'form-control'
+      .field.mt-2.mb-3
+        = f.label :development_type
+        = f.select :development_type, Project.development_types.keys, { }, { class: "select2 form-control" }
       .field.mt-2.mb-3
         = f.label :Project_Diagram
         = f.input :image, required: true, direct_upload: true, as: :file
+      .field.mt-2.mb-3
+        = f.label :Start_date
+        br
+        = f.date_field :start_date
       .field.mt-2.mb-3
         = f.label :End_date
         br

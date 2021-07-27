@@ -13,6 +13,14 @@
           i.dripicons-user
           span Users
       li.side-nav-item
+        = link_to projects_path, class: "side-nav-link #{active_items('projects')}" do
+          i.dripicons-briefcase
+          span Projects
+      li.side-nav-item
+        = link_to clients_path, class: "side-nav-link #{active_items('clients')}" do
+          i.dripicons-user-group
+          span Clients
+      li.side-nav-item
         = link_to post_categories_path, class: "side-nav-link #{active_items('post_categories')}" do
           i.dripicons-menu
           span Blog Categories
@@ -32,10 +40,6 @@
         = link_to teches_path, class: "side-nav-link #{active_items('technologies')}" do
           i.dripicons-briefcase
           span Technologies
-      li.side-nav-item
-        = link_to projects_path, class: "side-nav-link #{active_items('projects')}" do
-          i.dripicons-briefcase
-          span Projects
       li.side-nav-item
         = link_to developers_path, class: "side-nav-link #{active_items('developers')}" do
           i.dripicons-briefcase

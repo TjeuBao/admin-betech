@@ -1,0 +1,40 @@
+- content_for :page_title, @client.name
+section.section
+  .container.mb-4
+    nav.level
+      .level-left.mt-2
+        p.level-item
+          strong Actions
+      .level-right.d-flex
+        p.level-item.mr-3
+          = link_to "Edit", edit_client_path(@client), class:"button btn btn-primary btn-sm"
+        p.level-item.mr-3
+          = link_to "Delete", client_path(@client), method: :delete, data: { confirm: "Are you sure?" }, class:"button btn btn-danger btn-sm"
+        p.level-item
+          = link_to  "Back", clients_path(page: @page), class:"button btn btn-dark btn-sm"
+    hr/
+    | Name:
+    h4.title
+      = @client.name
+    | Address:
+    h4.title
+      = @client.address 
+    | HQ:
+    h4.title
+      = @client.hq
+
+    - if @projects.size > 0
+          hr/
+          | Projects:
+          h4.title
+          - @projects.each do |project|
+            .card
+              .card-content
+                .container
+                  .media
+                  .media-content
+                    h5.title.is-4
+                      = link_to project.name, project
+          .container.mb-3
+            .d-flex.justify-content-center
+              == pagy_bootstrap_nav(@pagy)

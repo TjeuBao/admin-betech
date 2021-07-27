@@ -2,7 +2,13 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :set_technology_options
   def index
-    @pagy, @projects = pagy(Project, items: per_page)
+    if params[:development_type].present?
+      @current_type = params[:development_type]
+      @projects = Project.where('development_type = ?', params[:development_type])
+    else
+      @projects = extract_project
+    end
+    @pagy, @projects = pagy(@projects, items: per_page)
   end
 
   def show
@@ -59,9 +65,16 @@ class ProjectsController < ApplicationController
     @frontend_options = Tech.frontend.pluck(:name, :id)
     @backend_options = Tech.backend.pluck(:name, :id)
     @db_options = Tech.db.pluck(:name, :id)
+    @client_options = Client.pluck(:name, :id)
   end
 
   def project_params
-    params.require(:project).permit({ tech_ids: [] }, :name, :description, :image, :end_date)
+    params.require(:project).permit({ tech_ids: [] }, :client_id, :name, :description, :deployment, :development_type, :website, :image, :start_date, :end_date)
+  end
+
+  def extract_project
+    return Project.search(params[:search]) if params[:search]
+
+    Project.order(id: :desc)
   end
 end
