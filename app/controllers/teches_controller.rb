@@ -2,7 +2,13 @@ class TechesController < ApplicationController
   before_action :set_tech, only: %i[show edit update destroy]
 
   def index
-    @pagy, @teches = pagy(Tech, items: per_page)
+    if params[:tech_type].present?
+      @current_type = params[:tech_type]
+      @teches = Tech.where('tech_type = ?', params[:tech_type])
+    else
+      @teches = Tech.all
+    end
+    @pagy, @teches = pagy(@teches, items: per_page)
   end
 
   def show

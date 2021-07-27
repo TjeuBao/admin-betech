@@ -32,7 +32,8 @@ RSpec.describe Developer, type: :model do
   end
   
   describe 'not_have_current_project' do
-    let(:project) { FactoryBot.create(:project) }
+    let(:client) { FactoryBot.create(:client) }
+    let(:project) { FactoryBot.create(:project, client_id: client.id) }
     let(:developer) { FactoryBot.create(:developer, project_ids: project.id) }
     let(:developer_project) { FactoryBot.create(:developer_project, developer_id: developer.id, project_id: project.id) }
     it {
@@ -50,7 +51,8 @@ RSpec.describe Developer, type: :model do
   end
 
   describe 'free_after_x_days' do
-    let(:project) { FactoryBot.create(:project) }
+    let(:client) { FactoryBot.create(:client) }
+    let(:project) { FactoryBot.create(:project, client_id: client.id) }
     let(:developer) { FactoryBot.create(:developer, project_ids: project.id) }
     let(:developer_project) { FactoryBot.create(:developer_project, developer_id: developer.id, project_id: project.id, current: true) }
     it {
