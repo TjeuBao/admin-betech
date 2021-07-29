@@ -1,0 +1,24 @@
+- content_for :page_title, @pc.full_name
+section.section
+  .container.mb-4
+    nav.level
+      .level-left.mt-2
+        p.level-item
+          strong Actions
+      .level-right.d-flex
+        p.level-item.mr-3
+          = link_to "Edit", edit_pc_path(@pc), class:"button btn btn-primary btn-sm"
+        p.level-item.mr-3
+          = link_to "Delete", pc_path(@pc), method: :delete, data: { confirm: "Are you sure?" }, class:"button btn btn-danger btn-sm"
+        p.level-item
+          = link_to  "Back", pcs_path(page: @page), class:"button btn btn-dark btn-sm"
+    hr/
+    | Full Name:
+    h4.title
+      = @pc.full_name
+    | Company Name:
+    h4.title
+      = @pc.company_name
+    | Level:
+    h4.title
+      = @pc.level

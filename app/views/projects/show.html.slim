@@ -34,11 +34,31 @@
       = image_tag @project.image, width: "300px"
   .card-body
     h5.card-title
+      | Git repo
+    p.card-text
+      = link_to @project.git_repo, @project.git_repo 
+  .card-body
+    h5.card-title
+      | Trello
+    p.card-text
+      = link_to @project.trello, @project.trello 
+  .card-body
+    h5.card-title
       | Developers list
     p.card-text
       - @project.developers.each do |d|
         = link_to d.company_name, detail_developer_path(d)
         br
+    .card-body
+    h5.card-title
+      | Start date
+    p.card-text
+      = @project.start_date
+  .card-body
+    h5.card-title
+      | End date
+    p.card-text
+      = @project.end_date
   .card-body
     .level-right.d-flex
       p.level-item.mr-3

@@ -7,8 +7,10 @@
 #  description      :string           not null
 #  development_type :integer
 #  end_date         :date
+#  git_repo         :string
 #  name             :string           not null
 #  start_date       :date
+#  trello           :string
 #  website          :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
@@ -29,6 +31,8 @@ class Project < ApplicationRecord
   has_and_belongs_to_many :teches
   has_many :developer_projects
   has_many :developers, through: :developer_projects
+  has_many :pc_projects
+  has_many :pcs, through: :pc_projects
   belongs_to :client
   has_one_attached :image
   validates :name, presence: true, uniqueness: true

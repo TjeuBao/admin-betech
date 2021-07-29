@@ -53,6 +53,7 @@ section.section
                       th scope="col" Level
                       th scope="col" Project
                       th scope="col" Current Project
+                      th scope="col" Join Date
                       th scope="col" TechStack
                       th scope="col" Detail
                       - @developers.each do |d|
@@ -70,6 +71,11 @@ section.section
                               - d.developer_projects.each do |dp|
                                 - if dp.current?
                                   = link_to dp.project.name, dp.project
+                                  br
+                            td
+                              - d.developer_projects.each do |dp|
+                                - if dp.current?
+                                  = dp.join_date
                                   br
                             td
                               - d.teches.each do |t|

@@ -116,6 +116,6 @@ class DevelopersController < ApplicationController
   end
 
   def developer_params
-    params.require(:developer).permit({ project_ids: [], tech_ids: [] }, :full_name, :company_name, :belong_team, :level, developer_projects_attributes: %i[current id])
+    params.require(:developer).permit({ project_ids: [], tech_ids: [] }, :full_name, :company_name, :belong_team, :level, developer_projects_attributes: %i[join_date current id])
   end
 end

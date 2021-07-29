@@ -7,8 +7,10 @@
 #  description      :string           not null
 #  development_type :integer
 #  end_date         :date
+#  git_repo         :string
 #  name             :string           not null
 #  start_date       :date
+#  trello           :string
 #  website          :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
