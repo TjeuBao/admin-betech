@@ -44,7 +44,6 @@ section.section
                         th scope="col" Start Date
                         th scope="col" End Date
                         th scope="col" HQ
-                        th scope="col" Description
                         th scope="col" Technology
                         th scope="col" Deployment
                         th scope="col" Developement
@@ -56,7 +55,6 @@ section.section
                             td = p.start_date
                             td = p.end_date
                             td = p.client.hq
-                            td = p.description
                             td
                               - p.teches.each do |t|
                                 = t.name
