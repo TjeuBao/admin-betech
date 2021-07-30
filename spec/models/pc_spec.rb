@@ -12,5 +12,14 @@
 require 'rails_helper'
 
 RSpec.describe Pc, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'validates' do
+    it { is_expected.to validate_presence_of :full_name }
+    it { is_expected.to validate_presence_of :company_name }
+    it { is_expected.to validate_presence_of :level }
+  end
+
+  describe 'association' do
+    it { is_expected.to have_many(:projects).through(:pc_projects) }
+    it { should accept_nested_attributes_for :pc_projects }
+  end
 end

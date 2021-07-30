@@ -42,6 +42,10 @@ class ClientsController < ApplicationController
   end
 
   def destroy
+    @client.projects.each do |p|
+      p.developer_projects.destroy_all
+      p.destroy
+    end
     @client.destroy
     respond_to do |format|
       format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }

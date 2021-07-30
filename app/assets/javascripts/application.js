@@ -7,4 +7,5 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require gmaps/google
 //= require select2

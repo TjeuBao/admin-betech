@@ -6,8 +6,7 @@ class PcsController < ApplicationController
     @pagy, @pcs = pagy_array(@pcs, items: per_page)
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @pc = Pc.new
@@ -54,11 +53,11 @@ class PcsController < ApplicationController
   def set_pc
     @pc = Pc.find(params[:id])
   end
-  
+
   def set_project_options
     @project_options = Project.pluck(:name, :id)
   end
-  
+
   def pc_params
     params.require(:pc).permit({ project_ids: [] }, :full_name, :company_name, :level, pc_projects_attributes: %i[join_date id])
   end

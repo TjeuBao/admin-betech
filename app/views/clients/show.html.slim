@@ -38,3 +38,9 @@ section.section
           .container.mb-3
             .d-flex.justify-content-center
               == pagy_bootstrap_nav(@pagy)
+.container.mb-4
+  div[style="width: 500px;"]
+    #map[style="width: 800px; height: 400px;"]
+  script[type="text/javascript"]
+    |  handler = Gmaps.build('Google'); handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){ markers = handler.addMarkers([ { "lat": 37.3333945, "lng": -121.8806499, "picture": { "width": 32, "height": 32 }, "infowindow": "SJSU" } ]); handler.bounds.extendWith(markers); handler.fitMapToBounds(); }); 
+
