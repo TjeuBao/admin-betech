@@ -56,7 +56,10 @@ gem 'rubocop-rails', require: false
 
 # Others
 gem 'cloudinary'
+gem 'coffee-rails'
 gem 'friendly_id', '~> 5.2.4'
+gem 'geocoder'
+gem 'gmaps4rails'
 gem 'pagy'
 gem 'paperclip', '~> 6.0.0'
 gem 'paperclip-cloudinary'

@@ -48,8 +48,6 @@ class DevelopersController < ApplicationController
   end
 
   def destroy
-    @developer.developer_projects.destroy_all
-    @developer.developer_teches.destroy_all
     @developer.destroy
     respond_to do |format|
       format.html { redirect_to developers_url, notice: 'Developer was successfully destroyed.' }
@@ -116,6 +114,6 @@ class DevelopersController < ApplicationController
   end
 
   def developer_params
-    params.require(:developer).permit({ project_ids: [], tech_ids: [] }, :full_name, :company_name, :belong_team, :level, developer_projects_attributes: %i[current id])
+    params.require(:developer).permit({ project_ids: [], tech_ids: [] }, :full_name, :company_name, :belong_team, :level, developer_projects_attributes: %i[join_date current id])
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_26_182734) do
+ActiveRecord::Schema.define(version: 2021_07_29_082430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(version: 2021_07_26_182734) do
     t.string "hq"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.float "latitude"
+    t.float "longitude"
   end
 
   create_table "developer_projects", force: :cascade do |t|
@@ -74,6 +76,7 @@ ActiveRecord::Schema.define(version: 2021_07_26_182734) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "current"
+    t.date "join_date"
     t.index ["developer_id"], name: "index_developer_projects_on_developer_id"
     t.index ["project_id"], name: "index_developer_projects_on_project_id"
   end
@@ -121,6 +124,24 @@ ActiveRecord::Schema.define(version: 2021_07_26_182734) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "pc_projects", force: :cascade do |t|
+    t.date "join_date"
+    t.bigint "pc_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pc_id"], name: "index_pc_projects_on_pc_id"
+    t.index ["project_id"], name: "index_pc_projects_on_project_id"
+  end
+
+  create_table "pcs", force: :cascade do |t|
+    t.string "full_name", null: false
+    t.string "company_name", null: false
+    t.string "level", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "post_categories", force: :cascade do |t|
     t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -161,6 +182,8 @@ ActiveRecord::Schema.define(version: 2021_07_26_182734) do
     t.string "deployment"
     t.integer "development_type"
     t.string "website"
+    t.string "git_repo"
+    t.string "trello"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["name"], name: "index_projects_on_name", unique: true
   end
@@ -205,5 +228,7 @@ ActiveRecord::Schema.define(version: 2021_07_26_182734) do
   add_foreign_key "developer_teches", "developers"
   add_foreign_key "developer_teches", "teches"
   add_foreign_key "job_submissions", "careers"
+  add_foreign_key "pc_projects", "pcs"
+  add_foreign_key "pc_projects", "projects"
   add_foreign_key "projects", "clients"
 end

@@ -4,6 +4,7 @@
 #
 #  id           :bigint           not null, primary key
 #  current      :boolean
+#  join_date    :date
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  developer_id :bigint           not null

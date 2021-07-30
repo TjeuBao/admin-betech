@@ -69,7 +69,7 @@ class ProjectsController < ApplicationController
   end
 
   def project_params
-    params.require(:project).permit({ tech_ids: [] }, :client_id, :name, :description, :deployment, :development_type, :website, :image, :start_date, :end_date)
+    params.require(:project).permit({ tech_ids: [] }, :client_id, :name, :description, :deployment, :development_type, :git_repo, :trello, :website, :image, :start_date, :end_date)
   end
 
   def extract_project

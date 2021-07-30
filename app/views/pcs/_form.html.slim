@@ -1,0 +1,24 @@
+.section
+  = simple_form_for @pc do |f|
+    .field.mt-2.mb-3
+      .control
+        = f.input :full_name, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
+    .field.mt-2.mb-3
+      = f.input :company_name, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
+    .field.mt-2.mb-3
+      = f.input :level, input_html: { class: 'input' }, wrapper: false, label_html: { class: 'label' }
+    .field.mt-2.mb-3
+        = f.label :Project
+        = f.select :project_ids, options_for_select(@project_options), { }, { class: "select2 form-control select2-multiple", :multiple => true, :size => 5, id: 'project-select' }
+    .field.mt-2.mb-3
+        h5.list Select the date pc join project
+        = f.simple_fields_for :pc_projects do |ff|
+          - project = ff.object.project 
+          = project.name 
+          br
+          = ff.date_field :join_date
+          br
+    = f.button :submit, class: "btn btn-info mb-2"
+    = link_to  "Back", :back, class:"btn btn-secondary mb-2 ml-4"
+javascript:
+  $('#project-select').select2();

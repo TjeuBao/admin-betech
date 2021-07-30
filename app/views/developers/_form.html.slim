@@ -17,6 +17,10 @@
           = project.name 
           p
             = ff.check_box :current
+          = ff.label :join_date 
+          br
+          = ff.date_field :join_date
+          br
       .field.mt-2.mb-3
         = f.input :level, 'data-provider': :summernote, class: 'form-control'
       = f.button :submit, class: "btn btn-info mb-2"
