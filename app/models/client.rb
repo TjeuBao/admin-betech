@@ -14,10 +14,12 @@
 class Client < ApplicationRecord
   geocoded_by :address
   after_validation :geocode
+
   validates :name, presence: true, uniqueness: true
   validates :address, presence: true
   validates :hq, presence: true
-  has_many :projects
+
+  has_many :projects, dependent: :destroy
 
   scope :search, ->(search_string) { where('lower(name) LIKE ? OR lower(hq) LIKE ?', "%#{search_string.downcase}%", "%#{search_string.downcase}%") }
 end

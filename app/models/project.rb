@@ -28,13 +28,15 @@
 class Project < ApplicationRecord
   DAYS_FROM_NOW = [10, 30, 60].freeze
   enum development_type: { mobile: 0, website: 1 }
+
   has_and_belongs_to_many :teches
-  has_many :developer_projects
+  has_many :developer_projects, dependent: :destroy
   has_many :developers, through: :developer_projects
-  has_many :pc_projects
+  has_many :pc_projects, dependent: :destroy
   has_many :pcs, through: :pc_projects
-  belongs_to :client
   has_one_attached :image
+  belongs_to :client
+
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
   validates :start_date, presence: true
