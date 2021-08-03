@@ -38,12 +38,14 @@ section.section
                       th scope="col" Name
                       th scope="col" Address
                       th scope="col" HQ
+                      th scope="col" Nationality
                     - @clients.each do |client|
                         tr
                           td = client.id
                           td = link_to client.name, client
                           td = client.address 
                           td = client.hq
+                          td = client.nationality
 section.section
   .container.mb-3
     .d-flex.justify-content-center

@@ -2,14 +2,15 @@
 #
 # Table name: clients
 #
-#  id         :bigint           not null, primary key
-#  address    :string
-#  hq         :string
-#  latitude   :float
-#  longitude  :float
-#  name       :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :bigint           not null, primary key
+#  address     :string
+#  hq          :string
+#  latitude    :float
+#  longitude   :float
+#  name        :string
+#  nationality :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #
 class Client < ApplicationRecord
   geocoded_by :address
@@ -21,5 +22,11 @@ class Client < ApplicationRecord
 
   has_many :projects, dependent: :destroy
 
+  before_save :set_nationality
+
   scope :search, ->(search_string) { where('lower(name) LIKE ? OR lower(hq) LIKE ?', "%#{search_string.downcase}%", "%#{search_string.downcase}%") }
+
+  def set_nationality
+    self.nationality = address.split(',')[-1]
+  end
 end
