@@ -57,6 +57,7 @@ class ClientsController < ApplicationController
 
   def set_nationality
     @clients = Client.all
+
     @clients.each do |client|
       n = client.address.split(',')[-1]
       client.update_columns(nationality: n)
