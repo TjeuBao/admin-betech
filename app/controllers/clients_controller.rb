@@ -1,6 +1,5 @@
 class ClientsController < ApplicationController
   before_action :set_client, only: %i[show edit update destroy]
-  before_action :set_nationality
   def index
     @pagy, @clients = pagy(extract_client, items: per_page)
   end
@@ -53,15 +52,6 @@ class ClientsController < ApplicationController
 
   def set_client
     @client = Client.find(params[:id])
-  end
-
-  def set_nationality
-    @clients = Client.all
-
-    @clients.each do |client|
-      n = client.address.split(',')[-1]
-      client.update_columns(nationality: n)
-    end
   end
 
   def client_params

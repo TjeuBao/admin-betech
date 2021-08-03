@@ -22,5 +22,11 @@ class Client < ApplicationRecord
 
   has_many :projects, dependent: :destroy
 
+  before_save :set_nationality
+
   scope :search, ->(search_string) { where('lower(name) LIKE ? OR lower(hq) LIKE ?', "%#{search_string.downcase}%", "%#{search_string.downcase}%") }
+
+  def set_nationality
+    self.nationality = address.split(',')[-1]
+  end
 end
