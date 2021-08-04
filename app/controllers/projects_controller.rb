@@ -2,12 +2,9 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :set_technology_options
   def index
-    if params[:development_type].present?
-      @current_type = params[:development_type]
-      @projects = Project.where('development_type = ?', params[:development_type])
-    else
-      @projects = extract_project
-    end
+    @projects = extract_project
+    fetch_filter_development
+    fetch_filter_industry
     @pagy, @projects = pagy(@projects, items: per_page)
   end
 
@@ -68,8 +65,22 @@ class ProjectsController < ApplicationController
     @client_options = Client.pluck(:name, :id)
   end
 
+  def fetch_filter_development
+    return unless params[:development_type].present?
+
+    @current_type = params[:development_type]
+    @projects = Project.where('development_type = ?', params[:development_type])
+  end
+
+  def fetch_filter_industry
+    return unless params[:industry].present?
+
+    @current_industry = params[:industry]
+    @projects = Project.where('industry = ?', params[:industry])
+  end
+
   def project_params
-    params.require(:project).permit({ tech_ids: [] }, :client_id, :name, :description, :deployment, :development_type, :git_repo, :trello, :website, :image, :start_date, :end_date)
+    params.require(:project).permit({ tech_ids: [] }, :client_id, :name, :description, :deployment, :development_type, :industry, :git_repo, :trello, :website, :image, :start_date, :end_date)
   end
 
   def extract_project

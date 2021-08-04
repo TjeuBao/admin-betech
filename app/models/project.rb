@@ -8,6 +8,7 @@
 #  development_type :integer
 #  end_date         :date
 #  git_repo         :string
+#  industry         :integer
 #  name             :string           not null
 #  start_date       :date
 #  trello           :string
@@ -27,7 +28,8 @@
 #
 class Project < ApplicationRecord
   DAYS_FROM_NOW = [10, 30, 60].freeze
-  enum development_type: { mobile: 0, website: 1 }
+  enum development_type: { mobile_android: 0, mobile_ios: 1, website: 2 }
+  enum industry: { sport: 0, ecommerce: 1 }
 
   has_and_belongs_to_many :teches
   has_many :developer_projects, dependent: :destroy

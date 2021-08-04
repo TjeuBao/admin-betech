@@ -34,6 +34,9 @@ section.section
                 = form_tag("/projects", method: 'get') do
                   .field.mb-3.float-md-right.mr-2
                     = select_tag(:development_type, options_for_select(Project.development_types, :selected => @current_type ), {:prompt => "All development",  onchange: "this.form.submit();"}) 
+                = form_tag("/projects", method: 'get') do
+                  .field.mb-3.float-md-right.mr-2
+                    = select_tag(:industry, options_for_select(Project.industries, :selected => @current_industry ), {:prompt => "Industry",  onchange: "this.form.submit();"}) 
                   .field.mb-3.float-md-right
                     span.header-title.mr-3 style=("font-weight: bold;") Filter:                
                 .table-responsive-sm
@@ -47,6 +50,7 @@ section.section
                         th scope="col" Technology
                         th scope="col" Deployment
                         th scope="col" Developement
+                        th scope="col" Industry
                         th scope="col" Website
                       - @projects.each do |p|
                           tr
@@ -61,6 +65,7 @@ section.section
                                 br
                             td = p.deployment
                             td = p.development_type
+                            td = p.industry
                             td = link_to p.website, p.website
 
 section.section

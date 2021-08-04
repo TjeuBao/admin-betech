@@ -30,6 +30,9 @@
         = f.label :development_type
         = f.select :development_type, Project.development_types.keys, { }, { class: "select2 form-control" }
       .field.mt-2.mb-3
+        = f.label :Industry
+        = f.select :industry, Project.industries.keys, { }, { class: "select2 form-control" }
+      .field.mt-2.mb-3
         = f.label :Project_Diagram
         = f.input :image, required: true, direct_upload: true, as: :file
       .field.mt-2.mb-3
