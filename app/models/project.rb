@@ -45,5 +45,8 @@ class Project < ApplicationRecord
   validates :end_date, presence: true
   validates :deployment, presence: true
 
+  scope :filter_development_type, ->(params) { where('development_type = ?', params) }
+  scope :filter_industry, ->(params) { where('industry = ?', params) }
+  scope :filter_industry_development_type, ->(params1, params2) { where('industry = ? AND development_type = ?', params1, params2) }  
   scope :search, ->(search_string) { where('lower(name) LIKE ? OR lower(deployment) LIKE ?', "%#{search_string.downcase}%", "%#{search_string.downcase}%") }
 end
