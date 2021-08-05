@@ -8,6 +8,7 @@
 #  development_type :integer
 #  end_date         :date
 #  git_repo         :string
+#  industry         :integer
 #  name             :string           not null
 #  start_date       :date
 #  trello           :string
@@ -27,7 +28,8 @@
 #
 class Project < ApplicationRecord
   DAYS_FROM_NOW = [10, 30, 60].freeze
-  enum development_type: { mobile: 0, website: 1 }
+  enum development_type: { mobile_android: 0, mobile_ios: 1, website: 2 }
+  enum industry: { sport: 0, ecommerce: 1 }
 
   has_and_belongs_to_many :teches
   has_many :developer_projects, dependent: :destroy
@@ -43,5 +45,7 @@ class Project < ApplicationRecord
   validates :end_date, presence: true
   validates :deployment, presence: true
 
-  scope :search, ->(search_string) { where('lower(name) LIKE ? OR lower(deployment) LIKE ?', "%#{search_string.downcase}%", "%#{search_string.downcase}%") }
+  scope :filter_development_type, ->(development_type) { where('development_type = ?', development_type) }
+  scope :filter_industry, ->(industry) { where('industry = ?', industry) }
+  scope :search, ->(query) { where('lower(name) LIKE ? OR lower(deployment) LIKE ?', "%#{query.downcase}%", "%#{query.downcase}%") }
 end

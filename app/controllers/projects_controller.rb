@@ -1,13 +1,10 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :set_technology_options
+  before_action :prepare_projects, only: %i[index]
   def index
-    if params[:development_type].present?
-      @current_type = params[:development_type]
-      @projects = Project.where('development_type = ?', params[:development_type])
-    else
-      @projects = extract_project
-    end
+    filter_params
+    project_filter
     @pagy, @projects = pagy(@projects, items: per_page)
   end
 
@@ -68,13 +65,31 @@ class ProjectsController < ApplicationController
     @client_options = Client.pluck(:name, :id)
   end
 
-  def project_params
-    params.require(:project).permit({ tech_ids: [] }, :client_id, :name, :description, :deployment, :development_type, :git_repo, :trello, :website, :image, :start_date, :end_date)
+  def filter_params
+    @type = params[:development_type]
+    @industry = params[:industry]
   end
 
-  def extract_project
-    return Project.search(params[:search]) if params[:search]
+  def project_filter
+    @projects = @projects.search(params[:search]) if params[:search]
+    @projects = @projects.filter_development_type(@type) if @type.present?
+    @projects = @projects.filter_industry(@industry) if @industry.present?
+  end
 
-    Project.order(id: :desc)
+  def project_params
+    params.require(:project).permit(
+      { tech_ids: [] },
+      :client_id,
+      :name,
+      :description,
+      :deployment,
+      :development_type,
+      :industry,
+      :git_repo, :trello, :website, :image, :start_date, :end_date
+    )
+  end
+
+  def prepare_projects
+    @projects = Project.order(id: :desc)
   end
 end

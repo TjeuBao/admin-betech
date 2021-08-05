@@ -26,7 +26,17 @@
     p.card-text
       - @project.teches.db.each do |t|
         = t.name
-        br 
+        br
+  .card-body
+    h5.card-title
+      | Development type
+    p.card-text
+      = @project.development_type
+  .card-body
+    h5.card-title
+      | Industry
+    p.card-text
+      = @project.industry
   .card-body
     h5.card-title
         | Diagram

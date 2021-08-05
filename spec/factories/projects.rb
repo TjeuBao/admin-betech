@@ -8,6 +8,7 @@
 #  development_type :integer
 #  end_date         :date
 #  git_repo         :string
+#  industry         :integer
 #  name             :string           not null
 #  start_date       :date
 #  trello           :string
