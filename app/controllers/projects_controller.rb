@@ -1,12 +1,10 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: %i[show edit update destroy]
   before_action :set_technology_options
-  before_action :fetch_current_type_industry, only: %i[index]
+  before_action :prepare_projects, only: %i[index]
   def index
-    @projects = extract_project
-    fetch_filter_development
-    fetch_filter_industry
-    fetch_filter_industry_development
+    filter_params
+    project_filter
     @pagy, @projects = pagy(@projects, items: per_page)
   end
 
@@ -67,38 +65,31 @@ class ProjectsController < ApplicationController
     @client_options = Client.pluck(:name, :id)
   end
 
-  def fetch_current_type_industry
-    return unless [params[:development_type] || params[:industry]].present?
-
-    @current_type = params[:development_type]
-    @current_industry = params[:industry]
+  def filter_params
+    @type = params[:development_type]
+    @industry = params[:industry]
   end
 
-  def fetch_filter_development
-    return unless @current_type.present? && @current_industry.blank?
-
-    @projects = Project.filter_development_type(params[:development_type])
-  end
-
-  def fetch_filter_industry
-    return unless @current_industry.present? && @current_type.blank?
-
-    @projects = Project.filter_industry(params[:industry])
-  end
-
-  def fetch_filter_industry_development
-    return unless @current_type.present? && @current_industry.present?
-
-    @projects = Project.filter_industry_development_type(params[:industry], params[:development_type])
+  def project_filter
+    @projects = @projects.search(params[:search]) if params[:search]
+    @projects = @projects.filter_development_type(@type) if @type.present?
+    @projects = @projects.filter_industry(@industry) if @industry.present?
   end
 
   def project_params
-    params.require(:project).permit({ tech_ids: [] }, :client_id, :name, :description, :deployment, :development_type, :industry, :git_repo, :trello, :website, :image, :start_date, :end_date)
+    params.require(:project).permit(
+      { tech_ids: [] },
+      :client_id,
+      :name,
+      :description,
+      :deployment,
+      :development_type,
+      :industry,
+      :git_repo, :trello, :website, :image, :start_date, :end_date
+    )
   end
 
-  def extract_project
-    return Project.search(params[:search]) if params[:search]
-
-    Project.order(id: :desc)
+  def prepare_projects
+    @projects = Project.order(id: :desc)
   end
 end
