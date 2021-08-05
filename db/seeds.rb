@@ -23,3 +23,15 @@ Tech.create([
         tech_type: 1
     },
 ])
+
+DevelopmentType.create([
+    {
+        name: "Mobile IOS"
+    },
+    {
+        name: "Mobile Android"
+    },
+    {
+        name: "Website"
+    },
+])
