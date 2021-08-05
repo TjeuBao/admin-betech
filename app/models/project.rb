@@ -29,7 +29,7 @@
 class Project < ApplicationRecord
   DAYS_FROM_NOW = [10, 30, 60].freeze
   enum development_type: { mobile_android: 0, mobile_ios: 1, website: 2 }
-  enum industry: { sport: 0, ecommerce: 1 }
+  enum industry: { sport: 0, ecommerce: 1, finance: 2, education: 3, manufacturing: 4, medical: 5, health_fitness: 6 }
 
   has_and_belongs_to_many :teches
   has_many :developer_projects, dependent: :destroy
