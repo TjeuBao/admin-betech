@@ -58,8 +58,16 @@
     h5.card-title
       | Developers list
     p.card-text
-      - @project.developers.each do |d|
-        = link_to d.company_name, detail_developer_path(d)
+      - @project.developer_projects.each do |dp|
+        - if dp.current?
+          = link_to dp.developer.company_name, detail_developer_path(dp.developer)
+          br
+  .card-body
+    h5.card-title
+      | Management
+    p.card-text
+      - @project.pc_projects.each do |pp|
+        = link_to pp.pc.company_name, pc_path(pp.pc)
         br
     .card-body
     h5.card-title
