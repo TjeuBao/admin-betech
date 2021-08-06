@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_04_140157) do
+ActiveRecord::Schema.define(version: 2021_08_05_183744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,21 @@ ActiveRecord::Schema.define(version: 2021_08_04_140157) do
     t.index ["full_name"], name: "index_developers_on_full_name", unique: true
   end
 
+  create_table "development_types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "development_types_projects", force: :cascade do |t|
+    t.bigint "development_type_id", null: false
+    t.bigint "project_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["development_type_id"], name: "index_development_types_projects_on_development_type_id"
+    t.index ["project_id"], name: "index_development_types_projects_on_project_id"
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -181,7 +196,6 @@ ActiveRecord::Schema.define(version: 2021_08_04_140157) do
     t.bigint "client_id"
     t.date "start_date"
     t.string "deployment"
-    t.integer "development_type"
     t.string "website"
     t.string "git_repo"
     t.string "trello"
@@ -229,6 +243,8 @@ ActiveRecord::Schema.define(version: 2021_08_04_140157) do
   add_foreign_key "developer_projects", "projects"
   add_foreign_key "developer_teches", "developers"
   add_foreign_key "developer_teches", "teches"
+  add_foreign_key "development_types_projects", "development_types"
+  add_foreign_key "development_types_projects", "projects"
   add_foreign_key "job_submissions", "careers"
   add_foreign_key "pc_projects", "pcs"
   add_foreign_key "pc_projects", "projects"

@@ -2,20 +2,19 @@
 #
 # Table name: projects
 #
-#  id               :bigint           not null, primary key
-#  deployment       :string
-#  description      :string           not null
-#  development_type :integer
-#  end_date         :date
-#  git_repo         :string
-#  industry         :integer
-#  name             :string           not null
-#  start_date       :date
-#  trello           :string
-#  website          :string
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  client_id        :bigint
+#  id          :bigint           not null, primary key
+#  deployment  :string
+#  description :string           not null
+#  end_date    :date
+#  git_repo    :string
+#  industry    :integer
+#  name        :string           not null
+#  start_date  :date
+#  trello      :string
+#  website     :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  client_id   :bigint
 #
 # Indexes
 #
@@ -28,10 +27,10 @@
 #
 class Project < ApplicationRecord
   DAYS_FROM_NOW = [10, 30, 60].freeze
-  enum development_type: { mobile_android: 0, mobile_ios: 1, website: 2 }
   enum industry: { sport: 0, ecommerce: 1, finance: 2, education: 3, manufacturing: 4, medical: 5, health_fitness: 6 }
 
   has_and_belongs_to_many :teches
+  has_and_belongs_to_many :development_types
   has_many :developer_projects, dependent: :destroy
   has_many :developers, through: :developer_projects
   has_many :pc_projects, dependent: :destroy
@@ -45,7 +44,7 @@ class Project < ApplicationRecord
   validates :end_date, presence: true
   validates :deployment, presence: true
 
-  scope :filter_development_type, ->(development_type) { where('development_type = ?', development_type) }
+  scope :filter_development_type, ->(development_type_ids) { where('development_type_id = ?', development_type_ids) }
   scope :filter_industry, ->(industry) { where('industry = ?', industry) }
   scope :search, ->(query) { where('lower(name) LIKE ? OR lower(deployment) LIKE ?', "%#{query.downcase}%", "%#{query.downcase}%") }
 end

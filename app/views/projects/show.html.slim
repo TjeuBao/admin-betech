@@ -31,7 +31,9 @@
     h5.card-title
       | Development type
     p.card-text
-      = @project.development_type
+      - @project.development_type.each do |t|
+        = t.name
+        br
   .card-body
     h5.card-title
       | Industry

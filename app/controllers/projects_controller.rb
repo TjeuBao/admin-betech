@@ -63,27 +63,29 @@ class ProjectsController < ApplicationController
     @backend_options = Tech.backend.pluck(:name, :id)
     @db_options = Tech.db.pluck(:name, :id)
     @client_options = Client.pluck(:name, :id)
+    @development_type_options = DevelopmentType.pluck(:name, :id)
   end
 
   def filter_params
-    @type = params[:development_type]
+    @development_type = params[:development_type_ids]
     @industry = params[:industry]
   end
 
   def project_filter
     @projects = @projects.search(params[:search]) if params[:search]
-    @projects = @projects.filter_development_type(@type) if @type.present?
+    if @development_type.present?
+      @projects = @projects.joins(:development_types).filter_development_type(@development_type)
+    end
     @projects = @projects.filter_industry(@industry) if @industry.present?
   end
 
   def project_params
     params.require(:project).permit(
-      { tech_ids: [] },
+      { tech_ids: [], development_type_ids: [] },
       :client_id,
       :name,
       :description,
       :deployment,
-      :development_type,
       :industry,
       :git_repo, :trello, :website, :image, :start_date, :end_date
     )
