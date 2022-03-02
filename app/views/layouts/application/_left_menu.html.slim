@@ -2,24 +2,24 @@
   .slimscroll-menu style='height: 100vh !important;'
     = link_to root_path, class: 'logo text-center' do
       span.logo-lg
-        = image_pack_tag 'golden_owl_logo.svg', height: '30px'
+        / = image_pack_tag 'golden_owl_logo.svg', height: '30px'
       span.logo-sm
-        = image_pack_tag 'logo_sm.png', height: '16px'
+        / = image_pack_tag 'logo_sm.png', height: '16px'
     ul.metismenu.side-nav
       li.side-nav-title.side-nav-item
         | Navigation
       li.side-nav-item
         = link_to root_path, class: "side-nav-link #{active_items('home')}" do
           i.dripicons-user
-          span Users
-      li.side-nav-item
-        = link_to projects_path, class: "side-nav-link #{active_items('projects')}" do
-          i.dripicons-briefcase
-          span Projects
-      li.side-nav-item
-        = link_to clients_path, class: "side-nav-link #{active_items('clients')}" do
-          i.dripicons-user-group
-          span Clients
+          span Admin
+      / li.side-nav-item
+      /   = link_to projects_path, class: "side-nav-link #{active_items('projects')}" do
+      /     i.dripicons-briefcase
+      /     span Projects
+      / li.side-nav-item
+      /   = link_to clients_path, class: "side-nav-link #{active_items('clients')}" do
+      /     i.dripicons-user-group
+      /     span Clients
       li.side-nav-item
         = link_to post_categories_path, class: "side-nav-link #{active_items('post_categories')}" do
           i.dripicons-menu
@@ -28,24 +28,24 @@
         = link_to posts_path, class: "side-nav-link #{active_items('posts')}" do
           i.dripicons-document-new
           span Blogs
-      li.side-nav-item
-        = link_to careers_path, class: "side-nav-link #{active_items('careers')}" do
-          i.dripicons-briefcase
-          span Careers
-      li.side-nav-item
-        = link_to api_v1_subscriptions_path, class: "side-nav-link #{active_items('subscriptions')}" do
-          i.dripicons-briefcase
-          span Subscriptions
-      li.side-nav-item
-        = link_to teches_path, class: "side-nav-link #{active_items('technologies')}" do
-          i.dripicons-briefcase
-          span Technologies
-      li.side-nav-item
-        = link_to developers_path, class: "side-nav-link #{active_items('developers')}" do
-          i.dripicons-briefcase
-          span Developers
-      li.side-nav-item
-        = link_to pcs_path, class: "side-nav-link #{active_items('pcs')}" do
-          i.dripicons-briefcase
-          span PCs
+      / li.side-nav-item
+      /   = link_to careers_path, class: "side-nav-link #{active_items('careers')}" do
+      /     i.dripicons-briefcase
+      /     span Careers
+      / li.side-nav-item
+      /   = link_to api_v1_subscriptions_path, class: "side-nav-link #{active_items('subscriptions')}" do
+      /     i.dripicons-briefcase
+      /     span Subscriptions
+      / li.side-nav-item
+      /   = link_to teches_path, class: "side-nav-link #{active_items('technologies')}" do
+      /     i.dripicons-briefcase
+      /     span Technologies
+      / li.side-nav-item
+      /   = link_to developers_path, class: "side-nav-link #{active_items('developers')}" do
+      /     i.dripicons-briefcase
+      /     span Developers
+      / li.side-nav-item
+      /   = link_to pcs_path, class: "side-nav-link #{active_items('pcs')}" do
+      /     i.dripicons-briefcase
+      /     span PCs
     .clearfix

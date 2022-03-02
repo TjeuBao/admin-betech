@@ -102,6 +102,13 @@ ActiveRecord::Schema.define(version: 2021_08_05_183744) do
     t.index ["full_name"], name: "index_developers_on_full_name", unique: true
   end
 
+  create_table "developers_projects", id: false, force: :cascade do |t|
+    t.bigint "developer_id", null: false
+    t.bigint "project_id", null: false
+    t.index ["developer_id", "project_id"], name: "index_developers_projects_on_developer_id_and_project_id"
+    t.index ["project_id", "developer_id"], name: "index_developers_projects_on_project_id_and_developer_id"
+  end
+
   create_table "development_types", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
