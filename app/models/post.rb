@@ -29,6 +29,7 @@
 class Post < ApplicationRecord
   extend FriendlyId
   include ConvertImageUrl
+  has_many_attached :content
 
   friendly_id :title, use: :slugged
 
